@@ -4,10 +4,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <h1>تست دیتابیس (با واسط)</h1>
+  <h1>تست دیتابیس با واسط</h1>
   <div id="result">در حال لود...</div>
   <script>
-    const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
+    // استفاده از یک مسیر واسط (Proxy) به جای آدرس مستقیم Supabase
+    const supabaseUrl = 'https://api.allorigins.win/raw?url=https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
