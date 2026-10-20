@@ -17,7 +17,6 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IRANSans', sans-serif; }
     
-    /* پس‌زمینه جدید و زیبا */
     body { 
       background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070&auto=format&fit=crop');
       background-size: cover;
@@ -104,7 +103,6 @@
     .btn-delete { background: var(--danger); }
     .btn-edit { background: #8e24aa; }
     
-    /* تنظیمات مدیر */
     .admin-settings-box { background: #f8f9fa; padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #ddd; }
     .admin-setting-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
     .admin-setting-row select, .admin-setting-row input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: inherit;}
@@ -171,12 +169,14 @@
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط</button>
     </div>
 
-    <!-- فرم ثبت‌نام -->
+    <!-- فرم ثبت‌نام (کامل و با فیلدهای جدید) -->
     <div id="section-register" class="card" style="display: none;">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       <div id="editWarning" class="hidden" style="background:#fff8e1; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #ffecb3;">در حال ویرایش هستید. پس از ثبت به صف انتظار می‌روید.</div>
       <form id="profileForm">
         <input type="hidden" id="edit_id">
+        
+        <h3 style="color:var(--primary); margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">اطلاعات پایه</h3>
         <div class="form-group"><label>نام کاربری (انگلیسی)</label><input type="text" id="username" required pattern="[A-Za-z0-9_]+" placeholder="مثلاً: ali_reza"></div>
         <div class="form-group"><label>جنسیت</label><select id="role" required onchange="toggleGenderFields()"><option value="">انتخاب کنید...</option><option value="man">آقا (داماد)</option><option value="woman">خانم (عروس)</option></select></div>
         <div class="form-group"><label>نام (فارسی)</label><input type="text" id="first_name" required></div>
@@ -185,15 +185,41 @@
         <div class="form-group hidden" id="countryGroup"><label>نام کشور</label><input type="text" id="country_name"></div>
         <div class="form-group"><label>استان</label><select id="province" required><option value="">انتخاب کنید...</option><option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option><option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><option value="آذربایجان شرقی">آذربایجان شرقی</option><option value="آذربایجان غربی">آذربایجان غربی</option><option value="خوزستان">خوزستان</option><option value="مازندران">مازندران</option><option value="گیلان">گیلان</option><option value="کرمان">کرمان</option><option value="قم">قم</option><option value="یزد">یزد</option><option value="کرمانشاه">کرمانشاه</option><option value="هرمزگان">هرمزگان</option><option value="سیستان و بلوچستان">سیستان و بلوچستان</option><option value="کردستان">کردستان</option><option value="همدان">همدان</option><option value="مرکزی">مرکزی</option><option value="گلستان">گلستان</option><option value="قزوین">قزوین</option><option value="لرستان">لرستان</option><option value="بوشهر">بوشهر</option><option value="اردبیل">اردبیل</option><option value="زنجان">زنجان</option><option value="سمنان">سمنان</option><option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option><option value="خراسان شمالی">خراسان شمالی</option><option value="خراسان جنوبی">خراسان جنوبی</option><option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option><option value="ایلام">ایلام</option></select></div>
         <div class="form-group"><label>شهر</label><input type="text" id="city" required></div>
+        
+        <h3 style="color:var(--primary); margin-top:30px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">اطلاعات جسمانی و تحصیلی</h3>
         <div class="form-group"><label>سال تولد</label><select id="birth_year" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>وضعیت سلامت</label><select id="health_status" required onchange="toggleDisease()"><option value="">انتخاب کنید...</option><option value="سالم">سالم</option><option value="بیمار">بیمار</option></select></div>
         <div class="form-group hidden" id="diseaseGroup"><label>نوع بیماری</label><input type="text" id="disease_type"></div>
         <div class="form-group"><label>قد (سانتی‌متر)</label><select id="height" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>وزن (کیلوگرم)</label><select id="weight" required><option value="">انتخاب کنید...</option></select></div>
-        <div class="form-group"><label>تحصیلات</label><select id="education" required><option value="">انتخاب کنید...</option><option value="بی سواد">بی سواد</option><option value="ابتدایی">ابتدایی</option><option value="دیپلم">دیپلم</option><option value="دانشجو">دانشجو</option><option value="کارشناسی">کارشناسی</option><option value="ارشد">ارشد</option><option value="دکترا">دکترا</option></select></div>
+        <div class="form-group"><label>تحصیلات</label><select id="education" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="بی سواد">بی سواد</option><option value="ابتدایی">ابتدایی</option><option value="دیپلم">دیپلم</option>
+            <option value="دانشجو">دانشجو</option><option value="کارشناسی">کارشناسی</option><option value="ارشد">ارشد</option>
+            <option value="دکترا">دکترا</option>
+            <option value="حوزوی مقدماتی">حوزوی (مقدماتی)</option>
+            <option value="حوزوی سطح عالی">حوزوی (سطح عالی)</option>
+            <option value="حوزوی خارج">حوزوی (خارج)</option>
+        </select></div>
+        <div class="form-group"><label>شغل</label><input type="text" id="job" placeholder="مثلاً: مهندس، پزشک، کارمند..."></div>
+
+        <h3 style="color:var(--primary); margin-top:30px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">اطلاعات خانوادگی و ازدواج</h3>
+        <div class="form-group"><label>تعداد اعضای خانواده (خانواده پدری)</label><select id="family_members_count" required><option value="">انتخاب کنید...</option><option value="1">۱ نفر</option><option value="2">۲ نفر</option><option value="3">۳ نفر</option><option value="4">۴ نفر</option><option value="5">۵ نفر</option><option value="6">۶ نفر</option><option value="7">۷ نفر</option><option value="8">۸ نفر</option><option value="بیشتر از ۸ نفر">بیشتر از ۸ نفر</option></select></div>
+        <div class="form-group"><label>نحوه زندگی</label><select id="living_status" required><option value="">انتخاب کنید...</option><option value="مستقل">مستقل</option><option value="با خانواده">با خانواده</option></select></div>
         <div class="form-group"><label>وضعیت ازدواج</label><select id="marital_status" required onchange="toggleMarriageFields()"><option value="">انتخاب کنید...</option><option value="مجرد">مجرد</option><option value="مطلقه عقد">مطلقه (عقد)</option><option value="مطلقه عروسی">مطلقه (عروسی)</option><option value="فوت همسر">فوت همسر</option></select></div>
         <div class="form-group hidden" id="virginityGroup"><label>وضعیت دوشیزگی</label><select id="virginity"><option value="">انتخاب کنید...</option><option value="دوشیزه">دوشیزه</option><option value="غیر دوشیزه">غیر دوشیزه</option></select></div>
-        <div class="form-group hidden" id="childrenGroup"><label>فرزندان (از ازدواج سابق)</label><textarea id="previous_marriage_children" rows="2"></textarea></div>
+        <div class="form-group hidden" id="childrenGroup"><label>در صورت داشتن فرزند، تعداد، سن و جنسیت</label><textarea id="children_details" rows="2" placeholder="مثلاً: یک پسر ۵ ساله، یک دختر ۳ ساله"></textarea></div>
+
+        <h3 style="color:var(--primary); margin-top:30px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">اعتقادات و شخصیت‌شناسی</h3>
+        <div class="form-group"><label>اعتقادات دینی</label><select id="religious_beliefs" required><option value="">انتخاب کنید...</option><option value="مذهبی و پایبند">مذهبی و پایبند</option><option value="مذهبی متوسط">مذهبی متوسط</option><option value="معتقد به اصول">معتقد به اصول</option><option value="بی‌تفاوت">بی‌تفاوت</option></select></div>
+        <div class="form-group"><label>اعتقادات سیاسی</label><select id="political_beliefs" required><option value="">انتخاب کنید...</option><option value="اصلاح‌طلب">اصلاح‌طلب</option><option value="اصول‌گرا">اصول‌گرا</option><option value="مستقل">مستقل</option><option value="بی‌طرف">بی‌طرف</option></select></div>
+        <div class="form-group"><label>تیپ شخصیتی (MBTI)</label><select id="psychology_mbti"><option value="">انتخاب کنید...</option><option value="ISTJ">ISTJ (منظم و عمل‌گرا)</option><option value="ISFJ">ISFJ (حامی و وفادار)</option><option value="INFJ">INFJ (بینش‌مند و آرمان‌گرا)</option><option value="INTJ">INTJ (استراتژیست)</option><option value="ISTP">ISTP (ماجراجو و عمل‌گرا)</option><option value="ISFP">ISFP (هنرمند و حساس)</option><option value="INFP">INFP (آرمان‌گرا و مهربان)</option><option value="INTP">INTP (منطق‌گرا)</option><option value="ESTP">ESTP (پرانرژی و واقع‌گرا)</option><option value="ESFP">ESFP (سرگرم‌کننده)</option><option value="ENFP">ENFP (الهام‌بخش)</option><option value="ENTP">ENTP (بحث‌کننده و خلاق)</option><option value="ESTJ">ESTJ (مدیر و منظم)</option><option value="ESFJ">ESFJ (اجتماعی و حمایتگر)</option><option value="ENFJ">ENFJ (رهبر و الهام‌بخش)</option><option value="ENTJ">ENTJ (فرمانده)</option></select></div>
+        <div class="form-group"><label>سبک دلبستگی</label><select id="psychology_attachment"><option value="">انتخاب کنید...</option><option value="ایمن">ایمن (راحت در روابط نزدیک)</option><option value="اضطرابی">اضطرابی (نیاز به تایید مداوم)</option><option value="اجتنابی">اجتنابی (مستقل و دور از وابستگی)</option><option value="آشفته">آشفته (ترکیبی از اضطراب و اجتناب)</option></select></div>
+        <div class="form-group"><label>زبان عشق</label><select id="psychology_love_language"><option value="">انتخاب کنید...</option><option value="کلام تاییدی">کلام تاییدی (تعریف و تمجید)</option><option value="زمان با کیفیت">زمان با کیفیت (با هم بودن)</option><option value="هدیه دادن">هدیه دادن</option><option value="خدمت کردن">خدمت کردن</option><option value="لمس فیزیکی">لمس فیزیکی (در چارچوب شرع)</option></select></div>
+        <div class="form-group"><label>سبک حل تعارض</label><select id="psychology_conflict"><option value="">انتخاب کنید...</option><option value="مذاکره و گفتگو">مذاکره و گفتگو</option><option value="سازش">سازش</option><option value="اجتناب">اجتناب از بحث</option><option value="رقابتی">رقابتی (تلاش برای برنده شدن)</option></select></div>
+        <div class="form-group"><label>سحرخیز هستید یا شب‌زنده‌دار؟</label><select id="psychology_morning_night"><option value="">انتخاب کنید...</option><option value="سحرخیز">سحرخیز</option><option value="شب‌زنده‌دار">شب‌زنده‌دار</option><option value="متغیر">متغیر</option></select></div>
+
+        <h3 style="color:var(--primary); margin-top:30px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:5px;">توضیحات و اطلاعات تماس</h3>
         <div class="form-group"><label>ملاک انتخاب همسر</label><textarea id="criteria" rows="2"></textarea></div>
         <div class="form-group"><label>توضیحات (بیوگرافی)</label><textarea id="extra_details" rows="3"></textarea></div>
         <div class="form-group"><label>آدرس دقیق (فقط مدیر)</label><textarea id="address" rows="2"></textarea></div>
@@ -442,7 +468,7 @@
             document.getElementById('timeGold').value = timeSettings.gold;
         }
         
-        // پر کردن لیست‌های کشویی
+        // پر کردن لیست‌های کشویی در فرم
         const heightSel = document.getElementById('height');
         if(heightSel) for (let i = 140; i <= 210; i++) heightSel.innerHTML += `<option value="${i}">${i} cm</option>`;
         const weightSel = document.getElementById('weight');
@@ -915,7 +941,6 @@
       filtered.forEach(p => {
         let photoHtml = p.photo_url ? `<img src="${p.photo_url}" style="width:60px; height:60px; border-radius:50%; object-fit:cover; float:left; margin-left:10px;">` : '';
         
-        // انتخابگر سطح و زمان برای هر فرد
         let statusOptions = `
             <option value="beginner" ${p.status === 'beginner' ? 'selected' : ''}>مبتدی</option>
             <option value="silver" ${p.status === 'silver' ? 'selected' : ''}>نقره‌ای</option>
@@ -1036,6 +1061,147 @@
       document.getElementById('statSilver').innerText = allProfiles.filter(p => p.status === 'silver').length;
       document.getElementById('statGold').innerText = allProfiles.filter(p => p.status === 'gold').length;
     }
+
+    // توابع فرم
+    function toggleGenderFields() { document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none'; }
+    function toggleCountry() { document.getElementById('countryGroup').style.display = (document.getElementById('nationality').value === 'خارجی') ? 'block' : 'none'; }
+    function toggleDisease() { document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none'; }
+    function toggleMarriageFields() { 
+        const status = document.getElementById('marital_status').value;
+        document.getElementById('childrenGroup').style.display = (status === 'مجرد' || status === '') ? 'none' : 'block';
+    }
+    function checkFileSize(input) {
+      if (input.files.length > 0 && (input.files[0].size / 1024 / 1024) > 1) { alert('حجم عکس باید کمتر از ۱ مگابایت باشد.'); input.value = ''; }
+    }
+    
+    function loadMyProfile() {
+      const p = allProfiles.find(x => x.id == myProfileId);
+      if (!p) return;
+      document.getElementById('edit_id').value = p.id;
+      document.getElementById('username').value = p.username || '';
+      document.getElementById('role').value = p.role || '';
+      document.getElementById('first_name').value = p.first_name || '';
+      document.getElementById('last_name').value = p.last_name || '';
+      document.getElementById('nationality').value = p.nationality || '';
+      document.getElementById('province').value = p.province || '';
+      document.getElementById('city').value = p.city || '';
+      document.getElementById('birth_year').value = p.birth_year || '';
+      document.getElementById('health_status').value = p.health_status || '';
+      document.getElementById('height').value = p.height || '';
+      document.getElementById('weight').value = p.weight || '';
+      document.getElementById('education').value = p.education || '';
+      document.getElementById('job').value = p.job || '';
+      document.getElementById('family_members_count').value = p.family_members_count || '';
+      document.getElementById('living_status').value = p.living_status || '';
+      document.getElementById('marital_status').value = p.marital_status || '';
+      document.getElementById('virginity').value = p.virginity || '';
+      document.getElementById('children_details').value = p.children_details || '';
+      document.getElementById('religious_beliefs').value = p.religious_beliefs || '';
+      document.getElementById('political_beliefs').value = p.political_beliefs || '';
+      document.getElementById('psychology_mbti').value = p.psychology_mbti || '';
+      document.getElementById('psychology_attachment').value = p.psychology_attachment || '';
+      document.getElementById('psychology_love_language').value = p.psychology_love_language || '';
+      document.getElementById('psychology_conflict').value = p.psychology_conflict || '';
+      document.getElementById('psychology_morning_night').value = p.psychology_morning_night || '';
+      document.getElementById('criteria').value = p.criteria || '';
+      document.getElementById('extra_details').value = p.extra_details || '';
+      document.getElementById('address').value = p.address || '';
+      document.getElementById('messenger_type').value = p.messenger_type || '';
+      document.getElementById('contact_id').value = p.contact_id || '';
+      document.getElementById('phone').value = p.phone || '';
+      
+      document.getElementById('editWarning').classList.remove('hidden');
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+      toggleGenderFields(); toggleCountry(); toggleDisease(); toggleMarriageFields();
+    }
+    
+    function cancelEdit() {
+      document.getElementById('profileForm').reset(); document.getElementById('edit_id').value = '';
+      document.getElementById('editWarning').classList.add('hidden'); document.getElementById('cancelEditBtn').classList.add('hidden');
+      document.getElementById('virginityGroup').style.display = 'none'; document.getElementById('countryGroup').style.display = 'none';
+      document.getElementById('diseaseGroup').style.display = 'none'; document.getElementById('childrenGroup').style.display = 'none';
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const editId = document.getElementById('edit_id').value;
+      const isEdit = editId !== '';
+      let isValid = true;
+      
+      document.querySelectorAll('#profileForm input[required], #profileForm select[required]').forEach(input => {
+        if (!input.value.trim()) { input.classList.add('error'); isValid = false; }
+        else { input.classList.remove('error'); }
+      });
+
+      if (!/^[\u0600-\u06FF\s]+$/.test(document.getElementById('first_name').value)) { alert('نام باید فارسی باشد.'); isValid = false; }
+      if (!/^@[A-Za-z0-9_]+$/.test(document.getElementById('contact_id').value)) { alert('آیدی باید انگلیسی و با @ باشد.'); isValid = false; }
+      if (!/^\d{11}$/.test(document.getElementById('phone').value)) { alert('شماره باید ۱۱ رقم باشد.'); isValid = false; }
+      
+      const fileInput = document.getElementById('photo_file');
+      if (!isEdit && fileInput.files.length === 0) { alert('آپلود عکس اجباری است.'); isValid = false; }
+      if (!isValid) return alert('لطفاً خطاهای فرم را برطرف کنید.');
+
+      let photoUrl = null;
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileName = Date.now() + '_' + file.name;
+        const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
+          method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }, body: file
+        });
+        if (uploadRes.ok) photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
+      }
+      
+      const profileData = {
+        username: document.getElementById('username').value, role: document.getElementById('role').value,
+        first_name: document.getElementById('first_name').value, last_name: document.getElementById('last_name').value,
+        nationality: document.getElementById('nationality').value, province: document.getElementById('province').value,
+        city: document.getElementById('city').value, birth_year: document.getElementById('birth_year').value,
+        health_status: document.getElementById('health_status').value, disease_type: document.getElementById('disease_type').value,
+        height: document.getElementById('height').value, weight: document.getElementById('weight').value,
+        education: document.getElementById('education').value, marital_status: document.getElementById('marital_status').value,
+        virginity: document.getElementById('virginity').value, previous_marriage_children: document.getElementById('children_details').value,
+        criteria: document.getElementById('criteria').value, extra_details: document.getElementById('extra_details').value,
+        address: document.getElementById('address').value, messenger_type: document.getElementById('messenger_type').value,
+        contact_id: document.getElementById('contact_id').value, phone: document.getElementById('phone').value,
+        job: document.getElementById('job').value,
+        family_members_count: document.getElementById('family_members_count').value,
+        living_status: document.getElementById('living_status').value,
+        children_details: document.getElementById('children_details').value,
+        religious_beliefs: document.getElementById('religious_beliefs').value,
+        political_beliefs: document.getElementById('political_beliefs').value,
+        psychology_mbti: document.getElementById('psychology_mbti').value,
+        psychology_attachment: document.getElementById('psychology_attachment').value,
+        psychology_love_language: document.getElementById('psychology_love_language').value,
+        psychology_conflict: document.getElementById('psychology_conflict').value,
+        psychology_morning_night: document.getElementById('psychology_morning_night').value,
+        status: 'pending', agreed_terms: true
+      };
+      
+      if (photoUrl) profileData.photo_url = photoUrl;
+      localStorage.setItem('my_gender', profileData.role); myGender = profileData.role;
+
+      try {
+        const url = isEdit ? `${supabaseUrl}/rest/v1/profiles?id=eq.${editId}` : `${supabaseUrl}/rest/v1/profiles`;
+        const method = isEdit ? 'PATCH' : 'POST';
+        const res = await fetch(url, {
+          method: method, headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' }, body: JSON.stringify(profileData)
+        });
+        
+        if (res.ok) {
+          if (!isEdit) {
+            const getRes = await fetch(`${supabaseUrl}/rest/v1/profiles?select=id&order=id.desc&limit=1`, { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
+            const newData = await getRes.json();
+            if(newData && newData[0]) {
+              localStorage.setItem('my_profile_id', newData[0].id); localStorage.setItem('my_phone', profileData.phone);
+              myProfileId = newData[0].id; myPhone = profileData.phone;
+            }
+          }
+          alert(isEdit ? 'ویرایش شد.' : 'ثبت شد.'); cancelEdit(); showSection('profile');
+        }
+      } catch (err) { alert('خطا در ارتباط با سرور.'); }
+    });
+
+    function copyCard() { navigator.clipboard.writeText('6037997123943616'); alert('کپی شد!'); }
   </script>
 </body>
 </html>
