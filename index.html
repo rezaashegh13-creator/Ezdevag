@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>همسریابی | ازدواج</title>
+  <title>همسریابی آرامش</title>
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
   <style>
     @font-face { font-family: 'IRANSans'; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'); }
@@ -22,7 +22,7 @@
     
     /* هدر و بنر */
     header { background: var(--card-bg); border-radius: 24px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
-    .banner-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 20px; display: none; position: relative; cursor: pointer; }
+    .banner-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 20px; display: none; cursor: pointer; }
     .banner-container img { width: 100%; height: auto; display: block; }
     .logo-icon { font-size: 50px; margin-bottom: 10px; cursor: pointer; display: inline-block; transition: 0.3s; }
     .logo-icon:hover { transform: scale(1.1); }
@@ -117,7 +117,7 @@
         <img id="bannerImg" src="" alt="تبلیغات">
       </div>
       <div class="logo-icon" onclick="promptAdmin()">💍</div>
-      <h1>همسریابی لاکچری</h1>
+      <h1>همسریابی آرامش</h1>
       <a href="http://eitaa.com/joinchat/878706709C93902231a1" class="glow-btn" target="_blank">✨ لمس کن برای رشد ✨</a>
       <div class="contact-admin">
         <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارتباط در ایتا</a>
@@ -128,7 +128,7 @@
     <div class="nav-grid">
       <button onclick="showSection('register')" class="nav-btn btn-register">📝 ثبت‌نام</button>
       <button onclick="showSection('profile')" class="nav-btn btn-profile">👤 پروفایل من</button>
-      <button onclick="showSection('view')" class="nav-btn btn-view">👀 مشاهده</button>
+      <button onclick="showSection('view')" class="nav-btn btn-view">👀 مشاهده پروفایل‌ها</button>
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط</button>
     </div>
 
@@ -146,7 +146,7 @@
         <div class="form-group"><label>نام خانوادگی</label><input type="text" id="last_name" required></div>
         <div class="form-group"><label>ملیت</label><select id="nationality" required onchange="toggleCountry()"><option value="">انتخاب کنید...</option><option value="ایرانی">ایرانی</option><option value="خارجی">خارجی</option></select></div>
         <div class="form-group hidden" id="countryGroup"><label>نام کشور</label><input type="text" id="country_name"></div>
-        <div class="form-group"><label>استان</label><select id="province" required><option value="">انتخاب کنید...</option><option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option><option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><!--... بقیه استان‌ها ...--></select></div>
+        <div class="form-group"><label>استان</label><select id="province" required><option value="">انتخاب کنید...</option><option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option><option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><option value="آذربایجان شرقی">آذربایجان شرقی</option><option value="آذربایجان غربی">آذربایجان غربی</option><option value="خوزستان">خوزستان</option><option value="مازندران">مازندران</option><option value="گیلان">گیلان</option><option value="کرمان">کرمان</option><option value="قم">قم</option><option value="یزد">یزد</option><option value="کرمانشاه">کرمانشاه</option><option value="هرمزگان">هرمزگان</option><option value="سیستان و بلوچستان">سیستان و بلوچستان</option><option value="کردستان">کردستان</option><option value="همدان">همدان</option><option value="مرکزی">مرکزی</option><option value="گلستان">گلستان</option><option value="قزوین">قزوین</option><option value="لرستان">لرستان</option><option value="بوشهر">بوشهر</option><option value="اردبیل">اردبیل</option><option value="زنجان">زنجان</option><option value="سمنان">سمنان</option><option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option><option value="خراسان شمالی">خراسان شمالی</option><option value="خراسان جنوبی">خراسان جنوبی</option><option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option><option value="ایلام">ایلام</option></select></div>
         <div class="form-group"><label>شهر</label><input type="text" id="city" required></div>
         <div class="form-group"><label>سال تولد</label><select id="birth_year" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>ماه تولد</label><select id="birth_month" required><option value="">انتخاب کنید...</option><option value="فروردین">فروردین</option><option value="اردیبهشت">اردیبهشت</option><option value="خرداد">خرداد</option><option value="تیر">تیر</option><option value="مرداد">مرداد</option><option value="شهریور">شهریور</option><option value="مهر">مهر</option><option value="آبان">آبان</option><option value="آذر">آذر</option><option value="دی">دی</option><option value="بهمن">بهمن</option><option value="اسفند">اسفند</option></select></div>
@@ -155,16 +155,19 @@
         <div class="form-group"><label>قد</label><select id="height" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>وزن</label><select id="weight" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>تحصیلات</label><select id="education" required><option value="">انتخاب کنید...</option><option value="بی سواد">بی سواد</option><option value="ابتدایی">ابتدایی</option><option value="دیپلم">دیپلم</option><option value="دانشجو">دانشجو</option><option value="کارشناسی">کارشناسی</option><option value="ارشد">ارشد</option><option value="دکترا">دکترا</option><option value="حوزوی مقدماتی">حوزوی مقدماتی</option><option value="حوزوی عالی">حوزوی عالی</option><option value="حوزوی خارج">حوزوی خارج</option></select></div>
-        <div class="form-group"><label>وضعیت ازدواج</label><select id="marital_status" required><option value="">انتخاب کنید...</option><option value="مجرد">مجرد</option><option value="مطلقه عقد">مطلقه (عقد)</option><option value="مطلقه عروسی">مطلقه (عروسی)</option><option value="فوت همسر">فوت همسر</option></select></div>
+        <div class="form-group"><label>وضعیت ازدواج</label><select id="marital_status" required onchange="toggleMarriageFields()"><option value="">انتخاب کنید...</option><option value="مجرد">مجرد</option><option value="مطلقه عقد">مطلقه (عقد)</option><option value="مطلقه عروسی">مطلقه (عروسی)</option><option value="فوت همسر">فوت همسر</option></select></div>
         <div class="form-group hidden" id="virginityGroup"><label>وضعیت دوشیزگی</label><select id="virginity"><option value="">انتخاب کنید...</option><option value="دوشیزه">دوشیزه</option><option value="غیر دوشیزه">غیر دوشیزه</option></select></div>
-        <div class="form-group"><label>تعداد/سن فرزندان (از ازدواج سابق)</label><textarea id="previous_marriage_children" rows="2"></textarea></div>
+        <div class="form-group hidden" id="childrenGroup"><label>تعداد/سن فرزندان (از ازدواج سابق)</label><textarea id="previous_marriage_children" rows="2"></textarea></div>
         <div class="form-group"><label>ملاک انتخاب همسر</label><textarea id="criteria" rows="2"></textarea></div>
         <div class="form-group"><label>توضیحات بیشتر (بیوگرافی)</label><textarea id="extra_details" rows="3"></textarea></div>
         <div class="form-group"><label>آدرس دقیق (فقط مدیر)</label><textarea id="address" rows="2"></textarea></div>
         <div class="form-group"><label>نوع پیام‌رسان</label><select id="messenger_type" required><option value="">انتخاب کنید...</option><option value="ایتا">ایتا</option><option value="تلگرام">تلگرام</option></select></div>
         <div class="form-group"><label>آیدی پیام‌رسان (@)</label><input type="text" id="contact_id" required pattern="@[A-Za-z0-9_]+" placeholder="@username"></div>
         <div class="form-group"><label>شماره موبایل (۱۱ رقم)</label><input type="tel" id="phone" required pattern="\d{11}" placeholder="09123456789"></div>
+        
         <div class="form-group"><label>آپلود عکس اصلی (اجباری - حداکثر ۱ مگابایت)</label><input type="file" id="photo_file" accept="image/*" onchange="checkFileSize(this)"></div>
+        <div class="form-group"><label>آپلود مدارک (اختیاری - شناسنامه/طلاقنامه)</label><input type="file" id="doc_file" accept="image/*,application/pdf"></div>
+        
         <div class="form-group"><label><input type="checkbox" id="agree_terms" style="width:auto; margin-left:8px;" required><span>تعهدنامه را می‌پذیرم.</span></label></div>
         <button type="submit" class="btn-submit">ثبت اطلاعات</button>
         <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#90a4ae;">انصراف</button>
@@ -186,7 +189,7 @@
           <div id="myBadge" class="badge" style="margin-top:10px;"></div>
           <p id="myBio" style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);"></p>
           <div class="stats-grid">
-            <div class="stat-box"><div class="stat-value" id="myExpDays">0</div><div class="stat-label">روز اعتبار باقی‌مانده</div></div>
+            <div class="stat-box"><div class="stat-value" id="myExpDays">-</div><div class="stat-label">زمان اعتبار باقی‌مانده</div></div>
             <div class="stat-box"><div class="stat-value" id="myExpStatus">-</div><div class="stat-label">وضعیت اشتراک</div></div>
           </div>
           <button onclick="editMyProfile()" class="btn-submit" style="margin-top:20px;">✏️ ویرایش پروفایل من</button>
@@ -207,59 +210,53 @@
       <h2 class="section-title">💎 شرایط ثبت‌نام و ارتقاء</h2>
       <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:20px;">این ثبت‌نام فقط برای شما در یک گوشی معتبر است.</p>
       <button onclick="openModal()" class="btn-submit" style="background:#5d4037; margin-bottom:20px;">مشاهده توضیحات کامل مزایا</button>
+      
       <div class="plan-card"><div><strong>نقره‌ای (۱ ماهه)</strong></div><div class="plan-price">۱۵۵,۰۰۰ تومان</div></div>
       <div class="plan-card"><div><strong>طلایی (۱ ماهه)</strong></div><div class="plan-price">۲۳۰,۰۰۰ تومان</div></div>
       <div class="plan-card" style="border-color: var(--accent);"><div><strong>نردبان (۱۰ روزه)</strong><br><small>نمایش در بالای صفحه</small></div><div class="plan-price" style="color:var(--accent);">۵۰,۰۰۰ تومان</div></div>
-      <p style="margin-top: 25px; font-weight: bold;">شماره کارت:</p>
+
+      <p style="margin-top: 25px; font-weight: bold;">شماره کارت (برای کپی لمس کنید):</p>
       <div class="card-number" onclick="copyCard()">6037997123943616</div>
       <p style="font-size: 0.9rem; text-align: center;">بنام خانم جودکی - بانک ملی</p>
+      
+      <p style="font-size: 0.9rem; text-align: center; margin-top: 15px; color: var(--primary); font-weight:bold;">لطفاً رسید را به آیدی زیر بفرستید:</p>
+      <div class="contact-admin" style="margin-top: 15px;">
+        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارسال رسید در ایتا</a>
+        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">ارسال رسید در تلگرام</a>
+      </div>
     </div>
 
     <!-- 5. پنل مدیریت -->
     <div id="section-admin" class="card" style="display: none;">
       <h2 class="section-title">⚙️ پنل مدیریت</h2>
+      
       <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 30px;">
         <div class="stat-box"><div class="stat-value" id="statTotal">0</div><div class="stat-label">کل کاربران</div></div>
         <div class="stat-box"><div class="stat-value" id="statSilver">0</div><div class="stat-label">نقره‌ای</div></div>
         <div class="stat-box"><div class="stat-value" id="statGold">0</div><div class="stat-label">طلایی</div></div>
         <div class="stat-box"><div class="stat-value" id="statPending">0</div><div class="stat-label">در انتظار</div></div>
       </div>
+      
+      <!-- گزارش مالی -->
+      <div style="background:#e8f5e9; padding:20px; border-radius:15px; margin-bottom:30px; border:1px solid #c8e6c9;">
+        <h3 style="margin-bottom:10px; color:var(--success);">💰 گزارش مالی (تقریبی)</h3>
+        <p style="font-size:1rem;">درآمد تخمینی از کاربران فعال: <strong id="financialReport" style="color:var(--success);">0 تومان</strong></p>
+      </div>
+
       <div style="background:#fff3e0; padding:20px; border-radius:15px; margin-bottom:30px; border:1px solid #ffe0b2;">
         <h3 style="margin-bottom:10px; color:var(--primary);">تنظیمات بنر بالای صفحه</h3>
         <div class="form-group"><label>لینک بنر (URL عکس)</label><input type="text" id="bannerUrlInput" placeholder="https://..."></div>
         <div class="form-group"><label>لینک تبلیغ (کلیک روی بنر)</label><input type="text" id="bannerLinkInput" placeholder="https://..."></div>
         <button onclick="saveBanner()" class="btn-submit" style="background:#ffa000;">ذخیره بنر</button>
       </div>
+
       <div class="admin-tabs" id="adminTabs">
         <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
         <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
         <div class="admin-tab" onclick="filterAdmin('gold')">طلایی</div>
         <div class="admin-tab" onclick="filterAdmin('rejected')">رد شده</div>
       </div>
-      <div style="margin-bottom:20px; display:flex; gap:10px;">
-        <button onclick="filterGenderAdmin('all')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">همه</button>
-        <button onclick="filterGenderAdmin('man')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">آقایان</button>
-        <button onclick="filterGenderAdmin('woman')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">بانوان</button>
-      </div>
-      <div id="adminList" class="grid"></div>
-    </div>
-
-  </div>
-
-  <!-- مودال توضیحات -->
-  <div id="infoModal" class="modal">
-    <div class="modal-content">
-      <h3>مزایای اشتراک نقره‌ای:</h3>
-      <ul><li>نمایش فرم شما برای جنس مخالف (اطلاعات کلی)</li><li>بدون نمایش عکس</li></ul>
-      <h3 style="margin-top:20px;">مزایای اشتراک طلایی:</h3>
-      <ul><li>نمایش کامل اطلاعات (به جز محرمانه)</li><li>مشاهده عکس پروفایل (تا ۵ عکس)</li><li>نمایش عکس شما به دیگران</li></ul>
-      <h3 style="margin-top:20px;">مزایای نردبان:</h3>
-      <ul><li>نمایش پروفایل شما در بالای لیست جستجو به مدت ۱۰ روز</li></ul>
-      <button onclick="closeModal()" class="close-modal">متوجه شدم</button>
-    </div>
-  </div>
-
-    <script>
+  <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
     
@@ -330,12 +327,8 @@
       const user = allProfiles.find(p => p.phone === phone);
       
       if (user) {
-        myPhone = phone;
-        myProfileId = user.id;
-        myGender = user.role;
-        localStorage.setItem('my_phone', phone);
-        localStorage.setItem('my_profile_id', user.id);
-        localStorage.setItem('my_gender', user.role);
+        myPhone = phone; myProfileId = user.id; myGender = user.role;
+        localStorage.setItem('my_phone', phone); localStorage.setItem('my_profile_id', user.id); localStorage.setItem('my_gender', user.role);
         showSection('profile');
       } else {
         alert('کاربری با این شماره یافت نشد.');
@@ -343,9 +336,7 @@
     }
     
     function logoutUser() {
-      localStorage.removeItem('my_phone');
-      localStorage.removeItem('my_profile_id');
-      localStorage.removeItem('my_gender');
+      localStorage.removeItem('my_phone'); localStorage.removeItem('my_profile_id'); localStorage.removeItem('my_gender');
       myPhone = ''; myProfileId = ''; myGender = '';
       showSection('profile');
     }
@@ -353,6 +344,7 @@
     function loadUserDashboard() {
       const p = allProfiles.find(x => x.id == myProfileId);
       if (!p) return;
+      
       document.getElementById('myName').innerText = `${p.first_name} ${p.last_name || ''}`;
       document.getElementById('myBio').innerText = p.extra_details || 'بیوگرافی ثبت نشده است.';
       
@@ -372,22 +364,50 @@
       if (p.expires_at) {
         const exp = new Date(p.expires_at);
         const now = new Date();
-        const diffDays = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
-        document.getElementById('myExpDays').innerText = diffDays > 0 ? diffDays : '0';
-        document.getElementById('myExpStatus').innerText = diffDays > 0 ? 'فعال' : 'منقضی';
+        const diffMs = exp - now;
+        
+        if(diffMs > 0) {
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('myExpDays').innerText = `${days} روز و ${hours} ساعت`;
+            document.getElementById('myExpStatus').innerText = 'فعال';
+        } else {
+            document.getElementById('myExpDays').innerText = '0';
+            document.getElementById('myExpStatus').innerText = 'منقضی';
+            if(p.status !== 'pending') {
+                // تبدیل خودکار به مهمان (رد شده)
+                autoExpire(p.id);
+            }
+        }
       } else {
         document.getElementById('myExpDays').innerText = '-';
         document.getElementById('myExpStatus').innerText = 'نامشخص';
       }
     }
+    
+    async function autoExpire(id) {
+        await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
+            method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'pending', expires_at: null })
+        });
+        alert('اعتبار شما به پایان رسیده و حساب شما به حالت مهمان تغییر یافت.');
+        fetchProfiles();
+    }
 
     function editMyProfile() { showSection('register'); }
 
+    // --- آمار و گزارش مالی ---
     function calculateStats() {
       document.getElementById('statTotal').innerText = allProfiles.length;
-      document.getElementById('statSilver').innerText = allProfiles.filter(p => p.status === 'silver').length;
-      document.getElementById('statGold').innerText = allProfiles.filter(p => p.status === 'gold').length;
+      const silvers = allProfiles.filter(p => p.status === 'silver').length;
+      const golds = allProfiles.filter(p => p.status === 'gold').length;
+      document.getElementById('statSilver').innerText = silvers;
+      document.getElementById('statGold').innerText = golds;
       document.getElementById('statPending').innerText = allProfiles.filter(p => p.status === 'pending').length;
+      
+      // محاسبه درآمد تقریبی (فرض بر خرید بسته ۱ ماهه)
+      const estimatedIncome = (silvers * 155000) + (golds * 230000);
+      document.getElementById('financialReport').innerText = estimatedIncome.toLocaleString() + ' تومان';
     }
 
     // --- سیستم بنر ---
@@ -418,6 +438,10 @@
     function toggleGenderFields() { document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none'; }
     function toggleCountry() { document.getElementById('countryGroup').style.display = (document.getElementById('nationality').value === 'خارجی') ? 'block' : 'none'; }
     function toggleDisease() { document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none'; }
+    function toggleMarriageFields() { 
+        const status = document.getElementById('marital_status').value;
+        document.getElementById('childrenGroup').style.display = (status === 'مجرد' || status === '') ? 'none' : 'block';
+    }
     function checkFileSize(input) {
       if (input.files.length > 0 && (input.files[0].size / 1024 / 1024) > 1) { alert('حجم عکس باید کمتر از ۱ مگابایت باشد.'); input.value = ''; }
     }
@@ -450,9 +474,10 @@
       document.getElementById('messenger_type').value = p.messenger_type || '';
       document.getElementById('contact_id').value = p.contact_id || '';
       document.getElementById('phone').value = p.phone || '';
+      
       document.getElementById('editWarning').classList.remove('hidden');
       document.getElementById('cancelEditBtn').classList.remove('hidden');
-      toggleGenderFields(); toggleCountry(); toggleDisease();
+      toggleGenderFields(); toggleCountry(); toggleDisease(); toggleMarriageFields();
     }
 
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
@@ -482,7 +507,17 @@
           method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }, body: file
         });
         if (uploadRes.ok) photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
-        else { alert('خطا در آپلود.'); return; }
+      }
+      
+      let docUrl = null;
+      const docInput = document.getElementById('doc_file');
+      if (docInput.files.length > 0) {
+        const file = docInput.files[0];
+        const fileName = 'doc_' + Date.now() + '_' + file.name;
+        const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
+          method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }, body: file
+        });
+        if (uploadRes.ok) docUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
       }
 
       const profileData = {
@@ -510,11 +545,13 @@
         messenger_type: document.getElementById('messenger_type').value,
         contact_id: document.getElementById('contact_id').value,
         phone: document.getElementById('phone').value,
-        status: 'pending',
+        status: 'pending', // با هر ویرایش به صف انتظار می رود
         agreed_terms: true
       };
       
       if (photoUrl) profileData.photo_url = photoUrl;
+      if (docUrl) profileData.document_url = docUrl;
+
       localStorage.setItem('my_gender', profileData.role);
       myGender = profileData.role;
 
@@ -535,7 +572,7 @@
               myProfileId = newData[0].id; myPhone = profileData.phone;
             }
           }
-          alert(isEdit ? 'ویرایش شد.' : 'ثبت شد.');
+          alert(isEdit ? 'ویرایش شد. در صف انتظار.' : 'ثبت شد. در صف انتظار.');
           resetForm(); showSection('profile');
         }
       } catch (err) { alert('خطا در ارتباط با سرور.'); }
@@ -549,6 +586,7 @@
       document.getElementById('virginityGroup').style.display = 'none';
       document.getElementById('countryGroup').style.display = 'none';
       document.getElementById('diseaseGroup').style.display = 'none';
+      document.getElementById('childrenGroup').style.display = 'none';
     }
     function cancelEdit() { resetForm(); }
 
@@ -568,7 +606,12 @@
       const grid = document.getElementById('profilesGrid');
       const msg = document.getElementById('viewerMessage');
       if (!myGender) return;
+      
+      const viewer = allProfiles.find(x => x.id == myProfileId);
+      const isGoldViewer = viewer && viewer.status === 'gold';
+      
       msg.innerText = `شما به عنوان ${myGender === 'man' ? 'آقا' : 'خانم'} وارد شده‌اید. فقط پروفایل جنس مخالف نمایش داده می‌شود.`;
+      
       grid.innerHTML = '';
       const oppositeRole = myGender === 'man' ? 'woman' : 'man';
       
@@ -578,7 +621,9 @@
       if (visibleProfiles.length === 0) { grid.innerHTML = '<p style="text-align:center; color:#888;">پروفایلی وجود ندارد.</p>'; return; }
 
       visibleProfiles.forEach(p => {
-        let photoHtml = p.status === 'gold' && p.photo_url ? `<img src="${p.photo_url}" class="profile-img" alt="عکس">` : `<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی (فقط طلایی)</div>`;
+        // آیا کاربر می‌تواند عکس را ببیند؟ (فقط اگر طلایی باشد)
+        let photoHtml = (isGoldViewer && p.photo_url) ? `<img src="${p.photo_url}" class="profile-img" alt="عکس">` : `<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی (نیاز به اشتراک طلایی)</div>`;
+        
         let ladderBadge = p.ladder ? `<span class="badge ladder">🚀 نردبان</span>` : '';
         let cardClass = p.ladder ? 'profile-card ladder-active' : 'profile-card';
 
@@ -621,13 +666,18 @@
 
       filtered.forEach(p => {
         let photoHtml = p.photo_url ? `<img src="${p.photo_url}" style="width:60px; height:60px; border-radius:50%; object-fit:cover; float:left; margin-left:10px;">` : '';
+        let docLink = p.document_url ? `<br><a href="${p.document_url}" target="_blank" style="color:#1976d2; text-decoration:underline;">مشاهده مدارک</a>` : '';
+        
         list.innerHTML += `
           <div class="profile-card" style="border: 2px solid #8e44ad; overflow:hidden;">
             ${photoHtml}
             <span class="badge ${p.status}">${p.status}</span>
             <h3>${p.first_name} ${p.last_name || ''} (${p.role === 'man' ? 'آقا' : 'خانم'})</h3>
             <div class="profile-field">کاربری: ${p.username} | متولد: ${p.birth_year}</div>
-            <div class="contact-info-admin"><strong>محرمانه:</strong><br>آدرس: ${safeVal(p.address)}<br>موبایل: ${safeVal(p.phone)}<br>پیام‌رسان: ${p.messenger_type} - ${p.contact_id}</div>
+            <div class="contact-info-admin">
+              <strong>محرمانه:</strong><br>آدرس: ${safeVal(p.address)}<br>موبایل: ${safeVal(p.phone)}<br>پیام‌رسان: ${p.messenger_type} - ${p.contact_id}
+              ${docLink}
+            </div>
             ${p.status === 'rejected' ? `<div class="profile-field" style="color:red; margin-top:5px;">دلیل رد: ${p.reject_reason}</div>` : ''}
             <div class="admin-btn-group">
               ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" class="admin-btn btn-silver">نقره‌ای</button>` : ''}
@@ -643,7 +693,8 @@
     }
 
     async function updateStatus(id, newStatus) {
-      const expiry = new Date(); expiry.setDate(expiry.getDate() + 30);
+      const expiry = new Date(); 
+      expiry.setDate(expiry.getDate() + 30);
       await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
         method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus, expires_at: expiry.toISOString() })
@@ -694,3 +745,29 @@
   </script>
 </body>
 </html>
+      
+      <div style="margin-bottom:20px; display:flex; gap:10px;">
+        <button onclick="filterGenderAdmin('all')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">همه</button>
+        <button onclick="filterGenderAdmin('man')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">آقایان</button>
+        <button onclick="filterGenderAdmin('woman')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">بانوان</button>
+      </div>
+
+      <div id="adminList" class="grid"></div>
+    </div>
+
+  </div>
+
+  <!-- مودال توضیحات -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <h3>مزایای اشتراک نقره‌ای:</h3>
+      <ul><li>نمایش فرم شما برای جنس مخالف (اطلاعات کلی)</li><li>بدون نمایش عکس</li></ul>
+      <h3 style="margin-top:20px;">مزایای اشتراک طلایی:</h3>
+      <ul><li>نمایش کامل اطلاعات (به جز محرمانه)</li><li>مشاهده عکس پروفایل جنس مخالف</li><li>نمایش عکس شما به دیگران</li></ul>
+      <h3 style="margin-top:20px;">مزایای نردبان:</h3>
+      <ul><li>نمایش پروفایل شما در بالای لیست جستجو به مدت ۱۰ روز</li></ul>
+      <button onclick="closeModal()" class="close-modal">متوجه شدم</button>
+    </div>
+  </div>
+
+  
