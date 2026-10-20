@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>تست نهایی ۳</title>
+</head>
+<body>
+  <h1>تست اتصال</h1>
+  <div id="res" style="font-size: 20px; color: blue;">در حال اتصال...</div>
+  
+  <script>
+    const url = 'https://tfvzyzhfzkyjohuapfzm.supabase.co/rest/v1/contents?select=*';
+    const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY';
+
+    fetch(url, {
+      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('res').innerText = 'موفق! تعداد: ' + data.length;
+      document.getElementById('res').style.color = 'green';
+    })
+    .catch(err => {
+      document.getElementById('res').innerText = 'خطا: ' + err.message;
+      document.getElementById('res').style.color = 'red';
+    });
+  </script>
+</body>
+</html>
