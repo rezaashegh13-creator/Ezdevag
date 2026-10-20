@@ -11,17 +11,11 @@
     body { background: #fdfaf6; color: #333; min-height: 100vh; padding: 16px; }
     .app-container { max-width: 800px; margin: 0 auto; }
     
-    /* هدر و دکمه‌ها */
     header { background: #fff; border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #ffe4d6; }
     .logo-icon { font-size: 40px; }
     h1 { color: #d1584c; margin-top: 10px; font-size: 1.5rem; }
-    .subtitle { color: #888; font-size: 0.9rem; margin-top: 5px; }
     
-    .glow-btn { 
-      display: block; width: 100%; padding: 15px; background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
-      color: #d1584c; text-align: center; border-radius: 15px; text-decoration: none; font-weight: bold; 
-      margin-top: 15px; box-shadow: 0 0 15px rgba(255, 154, 158, 0.6); animation: glow 2s infinite alternate; 
-    }
+    .glow-btn { display: block; width: 100%; padding: 15px; background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); color: #d1584c; text-align: center; border-radius: 15px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 0 15px rgba(255, 154, 158, 0.6); animation: glow 2s infinite alternate; }
     @keyframes glow { from { box-shadow: 0 0 10px #ff9a9e; } to { box-shadow: 0 0 25px #ff9a9e; } }
     
     .contact-admin { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
@@ -29,23 +23,24 @@
     .eitaa { background: #f39c12; }
     .telegram { background: #0088cc; }
 
-    /* فرم‌ها */
     .card { background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #ffe4d6; }
     .form-group { margin-bottom: 15px; }
     .form-group label { display: block; margin-bottom: 5px; color: #555; font-size: 0.9rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; outline: none; }
-    .form-group input:focus { border-color: #d1584c; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; outline: none; transition: 0.3s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #d1584c; }
     
+    /* استایل خطا */
+    .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: #e74c3c; background-color: #fadbd8; }
+    .error-text { color: #e74c3c; font-size: 0.75rem; display: none; margin-top: 5px; }
+
     .btn-submit { width: 100%; padding: 15px; background: #d1584c; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
     
-    /* پنل مدیریت */
     .admin-panel { display: none; }
     .admin-panel.active { display: block; }
     .admin-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
     .admin-tab { flex: 1; padding: 10px; background: #eee; border-radius: 10px; text-align: center; cursor: pointer; }
     .admin-tab.active { background: #d1584c; color: white; }
 
-    /* کارت‌های نمایش پروفایل */
     .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
     .profile-card { background: #fff; border-radius: 15px; padding: 15px; border: 1px solid #eee; }
     .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; color: white; margin-bottom: 10px; }
@@ -55,85 +50,247 @@
     
     .profile-field { font-size: 0.85rem; color: #555; margin-bottom: 5px; }
     .profile-field strong { color: #333; }
-    
     .contact-info-admin { background: #fff3cd; padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.8rem; border: 1px solid #ffeeba; }
+    
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
   <div class="app-container">
     
-    <!-- هدر اصلی -->
     <header>
       <div class="logo-icon">💍</div>
       <h1>پلتفرم ازدواج و همسریابی</h1>
-      <div class="subtitle">با مدیریت و تاییدیه مستقیم ادمین</div>
-      
       <a href="http://eitaa.com/joinchat/878706709C93902231a1" class="glow-btn" target="_blank">✨ لمس کن برای رشد ✨</a>
-      
       <div class="contact-admin">
-        <span style="font-size: 0.8rem; color: #888; width: 100%; margin-bottom: 5px;">ارتباط با ادمین:</span>
-        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ایتا</a>
-        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">تلگرام</a>
+        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارتباط در ایتا</a>
+        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">ارتباط در تلگرام</a>
       </div>
     </header>
 
-    <!-- منوی انتخاب -->
     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-      <button onclick="showSection('register')" class="btn-submit" style="background: #3498db;">ثبت‌نام / ویرایش فرم</button>
+      <button onclick="showSection('register')" class="btn-submit" style="background: #3498db;">ثبت‌نام</button>
       <button onclick="showSection('view')" class="btn-submit" style="background: #2ecc71;">مشاهده پروفایل‌ها</button>
       <button onclick="showSection('admin')" class="btn-submit" style="background: #8e44ad;">ورود مدیر</button>
     </div>
 
-    <!-- بخش ۱: فرم ثبت‌نام -->
+    <!-- فرم ثبت‌نام -->
     <div id="section-register" class="card">
       <h2 style="margin-bottom: 15px; color: #d1584c;">تکمیل فرم اطلاعات</h2>
       <form id="profileForm">
+        
+        <div class="form-group">
+          <label>نام کاربری (انگلیسی)</label>
+          <input type="text" id="username" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
         <div class="form-group">
           <label>جنسیت</label>
           <select id="role" required>
+            <option value="">انتخاب کنید...</option>
             <option value="man">داماد (آقا)</option>
             <option value="woman">عروس (خانم)</option>
           </select>
+          <div class="error-text">این فیلد الزامی است.</div>
         </div>
-        <div class="form-group"><label>نام کوچک</label><input type="text" id="first_name" required></div>
-        <div class="form-group"><label>سن</label><input type="text" id="age" required></div>
-        <div class="form-group"><label>شهر سکونت</label><input type="text" id="city" required></div>
-        <div class="form-group"><label>شغل</label><input type="text" id="job"></div>
-        <div class="form-group"><label>تحصیلات</label><input type="text" id="education"></div>
-        <div class="form-group"><label>وضعیت مالی</label><textarea id="finance" rows="2"></textarea></div>
-        <div class="form-group"><label>قد و وزن</label><input type="text" id="height_weight"></div>
-        <div class="form-group"><label>ملاک‌های انتخاب همسر</label><textarea id="criteria" rows="2"></textarea></div>
-        <div class="form-group"><label>درخواست آشنایی از شهر</label><input type="text" id="request_city"></div>
-        <div class="form-group"><label>روحیات و اخلاق</label><textarea id="mood" rows="2"></textarea></div>
-        <div class="form-group"><label>شماره تماس (مخفی می‌ماند)</label><input type="text" id="phone"></div>
-        <div class="form-group"><label>آیدی پیام‌رسان (مخفی می‌ماند)</label><input type="text" id="contact_id"></div>
-        
+
+        <div class="form-group">
+          <label>نام کوچک</label>
+          <input type="text" id="first_name" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>ملیت</label>
+          <select id="nationality" onchange="toggleCountry()" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="iranian">ایرانی</option>
+            <option value="foreign">خارجی</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group hidden" id="countryGroup">
+          <label>نام کشور</label>
+          <input type="text" id="country_name">
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>استان</label>
+          <select id="province" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="تهران">تهران</option>
+            <option value="البرز">البرز</option>
+            <option value="اصفهان">اصفهان</option>
+            <option value="خراسان رضوی">خراسان رضوی</option>
+            <option value="فارس">فارس</option>
+            <option value="آذربایجان شرقی">آذربایجان شرقی</option>
+            <option value="آذربایجان غربی">آذربایجان غربی</option>
+            <option value="خوزستان">خوزستان</option>
+            <option value="مازندران">مازندران</option>
+            <option value="گیلان">گیلان</option>
+            <option value="کرمان">کرمان</option>
+            <option value="قم">قم</option>
+            <option value="یزد">یزد</option>
+            <option value="کرمانشاه">کرمانشاه</option>
+            <option value="هرمزگان">هرمزگان</option>
+            <option value="سیستان و بلوچستان">سیستان و بلوچستان</option>
+            <option value="کردستان">کردستان</option>
+            <option value="همدان">همدان</option>
+            <option value="مرکزی">مرکزی</option>
+            <option value="گلستان">گلستان</option>
+            <option value="قزوین">قزوین</option>
+            <option value="لرستان">لرستان</option>
+            <option value="بوشهر">بوشهر</option>
+            <option value="اردبیل">اردبیل</option>
+            <option value="زنجان">زنجان</option>
+            <option value="سمنان">سمنان</option>
+            <option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option>
+            <option value="خراسان شمالی">خراسان شمالی</option>
+            <option value="خراسان جنوبی">خراسان جنوبی</option>
+            <option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option>
+            <option value="ایلام">ایلام</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>شهر</label>
+          <input type="text" id="city" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>سال تولد (مثلاً 1370)</label>
+          <input type="number" id="birth_year" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>ماه تولد</label>
+          <select id="birth_month" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="1">فروردین</option>
+            <option value="2">اردیبهشت</option>
+            <option value="3">خرداد</option>
+            <option value="4">تیر</option>
+            <option value="5">مرداد</option>
+            <option value="6">شهریور</option>
+            <option value="7">مهر</option>
+            <option value="8">آبان</option>
+            <option value="9">آذر</option>
+            <option value="10">دی</option>
+            <option value="11">بهمن</option>
+            <option value="12">اسفند</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>وضعیت سلامت</label>
+          <select id="health_status" onchange="toggleDisease()" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="healthy">سالم</option>
+            <option value="sick">بیمار</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group hidden" id="diseaseGroup">
+          <label>نوع بیماری</label>
+          <input type="text" id="disease_type">
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>قد (سانتی‌متر)</label>
+          <input type="number" id="height" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>وزن (کیلوگرم)</label>
+          <input type="number" id="weight" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>تحصیلات</label>
+          <select id="education" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="بی سواد">بی سواد</option>
+            <option value="ابتدایی">ابتدایی</option>
+            <option value="دیپلم">دیپلم</option>
+            <option value="دانشجو">دانشجو</option>
+            <option value="کارشناسی">کارشناسی</option>
+            <option value="ارشد">ارشد</option>
+            <option value="دکترا">دکترا</option>
+            <option value="حوزوی مقدماتی">حوزوی مقدماتی</option>
+            <option value="حوزوی عالی">حوزوی عالی</option>
+            <option value="حوزوی خارج">حوزوی خارج</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>وضعیت ازدواج</label>
+          <select id="marital_status" required>
+            <option value="">انتخاب کنید...</option>
+            <option value="مجرد">مجرد</option>
+            <option value="مطلقه عقد">مطلقه (عقد)</option>
+            <option value="مطلقه عروسی">مطلقه (عروسی)</option>
+            <option value="فوت همسر">فوت همسر</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group hidden" id="virginityGroup">
+          <label>وضعیت دوشیزگی (برای خانم‌ها)</label>
+          <select id="virginity">
+            <option value="">انتخاب کنید...</option>
+            <option value="دوشیزه">دوشیزه</option>
+            <option value="غیر دوشیزه">غیر دوشیزه</option>
+          </select>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>آدرس دقیق (فقط مدیر می‌بیند)</label>
+          <textarea id="exact_address" rows="2" required></textarea>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>شماره تماس (فقط مدیر می‌بیند)</label>
+          <input type="text" id="phone" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
+        <div class="form-group">
+          <label>آیدی پیام‌رسان (فقط مدیر می‌بیند)</label>
+          <input type="text" id="contact_id" required>
+          <div class="error-text">این فیلد الزامی است.</div>
+        </div>
+
         <button type="submit" class="btn-submit">ارسال برای تایید مدیر</button>
       </form>
     </div>
 
-    <!-- بخش ۲: مشاهده پروفایل‌ها -->
+    <!-- بخش مشاهده -->
     <div id="section-view" class="card" style="display: none;">
       <h2 style="margin-bottom: 15px; color: #2ecc71;">مشاهده پروفایل‌ها</h2>
-      <div class="form-group">
-        <label>جستجو بر اساس شهر</label>
-        <input type="text" id="searchCity" placeholder="نام شهر..." onkeyup="filterProfiles()">
-      </div>
       <div id="profilesGrid" class="grid"></div>
     </div>
 
-    <!-- بخش ۳: پنل مدیریت -->
+    <!-- بخش مدیریت -->
     <div id="section-admin" class="card admin-panel">
       <h2 style="margin-bottom: 15px; color: #8e44ad;">پنل مدیریت</h2>
-      
       <div id="adminLogin">
-        <div class="form-group">
-          <label>رمز عبور مدیر</label>
-          <input type="password" id="adminPass">
-        </div>
+        <div class="form-group"><label>رمز عبور مدیر</label><input type="password" id="adminPass"></div>
         <button onclick="loginAdmin()" class="btn-submit">ورود</button>
       </div>
-
       <div id="adminDashboard" style="display: none;">
         <div class="admin-tabs">
           <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
@@ -147,7 +304,6 @@
   </div>
 
   <script>
-    // اطلاعات اتصال به دیتابیس
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
     
@@ -155,36 +311,76 @@
     let isAdmin = false;
     let currentAdminFilter = 'pending';
 
-    // تغییر بخش‌ها
     function showSection(section) {
       document.getElementById('section-register').style.display = 'none';
       document.getElementById('section-view').style.display = 'none';
       document.getElementById('section-admin').style.display = 'none';
-      
       if (section === 'register') document.getElementById('section-register').style.display = 'block';
       if (section === 'view') { document.getElementById('section-view').style.display = 'block'; fetchProfiles(); }
       if (section === 'admin') document.getElementById('section-admin').style.display = 'block';
     }
 
-    // ثبت‌نام
+    // نمایش/مخفی کردن فیلدهای شرطی
+    function toggleCountry() {
+      const val = document.getElementById('nationality').value;
+      document.getElementById('countryGroup').style.display = (val === 'foreign') ? 'block' : 'none';
+    }
+    function toggleDisease() {
+      const val = document.getElementById('health_status').value;
+      document.getElementById('diseaseGroup').style.display = (val === 'sick') ? 'block' : 'none';
+    }
+    document.getElementById('role').addEventListener('change', function() {
+      document.getElementById('virginityGroup').style.display = (this.value === 'woman') ? 'block' : 'none';
+    });
+
+    // اعتبارسنجی فرم و ارسال
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      let isValid = true;
       
+      const inputs = document.querySelectorAll('#profileForm input[required], #profileForm select[required], #profileForm textarea[required]');
+      
+      inputs.forEach(input => {
+        const errorText = input.nextElementSibling;
+        // اگر فیلد مخفی است، اعتبارسنجی نکن
+        if (input.closest('.form-group').classList.contains('hidden')) return;
+        
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          if (errorText && errorText.classList.contains('error-text')) errorText.style.display = 'block';
+          isValid = false;
+        } else {
+          input.classList.remove('error');
+          if (errorText && errorText.classList.contains('error-text')) errorText.style.display = 'none';
+        }
+      });
+
+      if (!isValid) {
+        alert('لطفاً تمام فیلدهای الزامی را پر کنید.');
+        return;
+      }
+
       const newProfile = {
+        username: document.getElementById('username').value,
         role: document.getElementById('role').value,
         first_name: document.getElementById('first_name').value,
-        age: document.getElementById('age').value,
+        nationality: document.getElementById('nationality').value,
+        country_name: document.getElementById('country_name').value,
+        province: document.getElementById('province').value,
         city: document.getElementById('city').value,
-        job: document.getElementById('job').value,
+        birth_year: document.getElementById('birth_year').value,
+        birth_month: document.getElementById('birth_month').value,
+        health_status: document.getElementById('health_status').value,
+        disease_type: document.getElementById('disease_type').value,
+        height: document.getElementById('height').value,
+        weight: document.getElementById('weight').value,
         education: document.getElementById('education').value,
-        finance: document.getElementById('finance').value,
-        height_weight: document.getElementById('height_weight').value,
-        criteria: document.getElementById('criteria').value,
-        request_city: document.getElementById('request_city').value,
-        mood: document.getElementById('mood').value,
+        marital_status: document.getElementById('marital_status').value,
+        virginity: document.getElementById('virginity').value,
+        exact_address: document.getElementById('exact_address').value,
         phone: document.getElementById('phone').value,
         contact_id: document.getElementById('contact_id').value,
-        status: 'pending' // همه در ابتدا در صف انتظار هستند
+        status: 'pending'
       };
 
       try {
@@ -194,14 +390,18 @@
           body: JSON.stringify(newProfile)
         });
         if (res.ok) {
-          alert('اطلاعات با موفقیت ثبت شد. پس از تایید مدیر نمایش داده می‌شود.');
+          alert('اطلاعات با موفقیت ثبت شد. در انتظار تایید مدیر.');
           document.getElementById('profileForm').reset();
+          document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+          document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
           showSection('view');
+        } else {
+          const err = await res.json();
+          alert('خطا: ' + (err.message || 'مشکلی پیش آمد.'));
         }
-      } catch (err) { alert('خطا در ثبت: ' + err.message); }
+      } catch (err) { alert('خطای شبکه: ' + err.message); }
     });
 
-    // دریافت اطلاعات
     async function fetchProfiles() {
       try {
         const res = await fetch(supabaseUrl + '/rest/v1/profiles?select=*&order=id.desc', {
@@ -213,50 +413,40 @@
       } catch (err) { console.error(err); }
     }
 
-    // نمایش برای کاربران عادی (فقط نقره‌ای و طلایی)
     function renderPublicProfiles() {
       const grid = document.getElementById('profilesGrid');
       grid.innerHTML = '';
-      
       const visibleProfiles = allProfiles.filter(p => p.status === 'silver' || p.status === 'gold');
-      
       if (visibleProfiles.length === 0) {
-        grid.innerHTML = '<p style="text-align:center; color:#888;">هیچ پروفایل تایید شده‌ای برای نمایش وجود ندارد.</p>';
+        grid.innerHTML = '<p style="text-align:center; color:#888;">هیچ پروفایل تایید شده‌ای وجود ندارد.</p>';
         return;
       }
 
       visibleProfiles.forEach(p => {
         const badgeClass = p.status === 'gold' ? 'gold' : 'silver';
         const badgeText = p.status === 'gold' ? '🌟 طلایی' : '🥈 نقره‌ای';
-        
-        // عکس فقط برای طلایی‌ها (فعلاً جایش خالی است)
-        const photoHtml = p.status === 'gold' ? '<div style="height:100px; background:#eee; border-radius:10px; margin-bottom:10px;">عکس (فقط طلایی)</div>' : '<div style="height:100px; background:#f9f9f9; border-radius:10px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی است</div>';
+        const photoHtml = p.status === 'gold' ? '<div style="height:100px; background:#eee; border-radius:10px; margin-bottom:10px;">عکس (فقط طلایی)</div>' : '<div style="height:100px; background:#f9f9f9; border-radius:10px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی</div>';
 
         grid.innerHTML += `
           <div class="profile-card">
             <span class="badge ${badgeClass}">${badgeText}</span>
             ${photoHtml}
-            <h3 style="color:#d1584c; margin-bottom:10px;">${p.first_name} (${p.age} ساله)</h3>
-            <div class="profile-field"><strong>شهر:</strong> ${p.city}</div>
-            <div class="profile-field"><strong>شغل:</strong> ${p.job || 'ذکر نشده'}</div>
-            <div class="profile-field"><strong>تحصیلات:</strong> ${p.education || 'ذکر نشده'}</div>
-            <div class="profile-field"><strong>ملاک:</strong> ${p.criteria || 'ذکر نشده'}</div>
+            <h3 style="color:#d1584c; margin-bottom:10px;">${p.first_name} (${p.birth_year})</h3>
+            <div class="profile-field"><strong>شهر:</strong> ${p.city} (${p.province})</div>
+            <div class="profile-field"><strong>تحصیلات:</strong> ${p.education}</div>
+            <div class="profile-field"><strong>وضعیت ازدواج:</strong> ${p.marital_status}</div>
           </div>
         `;
       });
     }
 
-    // --- بخش مدیریت ---
     function loginAdmin() {
-      const pass = document.getElementById('adminPass').value;
-      if (pass === 'Reza6625') {
+      if (document.getElementById('adminPass').value === 'Reza6625') {
         isAdmin = true;
         document.getElementById('adminLogin').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
         fetchProfiles();
-      } else {
-        alert('رمز عبور اشتباه است!');
-      }
+      } else { alert('رمز اشتباه است!'); }
     }
 
     function filterAdmin(status) {
@@ -269,26 +459,22 @@
     function renderAdminList() {
       const list = document.getElementById('adminList');
       list.innerHTML = '';
-      
       const filtered = allProfiles.filter(p => p.status === currentAdminFilter);
       
-      if (filtered.length === 0) {
-        list.innerHTML = '<p style="text-align:center; color:#888;">لیست خالی است.</p>';
-        return;
-      }
+      if (filtered.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">لیست خالی است.</p>'; return; }
 
       filtered.forEach(p => {
         list.innerHTML += `
           <div class="profile-card" style="border: 2px solid #8e44ad;">
-            <h3>${p.first_name} (${p.role === 'man' ? 'آقا' : 'خانم'}) - ${p.age} ساله</h3>
-            <div class="profile-field"><strong>شهر:</strong> ${p.city} | <strong>شغل:</strong> ${p.job}</div>
-            
+            <h3>${p.first_name} (${p.role === 'man' ? 'آقا' : 'خانم'}) - متولد ${p.birth_year}</h3>
+            <div class="profile-field"><strong>نام کاربری:</strong> ${p.username}</div>
+            <div class="profile-field"><strong>موقعیت:</strong> ${p.city}، ${p.province}</div>
             <div class="contact-info-admin">
-              <strong>اطلاعات محرمانه (فقط مدیر):</strong><br>
-              شماره تماس: ${p.phone || 'ندارد'}<br>
-              آیدی پیام‌رسان: ${p.contact_id || 'ندارد'}
+              <strong>اطلاعات محرمانه:</strong><br>
+              آدرس: ${p.exact_address}<br>
+              شماره تماس: ${p.phone}<br>
+              آیدی: ${p.contact_id}
             </div>
-
             <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
               ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" style="background:#bdc3c7; color:white; border:none; padding:8px 15px; border-radius:5px;">تبدیل به نقره‌ای</button>` : ''}
               ${p.status === 'silver' ? `<button onclick="updateStatus(${p.id}, 'gold')" style="background:#f1c40f; color:#333; border:none; padding:8px 15px; border-radius:5px;">ارتقا به طلایی</button>` : ''}
@@ -300,38 +486,21 @@
     }
 
     async function updateStatus(id, newStatus) {
-      try {
-        await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
-          method: 'PATCH',
-          headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: newStatus })
-        });
-        fetchProfiles();
-      } catch (err) { alert('خطا در تغییر وضعیت'); }
+      await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
+        method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      fetchProfiles();
     }
 
     async function deleteProfile(id) {
       if (!confirm('آیا مطمئن هستید؟')) return;
-      try {
-        await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
-          method: 'DELETE',
-          headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
-        });
-        fetchProfiles();
-      } catch (err) { alert('خطا در حذف'); }
-    }
-    
-    // فیلتر جستجو
-    function filterProfiles() {
-      const query = document.getElementById('searchCity').value;
-      const cards = document.querySelectorAll('#profilesGrid .profile-card');
-      cards.forEach(card => {
-        if (card.innerText.includes(query)) card.style.display = 'block';
-        else card.style.display = 'none';
+      await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
+        method: 'DELETE', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
       });
+      fetchProfiles();
     }
 
-    // شروع
     fetchProfiles();
   </script>
 </body>
