@@ -8,18 +8,10 @@
   <style>
     @font-face { font-family: 'IRANSans'; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'); }
     
-    /* پالت رنگی شیک و مدرن */
     :root { 
-      --bg-color: #f8f9fa;
-      --card-bg: #ffffff;
-      --text-main: #2c3e50;
-      --text-muted: #7f8c8d;
-      --primary: #8e44ad; /* بنفش شیک */
-      --primary-hover: #732d91;
-      --accent: #d4af37; /* طلایی/مسی */
-      --success: #27ae60;
-      --danger: #c0392b;
-      --border-color: #e0e0e0;
+      --bg-color: #f8f9fa; --card-bg: #ffffff; --text-main: #2c3e50; --text-muted: #7f8c8d;
+      --primary: #8e44ad; --primary-hover: #732d91; --accent: #d4af37; 
+      --success: #27ae60; --danger: #c0392b; --border-color: #e0e0e0;
       --shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
@@ -27,30 +19,27 @@
     body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 20px; line-height: 1.6; }
     .app-container { max-width: 850px; margin: 0 auto; }
     
-    /* هدر شیک */
-    header { background: var(--card-bg); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
-    header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-    .logo-icon { font-size: 45px; margin-bottom: 10px; }
-    h1 { color: var(--text-main); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+    /* هدر */
+    header { background: var(--card-bg); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); position: relative; }
+    .logo-icon { font-size: 50px; margin-bottom: 10px; cursor: pointer; display: inline-block; transition: 0.3s; }
+    .logo-icon:hover { transform: scale(1.1); }
+    h1 { color: var(--text-main); font-size: 1.6rem; font-weight: 800; }
     
-    .glow-btn { display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; text-align: center; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3); border: none; cursor: pointer; font-family: inherit; font-size: 1rem; transition: 0.3s; }
-    .glow-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4); }
+    .glow-btn { display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3); border: none; cursor: pointer; font-family: inherit; font-size: 1rem; transition: 0.3s; }
+    .glow-btn:hover { transform: translateY(-2px); }
     
     .contact-admin { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
     .contact-btn { padding: 10px 25px; border-radius: 30px; text-decoration: none; color: white; font-size: 0.9rem; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-    .contact-btn:hover { transform: translateY(-2px); opacity: 0.9; }
     .eitaa { background: #f39c12; }
     .telegram { background: #0088cc; }
 
-    /* دکمه‌های ناوبری */
+    /* ناوبری */
     .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px; }
     .nav-btn { padding: 18px; border: none; border-radius: 16px; color: white; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: inherit; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-    .nav-btn i { font-size: 1.8rem; }
+    .nav-btn:hover { transform: translateY(-3px); }
     .btn-info { background: #34495e; }
     .btn-view { background: var(--success); }
     .btn-plans { background: var(--accent); color: #333; }
-    .btn-admin { background: var(--text-main); }
 
     /* کارت‌ها */
     .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); }
@@ -58,65 +47,70 @@
     
     /* فرم‌ها */
     .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; margin-bottom: 8px; color: var(--text-main); font-size: 0.95rem; font-weight: bold; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; background: #fafafa; color: var(--text-main); }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(142, 68, 173, 0.1); }
-    
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.95rem; font-weight: bold; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 0.95rem; background: #fafafa; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: #fff; outline: none; }
     .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: var(--danger); background-color: #fadbd8; }
-    .error-text { color: var(--danger); font-size: 0.8rem; display: none; margin-top: 6px; }
 
-    .btn-submit { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; font-family: inherit; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2); }
-    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); }
+    .btn-submit { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; font-family: inherit; }
+    .btn-submit:hover { background: var(--primary-hover); }
     
-    /* استایل‌های بخش پروفایل */
+    /* پروفایل‌ها */
     .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    .profile-card { background: #fff; border-radius: 16px; padding: 25px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: 0.3s; }
-    .profile-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    .profile-card { background: #fff; border-radius: 16px; padding: 25px; border: 1px solid var(--border-color); transition: 0.3s; position: relative; }
+    .profile-card.ladder-active { border: 2px solid var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
     
-    .badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; }
-    .badge.silver { background: #ecf0f1; color: #7f8c8d; border: 1px solid #bdc3c7; }
-    .badge.gold { background: #fef9e7; color: #d4ac0d; border: 1px solid #f1c40f; }
+    .badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; margin-left: 5px;}
+    .badge.silver { background: #ecf0f1; color: #7f8c8d; }
+    .badge.gold { background: #fef9e7; color: #d4ac0d; }
     .badge.pending { background: #fadbd8; color: var(--danger); }
-    .badge.rejected { background: #e5e7e9; color: #7f8c8d; }
+    .badge.ladder { background: linear-gradient(135deg, #f1c40f, #e67e22); color: white; }
     
-    .profile-field { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 8px; }
+    .profile-field { font-size: 0.95rem; margin-bottom: 8px; }
     .profile-field strong { color: var(--text-main); }
+    .profile-field span.empty { color: #aaa; }
     
-    .profile-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; background: #eee; border: 1px solid var(--border-color); }
-    
+    .profile-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; background: #eee; }
+    .gallery { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 15px; padding-bottom:5px; }
+    .gallery img { height: 80px; width: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid #ddd; }
+
     .contact-info-admin { background: #fff3cd; padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem; border: 1px solid #ffeeba; color: #856404; }
-    
     .hidden { display: none !important; }
 
-    /* استایل شرایط */
-    .plan-card { background: #f8f9fa; border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .plan-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
-    .card-number { background: #ecf0f1; padding: 18px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.3rem; letter-spacing: 2px; cursor: pointer; margin: 20px 0; font-family: monospace; color: var(--text-main); border: 2px dashed #bdc3c7; transition: 0.3s; }
-    .card-number:hover { background: #e0e0e0; }
+    /* پنل ادمین */
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 5px; flex-wrap: wrap; }
+    .admin-tab { padding: 10px 15px; background: #f0f0f0; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-weight: bold; white-space: nowrap; }
+    .admin-tab.active { background: var(--text-main); color: white; }
     
-    .terms-box { background: #f4f6f7; border: 1px solid var(--border-color); padding: 18px; border-radius: 12px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 20px; }
+    .admin-btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+    .admin-btn { border: none; padding: 8px 12px; border-radius: 8px; font-family: inherit; cursor: pointer; color: white; font-size: 0.85rem; }
+    .btn-silver { background: #bdc3c7; color: #333; }
+    .btn-gold { background: #f1c40f; color: #333; }
+    .btn-ladder { background: #e67e22; }
+    .btn-edit { background: #3498db; }
+    .btn-reject { background: #e74c3c; }
+    .btn-delete { background: #7f8c8d; }
 
-    .admin-tabs { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 5px; }
-    .admin-tab { padding: 12px 20px; background: #f0f0f0; border-radius: 30px; text-align: center; cursor: pointer; font-size: 0.9rem; white-space: nowrap; font-weight: bold; transition: 0.3s; border: 1px solid transparent; }
-    .admin-tab.active { background: var(--text-main); color: white; border-color: var(--text-main); }
-
-    /* مودال توضیحات */
+    /* مودال‌ها */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-    .modal-content { background: #fff; padding: 30px; border-radius: 20px; max-width: 500px; width: 100%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-    .modal-content h3 { color: var(--primary); margin-bottom: 15px; }
-    .modal-content ul { padding-right: 20px; margin-bottom: 15px; }
-    .modal-content li { margin-bottom: 8px; color: var(--text-main); }
-    .close-modal { background: var(--text-main); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; width: 100%; font-family: inherit; font-size: 1rem; }
+    .modal-content { background: #fff; padding: 30px; border-radius: 20px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
+    .close-modal { background: var(--text-main); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-family: inherit; margin-top: 15px; }
+    
+    .terms-box { background: #f4f6f7; padding: 18px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 20px; }
+    .plan-card { background: #f8f9fa; border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .card-number { background: #ecf0f1; padding: 18px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.3rem; letter-spacing: 2px; cursor: pointer; margin: 20px 0; font-family: monospace; border: 2px dashed #bdc3c7; }
   </style>
 </head>
 <body>
   <div class="app-container">
     
     <header>
-      <div class="logo-icon">💍</div>
+      <!-- آیکون حلقه: با کلیک روی آن، پنل مدیریت باز می‌شود -->
+      <div class="logo-icon" onclick="promptAdmin()">💍</div>
       <h1>پلتفرم ازدواج و همسریابی</h1>
       
-      <button onclick="showSection('plans')" class="glow-btn">✨ لمس کن برای رشد ✨</button>
+      <!-- دکمه رشد -->
+      <a href="http://eitaa.com/joinchat/878706709C93902231a1" class="glow-btn" target="_blank">✨ لمس کن برای رشد ✨</a>
       
       <div class="contact-admin">
         <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارتباط در ایتا</a>
@@ -128,26 +122,21 @@
       <button onclick="showSection('register')" class="nav-btn btn-info">📝 ثبت‌نام / ویرایش</button>
       <button onclick="showSection('view')" class="nav-btn btn-view">👀 مشاهده پروفایل‌ها</button>
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط ارتقاء</button>
-      <button onclick="showSection('admin')" class="nav-btn btn-admin">⚙️ پنل مدیریت</button>
     </div>
 
-    <!-- فرم ثبت‌نام -->
+    <!-- فرم ثبت‌نام / ویرایش -->
     <div id="section-register" class="card">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       
-      <div class="terms-box" id="termsBox">
-        <strong>تعهدنامه:</strong> با ثبت‌نام در این پلتفرم، تایید می‌کنم که این مجموعه فقط نقش معرف را دارد و هیچ مسئولیتی در قبال صحت اطلاعات افراد ندارد. مسئولیت تحقیق و بررسی بر عهده بنده است. همچنین این ثبت‌نام فقط برای من در همین گوشی معتبر است.
-      </div>
-
-      <div id="editWarning" class="hidden" style="background:#fef9e7; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #f1c40f; color:#856404;">
-        شما در حال ویرایش پروفایل خود هستید. پس از ثبت، فرم شما مجدداً در صف انتظار مدیر قرار می‌گیرد.
+      <div id="editWarning" class="hidden" style="background:#fef9e7; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #f1c40f;">
+        شما در حال ویرایش پروفایل خود هستید. پس از ثبت، به صف انتظار می‌روید.
       </div>
 
       <form id="profileForm">
         <input type="hidden" id="edit_id">
         
         <div class="form-group">
-          <label>نام کاربری (فقط انگلیسی)</label>
+          <label>نام کاربری (انگلیسی)</label>
           <input type="text" id="username" required pattern="[A-Za-z0-9_]+">
         </div>
 
@@ -160,15 +149,8 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label>نام (فارسی)</label>
-          <input type="text" id="first_name" required>
-        </div>
-
-        <div class="form-group">
-          <label>نام خانوادگی (فقط مدیر می‌بیند - فارسی)</label>
-          <input type="text" id="last_name" required>
-        </div>
+        <div class="form-group"><label>نام (فارسی)</label><input type="text" id="first_name" required></div>
+        <div class="form-group"><label>نام خانوادگی (فقط مدیر)</label><input type="text" id="last_name" required></div>
 
         <div class="form-group">
           <label>ملیت</label>
@@ -178,117 +160,56 @@
             <option value="خارجی">خارجی</option>
           </select>
         </div>
-
-        <div class="form-group hidden" id="countryGroup">
-          <label>نام کشور</label>
-          <input type="text" id="country_name">
-        </div>
+        <div class="form-group hidden" id="countryGroup"><label>نام کشور</label><input type="text" id="country_name"></div>
 
         <div class="form-group">
           <label>استان</label>
           <select id="province" required>
             <option value="">انتخاب کنید...</option>
-            <option value="تهران">تهران</option>
-            <option value="البرز">البرز</option>
-            <option value="اصفهان">اصفهان</option>
-            <option value="خراسان رضوی">خراسان رضوی</option>
-            <option value="فارس">فارس</option>
-            <option value="آذربایجان شرقی">آذربایجان شرقی</option>
-            <option value="آذربایجان غربی">آذربایجان غربی</option>
-            <option value="خوزستان">خوزستان</option>
-            <option value="مازندران">مازندران</option>
-            <option value="گیلان">گیلان</option>
-            <option value="کرمان">کرمان</option>
-            <option value="قم">قم</option>
-            <option value="یزد">یزد</option>
-            <option value="کرمانشاه">کرمانشاه</option>
-            <option value="هرمزگان">هرمزگان</option>
-            <option value="سیستان و بلوچستان">سیستان و بلوچستان</option>
-            <option value="کردستان">کردستان</option>
-            <option value="همدان">همدان</option>
-            <option value="مرکزی">مرکزی</option>
-            <option value="گلستان">گلستان</option>
-            <option value="قزوین">قزوین</option>
-            <option value="لرستان">لرستان</option>
-            <option value="بوشهر">بوشهر</option>
-            <option value="اردبیل">اردبیل</option>
-            <option value="زنجان">زنجان</option>
-            <option value="سمنان">سمنان</option>
-            <option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option>
-            <option value="خراسان شمالی">خراسان شمالی</option>
-            <option value="خراسان جنوبی">خراسان جنوبی</option>
-            <option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option>
+            <option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option>
+            <option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><option value="آذربایجان شرقی">آذربایجان شرقی</option>
+            <option value="آذربایجان غربی">آذربایجان غربی</option><option value="خوزستان">خوزستان</option><option value="مازندران">مازندران</option>
+            <option value="گیلان">گیلان</option><option value="کرمان">کرمان</option><option value="قم">قم</option>
+            <option value="یزد">یزد</option><option value="کرمانشاه">کرمانشاه</option><option value="هرمزگان">هرمزگان</option>
+            <option value="سیستان و بلوچستان">سیستان و بلوچستان</option><option value="کردستان">کردستان</option><option value="همدان">همدان</option>
+            <option value="مرکزی">مرکزی</option><option value="گلستان">گلستان</option><option value="قزوین">قزوین</option>
+            <option value="لرستان">لرستان</option><option value="بوشهر">بوشهر</option><option value="اردبیل">اردبیل</option>
+            <option value="زنجان">زنجان</option><option value="سمنان">سمنان</option><option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option>
+            <option value="خراسان شمالی">خراسان شمالی</option><option value="خراسان جنوبی">خراسان جنوبی</option><option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option>
             <option value="ایلام">ایلام</option>
           </select>
         </div>
+        <div class="form-group"><label>شهر</label><input type="text" id="city" required></div>
 
-        <div class="form-group">
-          <label>شهر</label>
-          <input type="text" id="city" required>
-        </div>
-
-        <div class="form-group">
-          <label>سال تولد</label>
-          <select id="birth_year" required><option value="">انتخاب کنید...</option></select>
-        </div>
-
+        <div class="form-group"><label>سال تولد</label><select id="birth_year" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group">
           <label>ماه تولد</label>
           <select id="birth_month" required>
-            <option value="">انتخاب کنید...</option>
-            <option value="فروردین">فروردین</option>
-            <option value="اردیبهشت">اردیبهشت</option>
-            <option value="خرداد">خرداد</option>
-            <option value="تیر">تیر</option>
-            <option value="مرداد">مرداد</option>
-            <option value="شهریور">شهریور</option>
-            <option value="مهر">مهر</option>
-            <option value="آبان">آبان</option>
-            <option value="آذر">آذر</option>
-            <option value="دی">دی</option>
-            <option value="بهمن">بهمن</option>
-            <option value="اسفند">اسفند</option>
+            <option value="">انتخاب کنید...</option><option value="فروردین">فروردین</option><option value="اردیبهشت">اردیبهشت</option>
+            <option value="خرداد">خرداد</option><option value="تیر">تیر</option><option value="مرداد">مرداد</option><option value="شهریور">شهریور</option>
+            <option value="مهر">مهر</option><option value="آبان">آبان</option><option value="آذر">آذر</option><option value="دی">دی</option>
+            <option value="بهمن">بهمن</option><option value="اسفند">اسفند</option>
           </select>
         </div>
 
         <div class="form-group">
           <label>وضعیت سلامت</label>
           <select id="health_status" required onchange="toggleDisease()">
-            <option value="">انتخاب کنید...</option>
-            <option value="سالم">سالم</option>
-            <option value="بیمار">بیمار</option>
+            <option value="">انتخاب کنید...</option><option value="سالم">سالم</option><option value="بیمار">بیمار</option>
           </select>
         </div>
+        <div class="form-group hidden" id="diseaseGroup"><label>نوع بیماری</label><input type="text" id="disease_type"></div>
 
-        <div class="form-group hidden" id="diseaseGroup">
-          <label>نوع بیماری</label>
-          <input type="text" id="disease_type">
-        </div>
-
-        <div class="form-group">
-          <label>قد (سانتی‌متر)</label>
-          <select id="height" required><option value="">انتخاب کنید...</option></select>
-        </div>
-
-        <div class="form-group">
-          <label>وزن (کیلوگرم)</label>
-          <select id="weight" required><option value="">انتخاب کنید...</option></select>
-        </div>
+        <div class="form-group"><label>قد</label><select id="height" required><option value="">انتخاب کنید...</option></select></div>
+        <div class="form-group"><label>وزن</label><select id="weight" required><option value="">انتخاب کنید...</option></select></div>
 
         <div class="form-group">
           <label>تحصیلات</label>
           <select id="education" required>
             <option value="">انتخاب کنید...</option>
-            <option value="بی سواد">بی سواد</option>
-            <option value="ابتدایی">ابتدایی</option>
-            <option value="دیپلم">دیپلم</option>
-            <option value="دانشجو">دانشجو</option>
-            <option value="کارشناسی">کارشناسی</option>
-            <option value="ارشد">ارشد</option>
-            <option value="دکترا">دکترا</option>
-            <option value="حوزوی مقدماتی">حوزوی مقدماتی</option>
-            <option value="حوزوی عالی">حوزوی عالی</option>
-            <option value="حوزوی خارج">حوزوی خارج</option>
+            <option value="بی سواد">بی سواد</option><option value="ابتدایی">ابتدایی</option><option value="دیپلم">دیپلم</option>
+            <option value="دانشجو">دانشجو</option><option value="کارشناسی">کارشناسی</option><option value="ارشد">ارشد</option>
+            <option value="دکترا">دکترا</option><option value="حوزوی مقدماتی">حوزوی مقدماتی</option><option value="حوزوی عالی">حوزوی عالی</option><option value="حوزوی خارج">حوزوی خارج</option>
           </select>
         </div>
 
@@ -296,77 +217,45 @@
           <label>وضعیت ازدواج</label>
           <select id="marital_status" required>
             <option value="">انتخاب کنید...</option>
-            <option value="مجرد">مجرد</option>
-            <option value="مطلقه عقد">مطلقه (عقد)</option>
-            <option value="مطلقه عروسی">مطلقه (عروسی)</option>
-            <option value="فوت همسر">فوت همسر</option>
+            <option value="مجرد">مجرد</option><option value="مطلقه عقد">مطلقه (عقد)</option>
+            <option value="مطلقه عروسی">مطلقه (عروسی)</option><option value="فوت همسر">فوت همسر</option>
           </select>
         </div>
-
         <div class="form-group hidden" id="virginityGroup">
-          <label>وضعیت دوشیزگی (برای خانم‌ها)</label>
-          <select id="virginity">
-            <option value="">انتخاب کنید...</option>
-            <option value="دوشیزه">دوشیزه</option>
-            <option value="غیر دوشیزه">غیر دوشیزه</option>
-          </select>
+          <label>وضعیت دوشیزگی</label>
+          <select id="virginity"><option value="">انتخاب کنید...</option><option value="دوشیزه">دوشیزه</option><option value="غیر دوشیزه">غیر دوشیزه</option></select>
         </div>
 
-        <div class="form-group">
-          <label>در صورت ازدواج سابق، تعداد، جنسیت و سن فرزندان</label>
-          <textarea id="previous_marriage_children" rows="2" placeholder="مثلاً: یک پسر ۵ ساله"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>ملاک انتخاب همسر</label>
-          <textarea id="criteria" rows="2"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>توضیحات بیشتر (از درج شماره و آدرس خودداری کنید)</label>
-          <textarea id="extra_details" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>آدرس دقیق (فقط مدیر می‌بیند)</label>
-          <textarea id="address" rows="2"></textarea>
-        </div>
+        <div class="form-group"><label>تعداد/سن فرزندان (از ازدواج سابق)</label><textarea id="previous_marriage_children" rows="2"></textarea></div>
+        <div class="form-group"><label>ملاک انتخاب همسر</label><textarea id="criteria" rows="2"></textarea></div>
+        <div class="form-group"><label>توضیحات بیشتر</label><textarea id="extra_details" rows="3"></textarea></div>
+        <div class="form-group"><label>آدرس دقیق (فقط مدیر)</label><textarea id="address" rows="2"></textarea></div>
 
         <div class="form-group">
           <label>نوع پیام‌رسان</label>
           <select id="messenger_type" required>
-            <option value="">انتخاب کنید...</option>
-            <option value="ایتا">ایتا</option>
-            <option value="تلگرام">تلگرام</option>
+            <option value="">انتخاب کنید...</option><option value="ایتا">ایتا</option><option value="تلگرام">تلگرام</option>
           </select>
         </div>
+        <div class="form-group"><label>آیدی پیام‌رسان (@)</label><input type="text" id="contact_id" required pattern="@[A-Za-z0-9_]+"></div>
+        <div class="form-group"><label>شماره موبایل (۱۱ رقم)</label><input type="tel" id="phone" required pattern="\d{11}"></div>
 
+        <!-- آپلود عکس اجباری -->
         <div class="form-group">
-          <label>آیدی پیام‌رسان (با @ و انگلیسی)</label>
-          <input type="text" id="contact_id" required placeholder="@username" pattern="@[A-Za-z0-9_]+">
-        </div>
-
-        <div class="form-group">
-          <label>شماره موبایل (۱۱ رقم انگلیسی)</label>
-          <input type="tel" id="phone" required pattern="\d{11}">
-        </div>
-
-        <!-- آپلود عکس (اجباری برای همه) -->
-        <div class="form-group" id="photoUploadGroup">
-          <label>آپلود عکس (اجباری)</label>
-          <input type="file" id="photo_file" accept="image/*" required>
+          <label>آپلود عکس اصلی (اجباری - حداکثر ۱ مگابایت)</label>
+          <input type="file" id="photo_file" accept="image/*" required onchange="checkFileSize(this)">
           <div id="uploadStatus" style="font-size:0.85rem; color:var(--primary); margin-top:8px;"></div>
         </div>
 
         <div class="form-group">
           <label>
             <input type="checkbox" id="agree_terms" style="width:auto; margin-left:8px;" required>
-            <span>تعهدنامه فوق را می‌پذیرم.</span>
+            <span>تعهدنامه را می‌پذیرم.</span>
           </label>
         </div>
 
-        <button type="submit" class="btn-submit">ثبت و ارسال برای مدیر</button>
-        <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#95a5a6; margin-top:10px;">انصراف از ویرایش</button>
+        <button type="submit" class="btn-submit">ثبت اطلاعات</button>
+        <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#95a5a6;">انصراف از ویرایش</button>
       </form>
     </div>
 
@@ -390,36 +279,38 @@
       <div class="plan-card"><div><strong>طلایی (۶ ماهه)</strong></div><div class="plan-price">۱,۰۰۰,۰۰۰ تومان</div></div>
       <div class="plan-card"><div><strong>نقره‌ای (۱ ساله)</strong></div><div class="plan-price">۹۰۰,۰۰۰ تومان</div></div>
       <div class="plan-card"><div><strong>طلایی (۱ ساله)</strong></div><div class="plan-price">۱,۸۰۰,۰۰۰ تومان</div></div>
+      
+      <!-- نردبان -->
+      <div class="plan-card" style="border-color: var(--accent);"><div><strong>نردبان (۱۰ روزه)</strong><br><small>نمایش در بالای صفحه</small></div><div class="plan-price" style="color:var(--accent);">۵۰,۰۰۰ تومان</div></div>
 
-      <p style="margin-top: 25px; font-weight: bold; color:var(--text-main);">شماره کارت (برای کپی لمس کنید):</p>
+      <p style="margin-top: 25px; font-weight: bold;">شماره کارت (برای کپی لمس کنید):</p>
       <div class="card-number" onclick="copyCard()">6037997123943616</div>
-      <p style="font-size: 0.9rem; text-align: center; color:var(--text-muted);">بنام خانم جودکی - بانک ملی</p>
-      <p style="font-size: 0.9rem; text-align: center; margin-top: 15px; color: var(--primary); font-weight:bold;">لطفاً رسید را به آیدی زیر بفرستید:</p>
+      <p style="font-size: 0.9rem; text-align: center;">بنام خانم جودکی - بانک ملی</p>
       
       <div class="contact-admin" style="margin-top: 15px;">
         <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ایتا</a>
         <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">تلگرام</a>
       </div>
-      <p style="text-align: center; margin-top: 25px; font-size: 1rem; color:var(--text-muted);">با آرزوی خوشبختی 🌹</p>
     </div>
 
-    <!-- پنل مدیریت -->
+    <!-- پنل مدیریت (مخفی) -->
     <div id="section-admin" class="card" style="display: none;">
       <h2 class="section-title">⚙️ پنل مدیریت</h2>
-      <div id="adminLogin">
-        <div class="form-group"><label>رمز عبور</label><input type="password" id="adminPass"></div>
-        <button onclick="loginAdmin()" class="btn-submit">ورود</button>
+      <div class="admin-tabs" id="adminTabs">
+        <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
+        <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
+        <div class="admin-tab" onclick="filterAdmin('gold')">طلایی</div>
+        <div class="admin-tab" onclick="filterAdmin('rejected')">رد شده</div>
       </div>
       
-      <div id="adminDashboard" style="display: none;">
-        <div class="admin-tabs">
-          <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
-          <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
-          <div class="admin-tab" onclick="filterAdmin('gold')">طلایی</div>
-          <div class="admin-tab" onclick="filterAdmin('rejected')">رد شده</div>
-        </div>
-        <div id="adminList" class="grid"></div>
+      <!-- فیلتر جنسیت برای مدیر -->
+      <div style="margin-bottom:20px; display:flex; gap:10px;">
+        <button onclick="filterGenderAdmin('all')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">همه</button>
+        <button onclick="filterGenderAdmin('man')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">آقایان</button>
+        <button onclick="filterGenderAdmin('woman')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">بانوان</button>
       </div>
+
+      <div id="adminList" class="grid"></div>
     </div>
 
   </div>
@@ -428,19 +319,11 @@
   <div id="infoModal" class="modal">
     <div class="modal-content">
       <h3>مزایای اشتراک نقره‌ای:</h3>
-      <ul>
-        <li>نمایش فرم شما برای جنس مخالف</li>
-        <li>امکان مشاهده پروفایل‌های جنس مخالف (بدون عکس)</li>
-        <li>اعتبار ۳۰ روزه، ۶ ماهه یا ۱ ساله</li>
-      </ul>
+      <ul><li>نمایش فرم شما برای جنس مخالف (اطلاعات کلی)</li><li>بدون نمایش عکس</li></ul>
       <h3 style="margin-top:20px;">مزایای اشتراک طلایی:</h3>
-      <ul>
-        <li>تمام مزایای اشتراک نقره‌ای</li>
-        <li><strong>مشاهده عکس پروفایل جنس مخالف</strong></li>
-        <li>نمایش عکس شما به سایر کاربران</li>
-        <li>اولویت در نمایش پروفایل</li>
-        <li>اعتبار ۳۰ روزه، ۶ ماهه یا ۱ ساله</li>
-      </ul>
+      <ul><li>نمایش کامل اطلاعات (به جز محرمانه)</li><li>مشاهده عکس پروفایل (تا ۵ عکس)</li><li>نمایش عکس شما به دیگران</li></ul>
+      <h3 style="margin-top:20px;">مزایای نردبان:</h3>
+      <ul><li>نمایش پروفایل شما در بالای لیست جستجو به مدت ۱۰ روز</li></ul>
       <button onclick="closeModal()" class="close-modal">متوجه شدم</button>
     </div>
   </div>
@@ -452,7 +335,9 @@
     let allProfiles = [];
     let isAdmin = false;
     let currentAdminFilter = 'pending';
+    let currentGenderFilter = 'all';
     let myGender = localStorage.getItem('my_gender') || '';
+    let myProfileId = localStorage.getItem('my_profile_id') || ''; 
 
     window.onload = function() {
       const yearSel = document.getElementById('birth_year');
@@ -473,45 +358,95 @@
       
       if (section === 'view') {
         if (!myGender) {
-          const g = prompt('لطفاً جنسیت خود را وارد کنید (man یا woman):');
-          if (g === 'man' || g === 'woman') {
-            myGender = g;
-            localStorage.setItem('my_gender', g);
-          } else { alert('ورودی نامعتبر است.'); return; }
+          const g = prompt('جنسیت خود را وارد کنید (man یا woman):');
+          if (g === 'man' || g === 'woman') { myGender = g; localStorage.setItem('my_gender', g); }
+          else { alert('نامعتبر'); return; }
         }
         renderPublicProfiles();
+      }
+      if (section === 'register' && myProfileId) {
+        loadMyProfile();
+      }
+    }
+
+    function promptAdmin() {
+      const pass = prompt('رمز عبور مدیر را وارد کنید:');
+      if (pass === 'Reza6625') {
+        isAdmin = true;
+        showSection('admin');
+      } else if (pass !== null) {
+        alert('رمز اشتباه است!');
       }
     }
 
     function openModal() { document.getElementById('infoModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
-
-    function copyCard() {
-      navigator.clipboard.writeText('6037997123943616');
-      alert('شماره کارت کپی شد!');
-    }
+    function copyCard() { navigator.clipboard.writeText('6037997123943616'); alert('کپی شد!'); }
 
     function toggleGenderFields() {
-      const role = document.getElementById('role').value;
-      document.getElementById('virginityGroup').style.display = (role === 'woman') ? 'block' : 'none';
+      document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none';
     }
-
     function toggleCountry() {
       document.getElementById('countryGroup').style.display = (document.getElementById('nationality').value === 'خارجی') ? 'block' : 'none';
     }
-
     function toggleDisease() {
       document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none';
     }
+    
+    function checkFileSize(input) {
+      if (input.files.length > 0) {
+        const fileSize = input.files[0].size / 1024 / 1024; 
+        if (fileSize > 1) {
+          alert('حجم عکس باید کمتر از ۱ مگابایت باشد.');
+          input.value = '';
+        }
+      }
+    }
 
-    // فرم ثبت‌نام / ویرایش
+    function loadMyProfile() {
+      const p = allProfiles.find(x => x.id == myProfileId);
+      if (!p) return;
+
+      document.getElementById('edit_id').value = p.id;
+      document.getElementById('username').value = p.username || '';
+      document.getElementById('role').value = p.role || '';
+      document.getElementById('first_name').value = p.first_name || '';
+      document.getElementById('last_name').value = p.last_name || '';
+      document.getElementById('nationality').value = p.nationality || '';
+      document.getElementById('country_name').value = p.country_name || '';
+      document.getElementById('province').value = p.province || '';
+      document.getElementById('city').value = p.city || '';
+      document.getElementById('birth_year').value = p.birth_year || '';
+      document.getElementById('birth_month').value = p.birth_month || '';
+      document.getElementById('health_status').value = p.health_status || '';
+      document.getElementById('disease_type').value = p.disease_type || '';
+      document.getElementById('height').value = p.height || '';
+      document.getElementById('weight').value = p.weight || '';
+      document.getElementById('education').value = p.education || '';
+      document.getElementById('marital_status').value = p.marital_status || '';
+      document.getElementById('virginity').value = p.virginity || '';
+      document.getElementById('previous_marriage_children').value = p.previous_marriage_children || '';
+      document.getElementById('criteria').value = p.criteria || '';
+      document.getElementById('extra_details').value = p.extra_details || '';
+      document.getElementById('address').value = p.address || '';
+      document.getElementById('messenger_type').value = p.messenger_type || '';
+      document.getElementById('contact_id').value = p.contact_id || '';
+      document.getElementById('phone').value = p.phone || '';
+
+      document.getElementById('editWarning').classList.remove('hidden');
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+      
+      toggleGenderFields();
+      toggleCountry();
+      toggleDisease();
+    }
+
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const editId = document.getElementById('edit_id').value;
       const isEdit = editId !== '';
       
-      // اعتبارسنجی
       let isValid = true;
       document.querySelectorAll('#profileForm input[required], #profileForm select[required]').forEach(input => {
         if (!input.value.trim()) { input.classList.add('error'); isValid = false; }
@@ -522,12 +457,12 @@
         alert('نام باید فارسی باشد.'); isValid = false;
       }
       if (!/^@[A-Za-z0-9_]+$/.test(document.getElementById('contact_id').value)) {
-        alert('آیدی باید با @ شروع شود و انگلیسی باشد.'); isValid = false;
+        alert('آیدی باید انگلیسی و با @ باشد.'); isValid = false;
       }
       if (!/^\d{11}$/.test(document.getElementById('phone').value)) {
-        alert('شماره موبایل باید ۱۱ رقم انگلیسی باشد.'); isValid = false;
+        alert('شماره باید ۱۱ رقم باشد.'); isValid = false;
       }
-      
+
       const fileInput = document.getElementById('photo_file');
       if (!isEdit && fileInput.files.length === 0) {
         alert('آپلود عکس اجباری است.'); isValid = false;
@@ -535,12 +470,11 @@
 
       if (!isValid) return alert('لطفاً خطاهای فرم را برطرف کنید.');
 
-      // آپلود عکس
       let photoUrl = null;
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         const fileName = Date.now() + '_' + file.name;
-        document.getElementById('uploadStatus').innerText = 'در حال آپلود عکس...';
+        document.getElementById('uploadStatus').innerText = 'در حال آپلود...';
         
         const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
           method: 'POST',
@@ -550,9 +484,8 @@
         
         if (uploadRes.ok) {
           photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
-          document.getElementById('uploadStatus').innerText = 'عکس با موفقیت آپلود شد.';
         } else {
-          document.getElementById('uploadStatus').innerText = 'خطا در آپلود عکس.';
+          document.getElementById('uploadStatus').innerText = 'خطا در آپلود.';
           return;
         }
       }
@@ -602,7 +535,17 @@
         });
         
         if (res.ok) {
-          alert(isEdit ? 'ویرایش شد. در صف انتظار مدیر قرار گرفت.' : 'ثبت شد. در صف انتظار مدیر.');
+          if (!isEdit) {
+            const getRes = await fetch(`${supabaseUrl}/rest/v1/profiles?select=id&order=id.desc&limit=1`, {
+              headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
+            });
+            const newData = await getRes.json();
+            if(newData && newData[0]) {
+              localStorage.setItem('my_profile_id', newData[0].id);
+              myProfileId = newData[0].id;
+            }
+          }
+          alert(isEdit ? 'ویرایش شد. در صف انتظار قرار گرفت.' : 'ثبت شد. در صف انتظار.');
           resetForm();
           showSection('view');
         }
@@ -614,7 +557,6 @@
       document.getElementById('edit_id').value = '';
       document.getElementById('editWarning').classList.add('hidden');
       document.getElementById('cancelEditBtn').classList.add('hidden');
-      document.getElementById('termsBox').classList.remove('hidden');
       document.getElementById('virginityGroup').style.display = 'none';
       document.getElementById('countryGroup').style.display = 'none';
       document.getElementById('diseaseGroup').style.display = 'none';
@@ -632,53 +574,69 @@
       } catch (err) { console.error(err); }
     }
 
+    function safeVal(val) {
+        return (val === null || val === undefined || val === '') ? '<span class="empty">-</span>' : val;
+    }
+
     function renderPublicProfiles() {
       const grid = document.getElementById('profilesGrid');
       const msg = document.getElementById('viewerMessage');
       
       if (!myGender) return;
-      
       msg.innerText = `شما به عنوان ${myGender === 'man' ? 'آقا' : 'خانم'} وارد شده‌اید. فقط پروفایل جنس مخالف نمایش داده می‌شود.`;
       
       grid.innerHTML = '';
       const oppositeRole = myGender === 'man' ? 'woman' : 'man';
-      const visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole);
+      
+      let visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole);
+      
+      // مرتب‌سازی: نردبان‌دارها اول
+      visibleProfiles.sort((a, b) => (b.ladder === true ? 1 : 0) - (a.ladder === true ? 1 : 0));
 
       if (visibleProfiles.length === 0) {
-        grid.innerHTML = '<p style="text-align:center; color:#888;">پروفایلی برای نمایش وجود ندارد.</p>';
+        grid.innerHTML = '<p style="text-align:center; color:#888;">پروفایلی وجود ندارد.</p>';
         return;
       }
 
       visibleProfiles.forEach(p => {
-        let photoHtml = '<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی (فقط طلایی)</div>';
+        let photoHtml = '';
         if (p.status === 'gold' && p.photo_url) {
           photoHtml = `<img src="${p.photo_url}" class="profile-img" alt="عکس">`;
+        } else {
+          photoHtml = `<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی (فقط طلایی)</div>`;
+        }
+
+        let ladderBadge = p.ladder ? `<span class="badge ladder">🚀 نردبان</span>` : '';
+        let cardClass = p.ladder ? 'profile-card ladder-active' : 'profile-card';
+
+        let detailsHtml = '';
+        if (p.status === 'gold') {
+            detailsHtml = `
+                <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>شهر:</strong> ${safeVal(p.city)} (${safeVal(p.province)})</div>
+                <div class="profile-field"><strong>قد/وزن:</strong> ${safeVal(p.height)} cm / ${safeVal(p.weight)} kg</div>
+                <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)}</div>
+                <div class="profile-field"><strong>وضعیت ازدواج:</strong> ${safeVal(p.marital_status)}</div>
+                <div class="profile-field"><strong>ملاک:</strong> ${safeVal(p.criteria)}</div>
+                <div class="profile-field"><strong>توضیحات:</strong> ${safeVal(p.extra_details)}</div>
+                ${p.previous_marriage_children ? `<div class="profile-field"><strong>فرزندان:</strong> ${p.previous_marriage_children}</div>` : ''}
+            `;
+        } else {
+            detailsHtml = `
+                <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>شهر:</strong> ${safeVal(p.city)}</div>
+                <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)}</div>
+            `;
         }
 
         grid.innerHTML += `
-          <div class="profile-card">
+          <div class="${cardClass}">
+            ${ladderBadge}
             <span class="badge ${p.status === 'gold' ? 'gold' : 'silver'}">${p.status === 'gold' ? '🌟 طلایی' : '🥈 نقره‌ای'}</span>
             ${photoHtml}
             <h3 style="color:var(--primary); margin-bottom:15px;">${p.first_name} (${p.birth_year})</h3>
-            <div class="profile-field"><strong>ملیت:</strong> ${p.nationality} | <strong>شهر:</strong> ${p.city} (${p.province})</div>
-            <div class="profile-field"><strong>قد/وزن:</strong> ${p.height} cm / ${p.weight} kg</div>
-            <div class="profile-field"><strong>تحصیلات:</strong> ${p.education}</div>
-            <div class="profile-field"><strong>وضعیت ازدواج:</strong> ${p.marital_status}</div>
-            <div class="profile-field"><strong>ملاک:</strong> ${p.criteria || 'ذکر نشده'}</div>
-            <div class="profile-field"><strong>توضیحات:</strong> ${p.extra_details || 'ندارد'}</div>
-            ${p.previous_marriage_children ? `<div class="profile-field"><strong>فرزندان سابق:</strong> ${p.previous_marriage_children}</div>` : ''}
+            ${detailsHtml}
           </div>
         `;
       });
-    }
-
-    function loginAdmin() {
-      if (document.getElementById('adminPass').value === 'Reza6625') {
-        isAdmin = true;
-        document.getElementById('adminLogin').style.display = 'none';
-        document.getElementById('adminDashboard').style.display = 'block';
-        fetchProfiles();
-      } else { alert('رمز اشتباه!'); }
     }
 
     function filterAdmin(status) {
@@ -688,35 +646,48 @@
       renderAdminList();
     }
 
+    function filterGenderAdmin(gender) {
+      currentGenderFilter = gender;
+      renderAdminList();
+    }
+
     function renderAdminList() {
       const list = document.getElementById('adminList');
       list.innerHTML = '';
-      const filtered = allProfiles.filter(p => p.status === currentAdminFilter);
+      let filtered = allProfiles.filter(p => p.status === currentAdminFilter);
+      
+      if(currentGenderFilter !== 'all') {
+          filtered = filtered.filter(p => p.role === currentGenderFilter);
+      }
       
       if (filtered.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">لیست خالی است.</p>'; return; }
 
       filtered.forEach(p => {
+        let photoHtml = p.photo_url ? `<img src="${p.photo_url}" style="width:60px; height:60px; border-radius:50%; object-fit:cover; float:left; margin-left:10px;">` : '';
+        
         list.innerHTML += `
-          <div class="profile-card" id="admin-card-${p.id}">
-            <span class="badge ${p.status}">${p.status === 'pending' ? 'در انتظار' : p.status === 'silver' ? 'نقره‌ای' : p.status === 'gold' ? 'طلایی' : 'رد شده'}</span>
+          <div class="profile-card" style="border: 2px solid #8e44ad; overflow:hidden;">
+            ${photoHtml}
+            <span class="badge ${p.status}">${p.status}</span>
             <h3>${p.first_name} ${p.last_name || ''} (${p.role === 'man' ? 'آقا' : 'خانم'})</h3>
             <div class="profile-field">کاربری: ${p.username} | متولد: ${p.birth_year}</div>
-            <div class="profile-field">ملاک: ${p.criteria}</div>
             
             <div class="contact-info-admin">
               <strong>محرمانه:</strong><br>
-              آدرس: ${p.address || 'ندارد'}<br>
-              موبایل: ${p.phone}<br>
+              آدرس: ${safeVal(p.address)}<br>
+              موبایل: ${safeVal(p.phone)}<br>
               پیام‌رسان: ${p.messenger_type} - ${p.contact_id}
             </div>
 
             ${p.status === 'rejected' ? `<div class="profile-field" style="color:red; margin-top:5px;">دلیل رد: ${p.reject_reason}</div>` : ''}
             
-            <div style="margin-top:15px; display:flex; gap:8px; flex-wrap:wrap;">
-              ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" style="background:#bdc3c7; border:none; padding:8px 15px; border-radius:8px; font-family:inherit; cursor:pointer;">نقره‌ای</button>` : ''}
-              ${p.status === 'pending' || p.status === 'silver' ? `<button onclick="updateStatus(${p.id}, 'gold')" style="background:#f1c40f; border:none; padding:8px 15px; border-radius:8px; font-family:inherit; cursor:pointer;">طلایی</button>` : ''}
-              <button onclick="rejectProfile(${p.id})" style="background:#e67e22; color:white; border:none; padding:8px 15px; border-radius:8px; font-family:inherit; cursor:pointer;">رد کردن</button>
-              <button onclick="deleteProfile(${p.id})" style="background:#e74c3c; color:white; border:none; padding:8px 15px; border-radius:8px; font-family:inherit; cursor:pointer;">حذف</button>
+            <div class="admin-btn-group">
+              ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" class="admin-btn btn-silver">نقره‌ای</button>` : ''}
+              ${p.status !== 'gold' ? `<button onclick="updateStatus(${p.id}, 'gold')" class="admin-btn btn-gold">طلایی</button>` : ''}
+              <button onclick="toggleLadder(${p.id}, ${p.ladder})" class="admin-btn btn-ladder">${p.ladder ? 'حذف نردبان' : 'فعال نردبان'}</button>
+              <button onclick="openEditAdmin(${p.id})" class="admin-btn btn-edit">ویرایش</button>
+              <button onclick="rejectProfile(${p.id})" class="admin-btn btn-reject">رد کردن</button>
+              <button onclick="deleteProfile(${p.id})" class="admin-btn btn-delete">حذف</button>
             </div>
           </div>
         `;
@@ -734,6 +705,14 @@
       fetchProfiles();
     }
 
+    async function toggleLadder(id, currentStatus) {
+      await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
+        method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ladder: !currentStatus })
+      });
+      fetchProfiles();
+    }
+
     async function rejectProfile(id) {
       const reason = prompt('دلیل رد کردن فرم چیست؟');
       if (!reason) return;
@@ -742,6 +721,21 @@
         body: JSON.stringify({ status: 'rejected', reject_reason: reason })
       });
       fetchProfiles();
+    }
+
+    async function openEditAdmin(id) {
+        // ویرایش سریع توسط مدیر (فقط تغییر نام و شماره)
+        const p = allProfiles.find(x => x.id === id);
+        const newName = prompt('نام جدید:', p.first_name);
+        const newPhone = prompt('شماره جدید:', p.phone);
+        
+        if (newName || newPhone) {
+          await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
+            method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ first_name: newName || p.first_name, phone: newPhone || p.phone })
+          });
+          fetchProfiles();
+        }
     }
 
     async function deleteProfile(id) {
