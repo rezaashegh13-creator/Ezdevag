@@ -17,9 +17,9 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IRANSans', sans-serif; }
     
-    /* پس‌زمینه با لینک معتبر */
+    /* تکسچر عاشقانه */
     body { 
-      background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070&auto=format&fit=crop');
+      background-image: url('https://cdn.imgurl.ir/uploads/q920088_czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjUzOS1rdWwtMDQtZ2xpdC5qcGc=');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -109,6 +109,7 @@
     .btn-edit { background: #8e24aa; }
     .btn-delete { background: #616161; }
     .btn-login-as { background: #00897b; }
+    .btn-status-change { background: #e91e63; }
 
     .user-dashboard { background: rgba(255,255,255,0.9); border: 2px solid var(--border-color); border-radius: 24px; padding: 30px; margin-bottom: 20px; text-align: center; }
     .user-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 15px; }
@@ -150,6 +151,14 @@
     .auth-btn { padding: 15px 30px; border-radius: 12px; border: none; font-family: inherit; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
     .btn-login-auth { background: var(--primary); color: white; }
     .btn-register-auth { background: #5d4037; color: white; }
+
+    .chat-tabs-admin { display: flex; gap: 10px; margin-bottom: 15px; }
+    .chat-tab-admin { padding: 8px 15px; background: #eee; border-radius: 20px; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
+    .chat-tab-admin.active { background: var(--primary); color: white; }
+    .time-setting-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; background:#fff; padding:10px; border-radius:10px; border:1px solid #ddd;}
+    .time-setting-row span { flex: 1; font-weight: bold; font-size:0.9rem; }
+    .time-setting-row input { width: 80px; padding: 5px; border-radius: 5px; border: 1px solid #ccc; text-align:center;}
+    .time-setting-row button { padding: 5px 10px; background: var(--success); color:white; border:none; border-radius:5px; cursor:pointer;}
   </style>
 </head>
 <body onscroll="checkScroll()">
@@ -174,10 +183,10 @@
       <button onclick="showSection('view')" class="nav-btn btn-view">👀 پروفایل‌ها</button>
       <button onclick="showSection('notifications')" class="nav-btn btn-notif">🔔 اعلانات <span id="notifBadge" class="notif-badge">0</span></button>
       <button onclick="showSection('chat')" class="nav-btn btn-chat">💬 ارتباط با ادمین</button>
-      <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 قوانین و شرایط</button>
+      <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط</button>
     </div>
 
-    <!-- 1. فرم ثبت‌نام -->
+    <!-- فرم ثبت‌نام -->
     <div id="section-register" class="card" style="display: none;">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       <div id="editWarning" class="hidden" style="background:#fff8e1; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #ffecb3;">در حال ویرایش هستید. پس از ثبت به صف انتظار می‌روید.</div>
@@ -214,7 +223,7 @@
       </form>
     </div>
 
-    <!-- 2. پروفایل من -->
+    <!-- پروفایل من -->
     <div id="section-profile" class="card" style="display: none;">
       <div id="userLoginView">
         <h2 class="section-title">🔐 خوش آمدید</h2>
@@ -243,7 +252,7 @@
       </div>
     </div>
 
-    <!-- 3. مشاهده پروفایل‌ها -->
+    <!-- مشاهده پروفایل‌ها -->
     <div id="section-view" class="card" style="display: none;">
       <h2 class="section-title">👀 مشاهده پروفایل‌ها</h2>
       <div class="filter-box">
@@ -266,13 +275,13 @@
       <div id="profilesGrid" class="grid"></div>
     </div>
 
-    <!-- 4. اعلانات -->
+    <!-- اعلانات -->
     <div id="section-notifications" class="card" style="display: none;">
       <h2 class="section-title">🔔 اعلانات و درخواست‌ها</h2>
       <div id="notificationsList" class="grid"></div>
     </div>
 
-    <!-- 5. چت با ادمین -->
+    <!-- چت با ادمین -->
     <div id="section-chat" class="card" style="display: none;">
         <h2 class="section-title">💬 ارتباط با ادمین</h2>
         <div id="chatLoginRequired" class="hidden">
@@ -288,7 +297,7 @@
         </div>
     </div>
 
-    <!-- 6. قوانین و شرایط -->
+    <!-- قوانین و شرایط -->
     <div id="section-plans" class="card" style="display: none;">
       <h2 class="section-title">💎 قوانین و هزینه‌ها</h2>
       <div class="rule-item">
@@ -319,27 +328,44 @@
       </div>
     </div>
 
-    <!-- 7. پنل مدیریت -->
+    <!-- پنل مدیریت -->
     <div id="section-admin" class="card" style="display: none;">
       <h2 class="section-title">⚙️ پنل مدیریت</h2>
       
-      <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 30px;">
-        <div class="stat-box"><div class="stat-value" id="statTotal">0</div><div class="stat-label">کل</div></div>
-        <div class="stat-box"><div class="stat-value" id="statPending">0</div><div class="stat-label">در انتظار</div></div>
-        <div class="stat-box"><div class="stat-value" id="statBeginner">0</div><div class="stat-label">مبتدی</div></div>
-        <div class="stat-box"><div class="stat-value" id="statSilver">0</div><div class="stat-label">نقره‌ای</div></div>
-        <div class="stat-box"><div class="stat-value" id="statGold">0</div><div class="stat-label">طلایی</div></div>
+      <!-- تنظیمات زمانی -->
+      <div style="background:#f0f4c3; padding:15px; border-radius:15px; margin-bottom:20px;">
+          <h3 style="color:#827717; margin-bottom:10px;">⏱️ تنظیمات روزهای اعتبار (پیش‌فرض)</h3>
+          <div class="time-setting-row">
+              <span>🌱 مبتدی:</span><input type="number" id="timeBeginner" value="30"> روز <button onclick="saveTimeSetting('beginner')">ذخیره</button>
+          </div>
+          <div class="time-setting-row">
+              <span>🥈 نقره‌ای:</span><input type="number" id="timeSilver" value="30"> روز <button onclick="saveTimeSetting('silver')">ذخیره</button>
+          </div>
+          <div class="time-setting-row">
+              <span>🌟 طلایی:</span><input type="number" id="timeGold" value="30"> روز <button onclick="saveTimeSetting('gold')">ذخیره</button>
+          </div>
       </div>
 
+      <!-- چت ادمین -->
       <div style="background:#e3f2fd; padding:15px; border-radius:15px; margin-bottom:20px;">
-        <h3 style="color:#1976d2;">💬 چت با کاربران <span id="adminChatNotifBadge" class="notif-badge" style="position:relative; display:none; margin-right:10px;">0</span></h3>
-        <div class="form-group">
-            <select id="adminChatUserSelect" onchange="loadAdminChat()">
-                <option value="">انتخاب کاربر...</option>
+        <h3 style="color:#1976d2; margin-bottom:10px;">💬 چت با کاربران</h3>
+        <div class="chat-tabs-admin">
+            <div class="chat-tab-admin active" onclick="switchAdminChatTab('inbox')">📥 دریافتی (جدید)</div>
+            <div class="chat-tab-admin" onclick="switchAdminChatTab('send')">📤 ارسالی (انتخاب کاربر)</div>
+        </div>
+
+        <div id="adminChatInbox">
+            <div id="adminInboxList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
+        </div>
+
+        <div id="adminChatSend" class="hidden">
+            <select id="adminChatUserSelect" onchange="loadAdminChat()" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px;">
+                <option value="">انتخاب کاربر برای شروع چت...</option>
             </select>
         </div>
-        <div id="adminChatArea" class="chat-container hidden">
-            <div class="chat-header">چت با کاربر</div>
+
+        <div id="adminChatArea" class="chat-container hidden" style="height: 350px;">
+            <div class="chat-header" id="adminChatHeader">چت</div>
             <div class="chat-messages" id="adminChatMessages"></div>
             <div class="chat-input-area">
                 <input type="text" id="adminChatInput" placeholder="پاسخ..." onkeypress="if(event.key === 'Enter') sendAdminMessage()">
@@ -353,7 +379,6 @@
         <div class="admin-tab" onclick="filterAdmin('beginner')">مبتدی</div>
         <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
         <div class="admin-tab" onclick="filterAdmin('gold')">طلایی</div>
-        <div class="admin-tab" onclick="filterAdmin('matches')">تایید دو طرفه</div>
       </div>
       
       <div id="adminList" class="grid"></div>
@@ -361,7 +386,7 @@
 
   </div>
 
-  <!-- مودال قوانین -->
+  <!-- مودال‌ها -->
   <div id="rulesModal" class="modal rules-modal" style="display: flex;">
       <div class="modal-content">
           <h2>🎉 افتتاحیه بزرگ! 🎉</h2>
@@ -381,7 +406,6 @@
       </div>
   </div>
 
-  <!-- مودال‌های دیگر -->
   <div id="adminEditModal" class="modal">
     <div class="modal-content">
       <h3 style="color:var(--primary); margin-bottom:15px;">✏️ ویرایش کامل پروفایل</h3>
@@ -404,7 +428,7 @@
     </div>
   </div>
 
-    <script>
+  <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
     
@@ -416,11 +440,17 @@
     let myGender = localStorage.getItem('my_gender') || '';
     let myProfileId = localStorage.getItem('my_profile_id') || ''; 
     let myPhone = localStorage.getItem('my_phone') || '';
-    let isAdminImpersonating = false;
     let currentAdminChatUserId = null;
-    let scrollCount = 0; 
+    
+    let timeSettings = { beginner: 30, silver: 30, gold: 30 };
 
     window.onload = function() {
+        if(document.getElementById('timeBeginner')) {
+            document.getElementById('timeBeginner').value = timeSettings.beginner;
+            document.getElementById('timeSilver').value = timeSettings.silver;
+            document.getElementById('timeGold').value = timeSettings.gold;
+        }
+        
         // پر کردن لیست‌های کشویی
         const heightSel = document.getElementById('height');
         if(heightSel) for (let i = 140; i <= 210; i++) heightSel.innerHTML += `<option value="${i}">${i}</option>`;
@@ -428,9 +458,10 @@
         if(weightSel) for (let i = 40; i <= 150; i++) weightSel.innerHTML += `<option value="${i}">${i}</option>`;
         const yearSel = document.getElementById('birth_year');
         if(yearSel) for (let i = 1403 - 15; i >= 1320; i--) yearSel.innerHTML += `<option value="${i}">${i}</option>`;
-      
+
         fetchProfiles();
         fetchLikes();
+        fetchTimeSettings();
         
         if(localStorage.getItem('hide_rules') !== 'true') {
             document.getElementById('rulesModal').style.display = 'flex';
@@ -440,6 +471,7 @@
             fetchProfiles();
             fetchLikes();
             if(document.getElementById('section-chat').style.display === 'block') fetchMessages();
+            if(isAdmin) updateAdminInbox();
         }, 5000);
     };
 
@@ -455,32 +487,9 @@
         document.getElementById('loginForm').classList.remove('hidden');
     }
 
-    async function checkAdminChatNotif() {
-        if(!isAdmin) return;
-        const res = await fetch(supabaseUrl + '/rest/v1/messages?receiver_id=is.null&is_read=eq.false', { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
-        const unread = await res.json();
-        const badge = document.getElementById('adminChatNotifBadge');
-        
-        if(unread.length > 0) {
-            badge.innerText = unread.length;
-            badge.style.display = 'inline-block';
-            
-            const senderIds = [...new Set(unread.map(m => m.sender_id))];
-            const names = senderIds.map(id => {
-                const p = allProfiles.find(x => x.id == id);
-                return p ? p.first_name : 'ناشناس';
-            }).join('، ');
-            
-            badge.title = `پیام جدید از: ${names}`;
-        } else {
-            badge.style.display = 'none';
-        }
-    }
-
     function checkScroll() {
         if (myProfileId) return; 
         if (document.getElementById('section-view').style.display !== 'block') return;
-
         scrollCount++;
         if (scrollCount === 2) {
             alert('برای دیدن پروفایل‌های بیشتر و استفاده از امکانات، لطفاً ثبت‌نام کنید.');
@@ -508,7 +517,7 @@
         } else {
           document.getElementById('userLoginView').classList.remove('hidden');
           document.getElementById('userDashboardView').classList.add('hidden');
-          document.getElementById('loginForm').classList.add('hidden'); // ریست کردن فرم ورود
+          document.getElementById('loginForm').classList.add('hidden');
         }
       }
       if (section === 'register' && myProfileId) { loadMyProfile(); }
@@ -527,9 +536,7 @@
 
     function promptAdmin() {
       const savedPass = localStorage.getItem('admin_pass');
-      if (savedPass === 'Reza6625') {
-          isAdmin = true; showSection('admin'); calculateStats(); return;
-      }
+      if (savedPass === 'Reza6625') { isAdmin = true; showSection('admin'); calculateStats(); return; }
       
       const pass = prompt('رمز عبور مدیر را وارد کنید:');
       if (pass === 'Reza6625') {
@@ -550,22 +557,9 @@
     }
     
     function logoutUser() {
-      if(isAdminImpersonating) {
-          isAdminImpersonating = false; isAdmin = true; myProfileId = ''; myPhone = '';
-          showSection('admin'); alert('به پنل مدیریت بازگشتید.'); return;
-      }
       localStorage.removeItem('my_phone'); localStorage.removeItem('my_profile_id'); localStorage.removeItem('my_gender');
       myPhone = ''; myProfileId = ''; myGender = '';
       showSection('profile');
-    }
-
-    function loginAsUser(userId) {
-        const user = allProfiles.find(p => p.id == userId);
-        if(!user) return;
-        isAdminImpersonating = true; isAdmin = false;
-        myProfileId = user.id; myPhone = user.phone; myGender = user.role;
-        alert(`ورود به عنوان ${user.first_name}`);
-        showSection('profile'); loadUserDashboard();
     }
 
     function loadUserDashboard() {
@@ -618,7 +612,6 @@
     }
     function editMyProfile() { showSection('register'); }
 
-    // --- چت ---
     async function fetchMessages() {
         if (!myProfileId) return;
         const res = await fetch(supabaseUrl + `/rest/v1/messages?or=(sender_id.eq.${myProfileId},receiver_id.eq.${myProfileId})&order=created_at.asc`, {
@@ -651,11 +644,56 @@
         fetchMessages();
     }
 
+    function switchAdminChatTab(tab) {
+        document.querySelectorAll('.chat-tab-admin').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        if(tab === 'inbox') {
+            document.getElementById('adminChatInbox').classList.remove('hidden');
+            document.getElementById('adminChatSend').classList.add('hidden');
+            updateAdminInbox();
+        } else {
+            document.getElementById('adminChatInbox').classList.add('hidden');
+            document.getElementById('adminChatSend').classList.remove('hidden');
+        }
+    }
+
+    async function updateAdminInbox() {
+        const unreadMsgs = allMessages.filter(m => m.receiver_id === null && !m.is_read);
+        const senderIds = [...new Set(unreadMsgs.map(m => m.sender_id))];
+        const inboxDiv = document.getElementById('adminInboxList');
+        inboxDiv.innerHTML = '';
+        
+        if(senderIds.length === 0) {
+            inboxDiv.innerHTML = '<p style="text-align:center; font-size:0.85rem; color:#888;">هیچ پیام خوانده نشده‌ای ندارید.</p>';
+            return;
+        }
+
+        senderIds.forEach(id => {
+            const user = allProfiles.find(p => p.id == id);
+            if(user) {
+                const unreadCount = unreadMsgs.filter(m => m.sender_id == id).length;
+                inboxDiv.innerHTML += `
+                    <div onclick="openAdminChatWithUser(${user.id})" style="background:#fff; padding:10px; border-radius:8px; margin-bottom:5px; cursor:pointer; display:flex; justify-content:space-between; border:1px solid #bbdefb;">
+                        <span><strong>${user.first_name}</strong> (${user.phone})</span>
+                        <span style="background:red; color:white; padding:2px 8px; border-radius:10px; font-size:0.8rem;">${unreadCount} پیام</span>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    function openAdminChatWithUser(userId) {
+        currentAdminChatUserId = userId;
+        const user = allProfiles.find(p => p.id == userId);
+        document.getElementById('adminChatHeader').innerText = `چت با ${user.first_name}`;
+        document.getElementById('adminChatArea').classList.remove('hidden');
+        loadAdminChat();
+    }
+
     async function loadAdminChat() {
         const select = document.getElementById('adminChatUserSelect');
-        currentAdminChatUserId = select.value;
-        if(!currentAdminChatUserId) { document.getElementById('adminChatArea').classList.add('hidden'); return; }
-        document.getElementById('adminChatArea').classList.remove('hidden');
+        if(select && select.value) currentAdminChatUserId = select.value;
+        if(!currentAdminChatUserId) return;
         
         await fetch(supabaseUrl + `/rest/v1/messages?sender_id=eq.${currentAdminChatUserId}&receiver_id=is.null`, {
             method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
@@ -687,12 +725,11 @@
         loadAdminChat();
     }
 
-    // --- لایک‌ها و پروفایل‌ها ---
     async function fetchLikes() {
         const res = await fetch(supabaseUrl + '/rest/v1/likes?select=*', { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
         allLikes = await res.json();
         checkNotifications();
-        checkAdminChatNotif();
+        if(isAdmin) updateAdminInbox();
     }
 
     async function sendAction(receiverId, type) {
@@ -789,7 +826,7 @@
       let viewerStatus = viewer ? viewer.status : 'pending';
       const isGoldViewer = viewerStatus === 'gold';
       
-      msg.innerText = `شما به عنوان ${myGender === 'man' ? 'آقا' : 'خانم'} وارد شده‌اید. فقط جنس مخالف نمایش داده می‌شود.`;
+      msg.innerText = `شما به عنوان ${myGender === 'man' ? 'آقا' : 'خانم'} وارد شده‌اید.`;
       
       grid.innerHTML = '';
       const oppositeRole = myGender === 'man' ? 'woman' : 'man';
@@ -880,19 +917,6 @@
       const list = document.getElementById('adminList');
       list.innerHTML = '';
       
-      if (currentAdminFilter === 'matches') {
-          const accepted = allLikes.filter(l => l.status === 'accepted');
-          if(accepted.length === 0) { list.innerHTML = '<p style="text-align:center;">هنوز تایید دو طرفه‌ای ندارید.</p>'; return; }
-          accepted.forEach(l => {
-              const s = allProfiles.find(x => x.id == l.sender_id);
-              const r = allProfiles.find(x => x.id == l.receiver_id);
-              if(s && r) {
-                  list.innerHTML += `<div class="profile-card" style="border:2px solid green;"><h3 style="color:green;">✔️ تایید دو طرفه</h3><p>فرستنده: ${s.first_name} (${s.phone})</p><p>گیرنده: ${r.first_name} (${r.phone})</p></div>`;
-              }
-          });
-          return;
-      }
-      
       let filtered = allProfiles.filter(p => p.status === currentAdminFilter);
       if (filtered.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">لیست خالی است.</p>'; return; }
 
@@ -905,9 +929,7 @@
             <h3>${p.first_name} ${p.last_name || ''}</h3>
             <div class="profile-field">کاربری: ${p.username} | موبایل: ${safeVal(p.phone)}</div>
             <div class="admin-btn-group">
-              ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'beginner')" class="admin-btn btn-beginner">تبدیل به مبتدی</button>` : ''}
-              ${p.status === 'pending' || p.status === 'beginner' ? `<button onclick="updateStatus(${p.id}, 'silver')" class="admin-btn btn-silver">نقره‌ای</button>` : ''}
-              ${p.status !== 'gold' ? `<button onclick="updateStatus(${p.id}, 'gold')" class="admin-btn btn-gold">طلایی</button>` : ''}
+              <button onclick="manualChangeStatus(${p.id})" class="admin-btn btn-status-change">تغییر سطح</button>
               <button onclick="loginAsUser(${p.id})" class="admin-btn btn-login-as">ورود به پنل کاربر</button>
               <button onclick="openAdminEdit(${p.id})" class="admin-btn btn-edit">ویرایش کامل</button>
               <button onclick="deleteProfile(${p.id})" class="admin-btn btn-delete">حذف</button>
@@ -917,14 +939,36 @@
       });
     }
 
-    async function updateStatus(id, newStatus) {
-      const daysToAdd = 30; // پیش‌فرض
-      const expiry = new Date(); expiry.setDate(expiry.getDate() + daysToAdd);
-      await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
-        method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus, expires_at: expiry.toISOString() })
-      });
-      fetchProfiles();
+    async function manualChangeStatus(userId) {
+        const newStatus = prompt('سطح جدید را وارد کنید: beginner / silver / gold');
+        if(!newStatus || !['beginner', 'silver', 'gold'].includes(newStatus)) { alert('سطح نامعتبر است.'); return; }
+        const days = timeSettings[newStatus] || 30;
+        const expiry = new Date(); expiry.setDate(expiry.getDate() + days);
+        await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + userId, {
+            method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus, expires_at: expiry.toISOString() })
+        });
+        alert('تغییر یافت.'); fetchProfiles();
+    }
+
+    function saveTimeSetting(type) {
+        const val = parseInt(document.getElementById('time' + type.charAt(0).toUpperCase() + type.slice(1)).value);
+        timeSettings[type] = val;
+        localStorage.setItem('timeSettings', JSON.stringify(timeSettings));
+        alert('ذخیره شد.');
+    }
+
+    function fetchTimeSettings() {
+        const saved = localStorage.getItem('timeSettings');
+        if(saved) timeSettings = JSON.parse(saved);
+    }
+
+    function loginAsUser(userId) {
+        const user = allProfiles.find(p => p.id == userId);
+        if(!user) return;
+        myProfileId = user.id; myPhone = user.phone; myGender = user.role;
+        alert(`ورود به عنوان ${user.first_name}`);
+        showSection('profile'); loadUserDashboard();
     }
 
     function openAdminEdit(id) {
@@ -967,125 +1011,6 @@
       document.getElementById('statSilver').innerText = allProfiles.filter(p => p.status === 'silver').length;
       document.getElementById('statGold').innerText = allProfiles.filter(p => p.status === 'gold').length;
     }
-
-    // فرم ثبت‌نام
-    function toggleGenderFields() { document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none'; }
-    function toggleCountry() { document.getElementById('countryGroup').style.display = (document.getElementById('nationality').value === 'خارجی') ? 'block' : 'none'; }
-    function toggleDisease() { document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none'; }
-    function toggleMarriageFields() { 
-        const status = document.getElementById('marital_status').value;
-        document.getElementById('childrenGroup').style.display = (status === 'مجرد' || status === '') ? 'none' : 'block';
-    }
-    function checkFileSize(input) {
-      if (input.files.length > 0 && (input.files[0].size / 1024 / 1024) > 1) { alert('حجم عکس باید کمتر از ۱ مگابایت باشد.'); input.value = ''; }
-    }
-    function loadMyProfile() {
-      const p = allProfiles.find(x => x.id == myProfileId);
-      if (!p) return;
-      document.getElementById('edit_id').value = p.id;
-      document.getElementById('username').value = p.username || '';
-      document.getElementById('role').value = p.role || '';
-      document.getElementById('first_name').value = p.first_name || '';
-      document.getElementById('last_name').value = p.last_name || '';
-      document.getElementById('nationality').value = p.nationality || '';
-      document.getElementById('province').value = p.province || '';
-      document.getElementById('city').value = p.city || '';
-      document.getElementById('birth_year').value = p.birth_year || '';
-      document.getElementById('health_status').value = p.health_status || '';
-      document.getElementById('height').value = p.height || '';
-      document.getElementById('weight').value = p.weight || '';
-      document.getElementById('education').value = p.education || '';
-      document.getElementById('marital_status').value = p.marital_status || '';
-      document.getElementById('virginity').value = p.virginity || '';
-      document.getElementById('previous_marriage_children').value = p.previous_marriage_children || '';
-      document.getElementById('criteria').value = p.criteria || '';
-      document.getElementById('extra_details').value = p.extra_details || '';
-      document.getElementById('address').value = p.address || '';
-      document.getElementById('messenger_type').value = p.messenger_type || '';
-      document.getElementById('contact_id').value = p.contact_id || '';
-      document.getElementById('phone').value = p.phone || '';
-      
-      document.getElementById('editWarning').classList.remove('hidden');
-      document.getElementById('cancelEditBtn').classList.remove('hidden');
-      toggleGenderFields(); toggleCountry(); toggleDisease(); toggleMarriageFields();
-    }
-    function cancelEdit() {
-      document.getElementById('profileForm').reset(); document.getElementById('edit_id').value = '';
-      document.getElementById('editWarning').classList.add('hidden'); document.getElementById('cancelEditBtn').classList.add('hidden');
-      document.getElementById('virginityGroup').style.display = 'none'; document.getElementById('countryGroup').style.display = 'none';
-      document.getElementById('diseaseGroup').style.display = 'none'; document.getElementById('childrenGroup').style.display = 'none';
-    }
-
-    document.getElementById('profileForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const editId = document.getElementById('edit_id').value;
-      const isEdit = editId !== '';
-      let isValid = true;
-      
-      document.querySelectorAll('#profileForm input[required], #profileForm select[required]').forEach(input => {
-        if (!input.value.trim()) { input.classList.add('error'); isValid = false; }
-        else { input.classList.remove('error'); }
-      });
-
-      if (!/^[\u0600-\u06FF\s]+$/.test(document.getElementById('first_name').value)) { alert('نام باید فارسی باشد.'); isValid = false; }
-      if (!/^@[A-Za-z0-9_]+$/.test(document.getElementById('contact_id').value)) { alert('آیدی باید انگلیسی و با @ باشد.'); isValid = false; }
-      if (!/^\d{11}$/.test(document.getElementById('phone').value)) { alert('شماره باید ۱۱ رقم باشد.'); isValid = false; }
-      
-      const fileInput = document.getElementById('photo_file');
-      if (!isEdit && fileInput.files.length === 0) { alert('آپلود عکس اجباری است.'); isValid = false; }
-      if (!isValid) return alert('لطفاً خطاهای فرم را برطرف کنید.');
-
-      let photoUrl = null;
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const fileName = Date.now() + '_' + file.name;
-        const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
-          method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }, body: file
-        });
-        if (uploadRes.ok) photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
-      }
-      
-      const profileData = {
-        username: document.getElementById('username').value, role: document.getElementById('role').value,
-        first_name: document.getElementById('first_name').value, last_name: document.getElementById('last_name').value,
-        nationality: document.getElementById('nationality').value, province: document.getElementById('province').value,
-        city: document.getElementById('city').value, birth_year: document.getElementById('birth_year').value,
-        health_status: document.getElementById('health_status').value, disease_type: document.getElementById('disease_type').value,
-        height: document.getElementById('height').value, weight: document.getElementById('weight').value,
-        education: document.getElementById('education').value, marital_status: document.getElementById('marital_status').value,
-        virginity: document.getElementById('virginity').value, previous_marriage_children: document.getElementById('previous_marriage_children').value,
-        criteria: document.getElementById('criteria').value, extra_details: document.getElementById('extra_details').value,
-        address: document.getElementById('address').value, messenger_type: document.getElementById('messenger_type').value,
-        contact_id: document.getElementById('contact_id').value, phone: document.getElementById('phone').value,
-        status: 'pending', agreed_terms: true
-      };
-      
-      if (photoUrl) profileData.photo_url = photoUrl;
-      localStorage.setItem('my_gender', profileData.role); myGender = profileData.role;
-
-      try {
-        const url = isEdit ? `${supabaseUrl}/rest/v1/profiles?id=eq.${editId}` : `${supabaseUrl}/rest/v1/profiles`;
-        const method = isEdit ? 'PATCH' : 'POST';
-        const res = await fetch(url, {
-          method: method, headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' }, body: JSON.stringify(profileData)
-        });
-        
-        if (res.ok) {
-          if (!isEdit) {
-            const getRes = await fetch(`${supabaseUrl}/rest/v1/profiles?select=id&order=id.desc&limit=1`, { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
-            const newData = await getRes.json();
-            if(newData && newData[0]) {
-              localStorage.setItem('my_profile_id', newData[0].id); localStorage.setItem('my_phone', profileData.phone);
-              myProfileId = newData[0].id; myPhone = profileData.phone;
-            }
-          }
-          alert(isEdit ? 'ویرایش شد.' : 'ثبت شد.'); cancelEdit(); showSection('profile');
-        }
-      } catch (err) { alert('خطا در ارتباط با سرور.'); }
-    });
-
-    // توابع کمکی دیگر
-    function copyCard() { navigator.clipboard.writeText('6037997123943616'); alert('کپی شد!'); }
   </script>
 </body>
 </html>
