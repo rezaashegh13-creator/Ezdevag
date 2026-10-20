@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>همسریابی آرامش</title>
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
   <style>
     @font-face { font-family: 'IRANSans'; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'); }
     
@@ -17,18 +18,21 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IRANSans', sans-serif; }
     
+    /* بک گراند تکسچر قلبی ملایم */
     body { 
-      background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-color: var(--bg-color);
+      background-color: #fff0f5;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e91e63' fill-opacity='0.08'%3E%3Cpath d='M30 15c-5-5-15-5-15 5 0 10 15 20 15 20s15-10 15-20c0-10-10-10-15-5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       color: var(--text-main); min-height: 100vh; padding: 20px; line-height: 1.6; 
     }
 
     .app-container { max-width: 850px; margin: 0 auto; }
     
-    header { background: var(--card-bg); backdrop-filter: blur(15px); border-radius: 24px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.5); position: relative; overflow: hidden; }
+    header { background: var(--card-bg); backdrop-filter: blur(15px); border-radius: 24px; padding: 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.5); position: relative; overflow: hidden; }
+    
+    .bismillah { font-family: 'Lalezar', cursive; font-size: 1.8rem; color: var(--primary); margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    
+    .banner-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 20px; display: none; cursor: pointer; }
+    .banner-container img { width: 100%; height: auto; display: block; }
     .logo-icon { font-size: 50px; margin-bottom: 10px; cursor: pointer; display: inline-block; transition: 0.3s; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
     .logo-icon:hover { transform: scale(1.1) rotate(5deg); }
     h1 { color: var(--primary); font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; }
@@ -148,6 +152,7 @@
   <div class="app-container">
     
     <header>
+      <div class="bismillah">بسم رب العشق</div>
       <div id="bannerDisplay" class="banner-container" onclick="clickBanner()">
         <img id="bannerImg" src="" alt="تبلیغات">
       </div>
@@ -169,7 +174,7 @@
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط</button>
     </div>
 
-    <!-- فرم ثبت‌نام (کامل و با فیلدهای جدید) -->
+    <!-- فرم ثبت‌نام -->
     <div id="section-register" class="card" style="display: none;">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       <div id="editWarning" class="hidden" style="background:#fff8e1; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #ffecb3;">در حال ویرایش هستید. پس از ثبت به صف انتظار می‌روید.</div>
@@ -363,6 +368,20 @@
           </div>
       </div>
 
+      <!-- تنظیمات بنر -->
+      <div class="admin-settings-box" style="background:#fff3e0; border-color:#ffe0b2;">
+          <h3 style="color:#e65100; margin-bottom:15px;">🖼️ تنظیمات بنر بالای صفحه</h3>
+          <div class="admin-setting-row" style="flex-direction:column; align-items:stretch;">
+              <label style="font-size:0.85rem; font-weight:bold; margin-bottom:5px;">لینک عکس بنر:</label>
+              <input type="text" id="bannerUrlInput" placeholder="https://...">
+          </div>
+          <div class="admin-setting-row" style="flex-direction:column; align-items:stretch;">
+              <label style="font-size:0.85rem; font-weight:bold; margin-bottom:5px;">لینک کلیک روی بنر (اختیاری):</label>
+              <input type="text" id="bannerLinkInput" placeholder="https://...">
+          </div>
+          <button onclick="saveBanner()" class="admin-btn btn-edit" style="width:100%; background:#ffa000; margin-top:10px;">ذخیره بنر</button>
+      </div>
+
       <!-- چت ادمین -->
       <div class="admin-settings-box" style="background:#e3f2fd; border-color:#90caf9;">
         <h3 style="color:#1976d2; margin-bottom:15px;">💬 چت با کاربران</h3>
@@ -459,6 +478,9 @@
     let myPhone = localStorage.getItem('my_phone') || '';
     let currentAdminChatUserId = null;
     
+    let currentBannerUrl = '';
+    let currentBannerLink = '';
+    
     let timeSettings = { beginner: 30, silver: 30, gold: 30 };
 
     window.onload = function() {
@@ -479,17 +501,19 @@
         fetchProfiles();
         fetchLikes();
         fetchTimeSettings();
+        fetchBanner();
         
         if(localStorage.getItem('hide_rules') !== 'true') {
             document.getElementById('rulesModal').style.display = 'flex';
         }
 
+        // افزایش زمان به 15 ثانیه برای جلوگیری از کندی
         setInterval(() => {
             fetchProfiles();
             fetchLikes();
             if(document.getElementById('section-chat').style.display === 'block') fetchMessages();
             if(isAdmin) updateAdminInbox();
-        }, 5000);
+        }, 15000);
     };
 
     function closeRules() {
@@ -1011,6 +1035,31 @@
     function fetchTimeSettings() {
         const saved = localStorage.getItem('timeSettings');
         if(saved) timeSettings = JSON.parse(saved);
+    }
+
+    async function fetchBanner() {
+        try {
+            const res = await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
+            const data = await res.json();
+            if (data && data[0] && data[0].banner_url) {
+                currentBannerUrl = data[0].banner_url;
+                currentBannerLink = data[0].banner_link || '';
+                document.getElementById('bannerImg').src = currentBannerUrl;
+                document.getElementById('bannerDisplay').style.display = 'block';
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    function clickBanner() { if (currentBannerLink) window.open(currentBannerLink, '_blank'); }
+
+    async function saveBanner() {
+        const url = document.getElementById('bannerUrlInput').value;
+        const link = document.getElementById('bannerLinkInput').value;
+        await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', {
+            method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ banner_url: url, banner_link: link })
+        });
+        alert('بنر ذخیره شد!'); fetchBanner();
     }
 
     function loginAsUser(userId) {
