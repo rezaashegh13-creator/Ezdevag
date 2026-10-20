@@ -8,108 +8,131 @@
   <style>
     @font-face { font-family: 'IRANSans'; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'); }
     
+    /* تم لاکچری کرم و رزگلد */
     :root { 
-      --bg-color: #f8f9fa; --card-bg: #ffffff; --text-main: #2c3e50; --text-muted: #7f8c8d;
-      --primary: #8e44ad; --primary-hover: #732d91; --accent: #d4af37; 
-      --success: #27ae60; --danger: #c0392b; --border-color: #e0e0e0;
-      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --bg-color: #fdfbf7; 
+      --card-bg: #ffffff; 
+      --text-main: #3e2723; 
+      --text-muted: #8d6e63; 
+      --primary: #c2185b; 
+      --primary-hover: #ad1457; 
+      --accent: #d4af37; 
+      --success: #2e7d32; 
+      --danger: #c62828; 
+      --border-color: #f0e6d2;
+      --shadow: 0 10px 30px rgba(142, 68, 173, 0.08);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IRANSans', sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; padding: 20px; line-height: 1.6; }
+    body { 
+      background-color: var(--bg-color); 
+      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); 
+      color: var(--text-main); min-height: 100vh; padding: 20px; line-height: 1.6; 
+    }
     .app-container { max-width: 850px; margin: 0 auto; }
     
-    /* هدر */
-    header { background: var(--card-bg); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); position: relative; }
+    /* هدر و بنر */
+    header { background: var(--card-bg); border-radius: 24px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); margin-bottom: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+    .banner-container { width: 100%; border-radius: 16px; overflow: hidden; margin-bottom: 20px; display: none; position: relative; }
+    .banner-container img { width: 100%; height: auto; display: block; }
+    
     .logo-icon { font-size: 50px; margin-bottom: 10px; cursor: pointer; display: inline-block; transition: 0.3s; }
     .logo-icon:hover { transform: scale(1.1); }
-    h1 { color: var(--text-main); font-size: 1.6rem; font-weight: 800; }
+    h1 { color: var(--primary); font-size: 1.6rem; font-weight: 800; }
     
-    .glow-btn { display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3); border: none; cursor: pointer; font-family: inherit; font-size: 1rem; transition: 0.3s; }
+    .glow-btn { display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 5px 15px rgba(194, 24, 91, 0.3); border: none; cursor: pointer; font-family: inherit; font-size: 1rem; transition: 0.3s; }
     .glow-btn:hover { transform: translateY(-2px); }
     
     .contact-admin { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-    .contact-btn { padding: 10px 25px; border-radius: 30px; text-decoration: none; color: white; font-size: 0.9rem; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+    .contact-btn { padding: 10px 25px; border-radius: 30px; text-decoration: none; color: white; font-size: 0.9rem; font-weight: bold; transition: 0.3s; }
     .eitaa { background: #f39c12; }
     .telegram { background: #0088cc; }
 
-    /* ناوبری */
+    /* دکمه‌ها */
     .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px; }
     .nav-btn { padding: 18px; border: none; border-radius: 16px; color: white; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: inherit; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .nav-btn:hover { transform: translateY(-3px); }
-    .btn-info { background: #34495e; }
-    .btn-view { background: var(--success); }
+    .btn-info { background: #5d4037; }
+    .btn-view { background: var(--primary); }
     .btn-plans { background: var(--accent); color: #333; }
+    .btn-profile { background: #455a64; }
 
-    /* کارت‌ها */
-    .card { background: var(--card-bg); border-radius: 20px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); }
-    .section-title { color: var(--text-main); font-size: 1.3rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; }
+    /* کارت‌ها و فرم‌ها */
+    .card { background: var(--card-bg); border-radius: 24px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); }
+    .section-title { color: var(--primary); font-size: 1.3rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; border-bottom: 2px dashed var(--border-color); padding-bottom: 15px; }
     
-    /* فرم‌ها */
     .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; margin-bottom: 8px; font-size: 0.95rem; font-weight: bold; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 0.95rem; background: #fafafa; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: #fff; outline: none; }
-    .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: var(--danger); background-color: #fadbd8; }
-
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.95rem; font-weight: bold; color: var(--text-main); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 0.95rem; background: #fffdfa; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: var(--danger); background-color: #ffebee; }
+    
     .btn-submit { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; font-family: inherit; }
     .btn-submit:hover { background: var(--primary-hover); }
     
     /* پروفایل‌ها */
     .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    .profile-card { background: #fff; border-radius: 16px; padding: 25px; border: 1px solid var(--border-color); transition: 0.3s; position: relative; }
-    .profile-card.ladder-active { border: 2px solid var(--accent); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+    .profile-card { background: #fff; border-radius: 20px; padding: 25px; border: 1px solid var(--border-color); transition: 0.3s; position: relative; }
+    .profile-card.ladder-active { border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); background: linear-gradient(to bottom right, #fff, #fffef7); }
     
     .badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; margin-left: 5px;}
-    .badge.silver { background: #ecf0f1; color: #7f8c8d; }
-    .badge.gold { background: #fef9e7; color: #d4ac0d; }
-    .badge.pending { background: #fadbd8; color: var(--danger); }
-    .badge.ladder { background: linear-gradient(135deg, #f1c40f, #e67e22); color: white; }
+    .badge.silver { background: #eceff1; color: #546e7a; }
+    .badge.gold { background: #fff8e1; color: #f57f17; border: 1px solid #ffecb3; }
+    .badge.pending { background: #ffebee; color: var(--danger); }
+    .badge.ladder { background: linear-gradient(135deg, #ffd54f, #ffb300); color: #fff; }
     
-    .profile-field { font-size: 0.95rem; margin-bottom: 8px; }
+    .profile-field { font-size: 0.95rem; margin-bottom: 8px; color: var(--text-muted); }
     .profile-field strong { color: var(--text-main); }
-    .profile-field span.empty { color: #aaa; }
+    .profile-field span.empty { color: #bdbdbd; }
     
-    .profile-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; background: #eee; }
-    .gallery { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 15px; padding-bottom:5px; }
-    .gallery img { height: 80px; width: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 1px solid #ddd; }
-
-    .contact-info-admin { background: #fff3cd; padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem; border: 1px solid #ffeeba; color: #856404; }
+    .profile-img { width: 100%; height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 15px; background: #eee; }
+    
+    .contact-info-admin { background: #fff3e0; padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem; border: 1px solid #ffe0b2; color: #e65100; }
     .hidden { display: none !important; }
 
     /* پنل ادمین */
     .admin-tabs { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 5px; flex-wrap: wrap; }
-    .admin-tab { padding: 10px 15px; background: #f0f0f0; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-weight: bold; white-space: nowrap; }
-    .admin-tab.active { background: var(--text-main); color: white; }
+    .admin-tab { padding: 10px 15px; background: #f5f5f5; border-radius: 30px; cursor: pointer; font-size: 0.85rem; font-weight: bold; white-space: nowrap; color: var(--text-muted); border: 1px solid transparent; }
+    .admin-tab.active { background: var(--text-main); color: white; border-color: var(--text-main); }
     
     .admin-btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
-    .admin-btn { border: none; padding: 8px 12px; border-radius: 8px; font-family: inherit; cursor: pointer; color: white; font-size: 0.85rem; }
-    .btn-silver { background: #bdc3c7; color: #333; }
-    .btn-gold { background: #f1c40f; color: #333; }
-    .btn-ladder { background: #e67e22; }
-    .btn-edit { background: #3498db; }
-    .btn-reject { background: #e74c3c; }
-    .btn-delete { background: #7f8c8d; }
+    .admin-btn { border: none; padding: 8px 12px; border-radius: 8px; font-family: inherit; cursor: pointer; color: white; font-size: 0.85rem; font-weight: bold;}
+    .btn-silver { background: #90a4ae; }
+    .btn-gold { background: #ffa000; }
+    .btn-ladder { background: #f57c00; }
+    .btn-edit { background: #1976d2; }
+    .btn-reject { background: #e53935; }
+    .btn-delete { background: #616161; }
+
+    /* داشبورد کاربر */
+    .user-dashboard { background: linear-gradient(135deg, #ffffff, #fffbfa); border: 2px solid var(--border-color); border-radius: 24px; padding: 30px; margin-bottom: 20px; text-align: center; }
+    .user-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 15px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+    .stat-box { background: #fff; padding: 15px; border-radius: 15px; border: 1px solid var(--border-color); text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); }
 
     /* مودال‌ها */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-    .modal-content { background: #fff; padding: 30px; border-radius: 20px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; }
-    .close-modal { background: var(--text-main); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-family: inherit; margin-top: 15px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(3px); }
+    .modal-content { background: var(--bg-color); padding: 30px; border-radius: 24px; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; border: 2px solid var(--accent); }
+    .close-modal { background: var(--text-main); color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; width: 100%; font-family: inherit; margin-top: 15px; }
     
-    .terms-box { background: #f4f6f7; padding: 18px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 20px; }
-    .plan-card { background: #f8f9fa; border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .card-number { background: #ecf0f1; padding: 18px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.3rem; letter-spacing: 2px; cursor: pointer; margin: 20px 0; font-family: monospace; border: 2px dashed #bdc3c7; }
+    .plan-card { background: #fff; border: 1px solid var(--border-color); padding: 20px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .card-number { background: #f5f5f5; padding: 18px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.3rem; letter-spacing: 2px; cursor: pointer; margin: 20px 0; font-family: monospace; border: 2px dashed #bdbdbd; color: var(--text-main); }
   </style>
 </head>
 <body>
   <div class="app-container">
     
     <header>
-      <!-- آیکون حلقه: با کلیک روی آن، پنل مدیریت باز می‌شود -->
+      <div id="bannerDisplay" class="banner-container">
+        <img id="bannerImg" src="" alt="تبلیغات">
+      </div>
+    
+      <!-- کلیک روی حلقه برای ورود مدیر -->
       <div class="logo-icon" onclick="promptAdmin()">💍</div>
-      <h1>پلتفرم ازدواج و همسریابی</h1>
+      <h1>همسریابی لاکچری</h1>
       
-      <!-- دکمه رشد -->
       <a href="http://eitaa.com/joinchat/878706709C93902231a1" class="glow-btn" target="_blank">✨ لمس کن برای رشد ✨</a>
       
       <div class="contact-admin">
@@ -119,27 +142,59 @@
     </header>
 
     <div class="nav-grid">
-      <button onclick="showSection('register')" class="nav-btn btn-info">📝 ثبت‌نام / ویرایش</button>
+      <button onclick="showSection('profile')" class="nav-btn btn-profile">👤 پروفایل من</button>
       <button onclick="showSection('view')" class="nav-btn btn-view">👀 مشاهده پروفایل‌ها</button>
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط ارتقاء</button>
     </div>
 
+    <!-- داشبورد کاربر (پروفایل خودم) -->
+    <div id="section-profile" class="card" style="display: none;">
+      <div id="userLoginView">
+        <h2 class="section-title">🔐 ورود به حساب</h2>
+        <p style="margin-bottom:20px; color:var(--text-muted);">برای مشاهده پروفایل خود، شماره موبایل خود را وارد کنید.</p>
+        <div class="form-group">
+          <input type="tel" id="loginPhoneInput" placeholder="09xxxxxxxxx" style="text-align:center; font-size:1.2rem; letter-spacing:2px;">
+        </div>
+        <button onclick="loginUser()" class="btn-submit">ورود</button>
+      </div>
+
+      <div id="userDashboardView" class="hidden">
+        <div class="user-dashboard">
+          <img id="myAvatar" class="user-avatar" src="" alt="عکس من">
+          <h2 id="myName" style="color:var(--primary);"></h2>
+          <div id="myBadge" class="badge" style="margin-top:10px;"></div>
+          <p id="myBio" style="margin-top:15px; font-size:0.9rem; color:var(--text-muted);"></p>
+          
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-value" id="myExpDays">0</div>
+              <div class="stat-label">روز اعتبار باقی‌مانده</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="myExpStatus">-</div>
+              <div class="stat-label">وضعیت اشتراک</div>
+            </div>
+          </div>
+
+          <button onclick="editMyProfile()" class="btn-submit" style="margin-top:20px;">✏️ ویرایش پروفایل من</button>
+          <button onclick="logoutUser()" class="btn-submit" style="background:#e57373; margin-top:10px;">خروج از حساب</button>
+        </div>
+      </div>
+    </div>
+
     <!-- فرم ثبت‌نام / ویرایش -->
-    <div id="section-register" class="card">
+    <div id="section-register" class="card" style="display: none;">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       
-      <div id="editWarning" class="hidden" style="background:#fef9e7; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #f1c40f;">
+      <div id="editWarning" class="hidden" style="background:#fff8e1; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #ffecb3;">
         شما در حال ویرایش پروفایل خود هستید. پس از ثبت، به صف انتظار می‌روید.
       </div>
 
       <form id="profileForm">
         <input type="hidden" id="edit_id">
         
-        <div class="form-group">
-          <label>نام کاربری (انگلیسی)</label>
-          <input type="text" id="username" required pattern="[A-Za-z0-9_]+">
-        </div>
-
+        <div class="form-group"><label>نام کاربری (انگلیسی)</label><input type="text" id="username" required pattern="[A-Za-z0-9_]+"></div>
+        
         <div class="form-group">
           <label>جنسیت</label>
           <select id="role" required onchange="toggleGenderFields()">
@@ -150,7 +205,7 @@
         </div>
 
         <div class="form-group"><label>نام (فارسی)</label><input type="text" id="first_name" required></div>
-        <div class="form-group"><label>نام خانوادگی (فقط مدیر)</label><input type="text" id="last_name" required></div>
+        <div class="form-group"><label>نام خانوادگی</label><input type="text" id="last_name" required></div>
 
         <div class="form-group">
           <label>ملیت</label>
@@ -228,7 +283,7 @@
 
         <div class="form-group"><label>تعداد/سن فرزندان (از ازدواج سابق)</label><textarea id="previous_marriage_children" rows="2"></textarea></div>
         <div class="form-group"><label>ملاک انتخاب همسر</label><textarea id="criteria" rows="2"></textarea></div>
-        <div class="form-group"><label>توضیحات بیشتر</label><textarea id="extra_details" rows="3"></textarea></div>
+        <div class="form-group"><label>توضیحات بیشتر (بیوگرافی)</label><textarea id="extra_details" rows="3"></textarea></div>
         <div class="form-group"><label>آدرس دقیق (فقط مدیر)</label><textarea id="address" rows="2"></textarea></div>
 
         <div class="form-group">
@@ -240,22 +295,17 @@
         <div class="form-group"><label>آیدی پیام‌رسان (@)</label><input type="text" id="contact_id" required pattern="@[A-Za-z0-9_]+"></div>
         <div class="form-group"><label>شماره موبایل (۱۱ رقم)</label><input type="tel" id="phone" required pattern="\d{11}"></div>
 
-        <!-- آپلود عکس اجباری -->
         <div class="form-group">
           <label>آپلود عکس اصلی (اجباری - حداکثر ۱ مگابایت)</label>
-          <input type="file" id="photo_file" accept="image/*" required onchange="checkFileSize(this)">
-          <div id="uploadStatus" style="font-size:0.85rem; color:var(--primary); margin-top:8px;"></div>
+          <input type="file" id="photo_file" accept="image/*" onchange="checkFileSize(this)">
         </div>
 
         <div class="form-group">
-          <label>
-            <input type="checkbox" id="agree_terms" style="width:auto; margin-left:8px;" required>
-            <span>تعهدنامه را می‌پذیرم.</span>
-          </label>
+          <label><input type="checkbox" id="agree_terms" style="width:auto; margin-left:8px;" required><span>تعهدنامه را می‌پذیرم.</span></label>
         </div>
 
         <button type="submit" class="btn-submit">ثبت اطلاعات</button>
-        <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#95a5a6;">انصراف از ویرایش</button>
+        <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#90a4ae;">انصراف</button>
       </form>
     </div>
 
@@ -265,69 +315,6 @@
       <p id="viewerMessage" style="font-size:1rem; color:var(--text-muted); margin-bottom:25px;"></p>
       <div id="profilesGrid" class="grid"></div>
     </div>
-
-    <!-- شرایط ارتقاء -->
-    <div id="section-plans" class="card" style="display: none;">
-      <h2 class="section-title">💎 شرایط ثبت‌نام و ارتقاء</h2>
-      <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:20px;">این ثبت‌نام فقط برای شما در یک گوشی معتبر است.</p>
-      
-      <button onclick="openModal()" class="btn-submit" style="background:#3498db; margin-bottom:20px;">مشاهده توضیحات کامل مزایا</button>
-
-      <div class="plan-card"><div><strong>نقره‌ای (۱ ماهه)</strong></div><div class="plan-price">۱۵۵,۰۰۰ تومان</div></div>
-      <div class="plan-card"><div><strong>طلایی (۱ ماهه)</strong></div><div class="plan-price">۲۳۰,۰۰۰ تومان</div></div>
-      <div class="plan-card"><div><strong>نقره‌ای (۶ ماهه)</strong></div><div class="plan-price">۵۰۰,۰۰۰ تومان</div></div>
-      <div class="plan-card"><div><strong>طلایی (۶ ماهه)</strong></div><div class="plan-price">۱,۰۰۰,۰۰۰ تومان</div></div>
-      <div class="plan-card"><div><strong>نقره‌ای (۱ ساله)</strong></div><div class="plan-price">۹۰۰,۰۰۰ تومان</div></div>
-      <div class="plan-card"><div><strong>طلایی (۱ ساله)</strong></div><div class="plan-price">۱,۸۰۰,۰۰۰ تومان</div></div>
-      
-      <!-- نردبان -->
-      <div class="plan-card" style="border-color: var(--accent);"><div><strong>نردبان (۱۰ روزه)</strong><br><small>نمایش در بالای صفحه</small></div><div class="plan-price" style="color:var(--accent);">۵۰,۰۰۰ تومان</div></div>
-
-      <p style="margin-top: 25px; font-weight: bold;">شماره کارت (برای کپی لمس کنید):</p>
-      <div class="card-number" onclick="copyCard()">6037997123943616</div>
-      <p style="font-size: 0.9rem; text-align: center;">بنام خانم جودکی - بانک ملی</p>
-      
-      <div class="contact-admin" style="margin-top: 15px;">
-        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ایتا</a>
-        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">تلگرام</a>
-      </div>
-    </div>
-
-    <!-- پنل مدیریت (مخفی) -->
-    <div id="section-admin" class="card" style="display: none;">
-      <h2 class="section-title">⚙️ پنل مدیریت</h2>
-      <div class="admin-tabs" id="adminTabs">
-        <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
-        <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
-        <div class="admin-tab" onclick="filterAdmin('gold')">طلایی</div>
-        <div class="admin-tab" onclick="filterAdmin('rejected')">رد شده</div>
-      </div>
-      
-      <!-- فیلتر جنسیت برای مدیر -->
-      <div style="margin-bottom:20px; display:flex; gap:10px;">
-        <button onclick="filterGenderAdmin('all')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">همه</button>
-        <button onclick="filterGenderAdmin('man')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">آقایان</button>
-        <button onclick="filterGenderAdmin('woman')" style="padding:8px 15px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">بانوان</button>
-      </div>
-
-      <div id="adminList" class="grid"></div>
-    </div>
-
-  </div>
-
-  <!-- مودال توضیحات -->
-  <div id="infoModal" class="modal">
-    <div class="modal-content">
-      <h3>مزایای اشتراک نقره‌ای:</h3>
-      <ul><li>نمایش فرم شما برای جنس مخالف (اطلاعات کلی)</li><li>بدون نمایش عکس</li></ul>
-      <h3 style="margin-top:20px;">مزایای اشتراک طلایی:</h3>
-      <ul><li>نمایش کامل اطلاعات (به جز محرمانه)</li><li>مشاهده عکس پروفایل (تا ۵ عکس)</li><li>نمایش عکس شما به دیگران</li></ul>
-      <h3 style="margin-top:20px;">مزایای نردبان:</h3>
-      <ul><li>نمایش پروفایل شما در بالای لیست جستجو به مدت ۱۰ روز</li></ul>
-      <button onclick="closeModal()" class="close-modal">متوجه شدم</button>
-    </div>
-  </div>
-
   <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
@@ -338,6 +325,10 @@
     let currentGenderFilter = 'all';
     let myGender = localStorage.getItem('my_gender') || '';
     let myProfileId = localStorage.getItem('my_profile_id') || ''; 
+    let myPhone = localStorage.getItem('my_phone') || '';
+    
+    let currentBannerUrl = '';
+    let currentBannerLink = '';
 
     window.onload = function() {
       const yearSel = document.getElementById('birth_year');
@@ -350,10 +341,12 @@
       for (let i = 40; i <= 150; i++) weightSel.innerHTML += `<option value="${i}">${i}</option>`;
       
       fetchProfiles();
+      fetchBanner();
+      if(myPhone) { showSection('profile'); }
     };
 
     function showSection(section) {
-      ['register', 'view', 'plans', 'admin'].forEach(s => document.getElementById('section-' + s).style.display = 'none');
+      ['register', 'view', 'plans', 'admin', 'profile'].forEach(s => document.getElementById('section-' + s).style.display = 'none');
       document.getElementById('section-' + section).style.display = 'block';
       
       if (section === 'view') {
@@ -363,6 +356,16 @@
           else { alert('نامعتبر'); return; }
         }
         renderPublicProfiles();
+      }
+      if (section === 'profile') {
+        if (myPhone) {
+          document.getElementById('userLoginView').classList.add('hidden');
+          document.getElementById('userDashboardView').classList.remove('hidden');
+          loadUserDashboard();
+        } else {
+          document.getElementById('userLoginView').classList.remove('hidden');
+          document.getElementById('userDashboardView').classList.add('hidden');
+        }
       }
       if (section === 'register' && myProfileId) {
         loadMyProfile();
@@ -374,15 +377,116 @@
       if (pass === 'Reza6625') {
         isAdmin = true;
         showSection('admin');
-      } else if (pass !== null) {
-        alert('رمز اشتباه است!');
+        calculateStats();
+      } else if (pass !== null) { alert('رمز اشتباه است!'); }
+    }
+
+    // --- سیستم ورود کاربر ---
+    function loginUser() {
+      const phone = document.getElementById('loginPhoneInput').value;
+      const user = allProfiles.find(p => p.phone === phone);
+      
+      if (user) {
+        myPhone = phone;
+        myProfileId = user.id;
+        myGender = user.role;
+        localStorage.setItem('my_phone', phone);
+        localStorage.setItem('my_profile_id', user.id);
+        localStorage.setItem('my_gender', user.role);
+        
+        showSection('profile');
+      } else {
+        alert('کاربری با این شماره یافت نشد.');
+      }
+    }
+    
+    function logoutUser() {
+      localStorage.removeItem('my_phone');
+      localStorage.removeItem('my_profile_id');
+      localStorage.removeItem('my_gender');
+      myPhone = ''; myProfileId = ''; myGender = '';
+      showSection('profile');
+    }
+
+    function loadUserDashboard() {
+      const p = allProfiles.find(x => x.id == myProfileId);
+      if (!p) return;
+      
+      document.getElementById('myName').innerText = `${p.first_name} ${p.last_name || ''}`;
+      document.getElementById('myBio').innerText = p.extra_details || 'بیوگرافی ثبت نشده است.';
+      
+      let badgeClass = p.status === 'gold' ? 'gold' : p.status === 'silver' ? 'silver' : 'pending';
+      let badgeText = p.status === 'gold' ? '🌟 طلایی' : p.status === 'silver' ? '🥈 نقره‌ای' : 'در انتظار تایید';
+      let badgeEl = document.getElementById('myBadge');
+      badgeEl.className = `badge ${badgeClass}`;
+      badgeEl.innerText = badgeText;
+
+      if (p.photo_url) {
+        document.getElementById('myAvatar').src = p.photo_url;
+        document.getElementById('myAvatar').style.display = 'inline-block';
+      } else {
+        document.getElementById('myAvatar').style.display = 'none';
+      }
+      
+      if (p.expires_at) {
+        const exp = new Date(p.expires_at);
+        const now = new Date();
+        const diffTime = exp - now;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        document.getElementById('myExpDays').innerText = diffDays > 0 ? diffDays : '0';
+        document.getElementById('myExpStatus').innerText = diffDays > 0 ? 'فعال' : 'منقضی';
+      } else {
+        document.getElementById('myExpDays').innerText = '-';
+        document.getElementById('myExpStatus').innerText = 'نامشخص';
       }
     }
 
-    function openModal() { document.getElementById('infoModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
-    function copyCard() { navigator.clipboard.writeText('6037997123943616'); alert('کپی شد!'); }
+    function editMyProfile() {
+      showSection('register');
+    }
 
+    function calculateStats() {
+      document.getElementById('statTotal').innerText = allProfiles.length;
+      document.getElementById('statSilver').innerText = allProfiles.filter(p => p.status === 'silver').length;
+      document.getElementById('statGold').innerText = allProfiles.filter(p => p.status === 'gold').length;
+      document.getElementById('statPending').innerText = allProfiles.filter(p => p.status === 'pending').length;
+    }
+
+    async function fetchBanner() {
+      try {
+        const res = await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', {
+          headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
+        });
+        const data = await res.json();
+        if (data && data[0] && data[0].banner_url) {
+          currentBannerUrl = data[0].banner_url;
+          currentBannerLink = data[0].banner_link || '';
+          
+          document.getElementById('bannerImg').src = currentBannerUrl;
+          document.getElementById('bannerDisplay').style.display = 'block';
+          if (currentBannerLink) {
+            document.getElementById('bannerDisplay').onclick = () => window.open(currentBannerLink, '_blank');
+            document.getElementById('bannerDisplay').style.cursor = 'pointer';
+          }
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    async function saveBanner() {
+      const url = document.getElementById('bannerUrlInput').value;
+      const link = document.getElementById('bannerLinkInput').value;
+      
+      await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', {
+        method: 'PATCH', 
+        headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ banner_url: url, banner_link: link })
+      });
+      alert('بنر ذخیره شد!');
+      fetchBanner();
+    }
+
+    // --- فرم‌ها ---
     function toggleGenderFields() {
       document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none';
     }
@@ -392,14 +496,10 @@
     function toggleDisease() {
       document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none';
     }
-    
     function checkFileSize(input) {
       if (input.files.length > 0) {
         const fileSize = input.files[0].size / 1024 / 1024; 
-        if (fileSize > 1) {
-          alert('حجم عکس باید کمتر از ۱ مگابایت باشد.');
-          input.value = '';
-        }
+        if (fileSize > 1) { alert('حجم عکس باید کمتر از ۱ مگابایت باشد.'); input.value = ''; }
       }
     }
 
@@ -435,10 +535,7 @@
 
       document.getElementById('editWarning').classList.remove('hidden');
       document.getElementById('cancelEditBtn').classList.remove('hidden');
-      
-      toggleGenderFields();
-      toggleCountry();
-      toggleDisease();
+      toggleGenderFields(); toggleCountry(); toggleDisease();
     }
 
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
@@ -474,7 +571,6 @@
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         const fileName = Date.now() + '_' + file.name;
-        document.getElementById('uploadStatus').innerText = 'در حال آپلود...';
         
         const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
           method: 'POST',
@@ -484,10 +580,7 @@
         
         if (uploadRes.ok) {
           photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
-        } else {
-          document.getElementById('uploadStatus').innerText = 'خطا در آپلود.';
-          return;
-        }
+        } else { alert('خطا در آپلود.'); return; }
       }
 
       const profileData = {
@@ -542,12 +635,14 @@
             const newData = await getRes.json();
             if(newData && newData[0]) {
               localStorage.setItem('my_profile_id', newData[0].id);
+              localStorage.setItem('my_phone', profileData.phone);
               myProfileId = newData[0].id;
+              myPhone = profileData.phone;
             }
           }
-          alert(isEdit ? 'ویرایش شد. در صف انتظار قرار گرفت.' : 'ثبت شد. در صف انتظار.');
+          alert(isEdit ? 'ویرایش شد.' : 'ثبت شد.');
           resetForm();
-          showSection('view');
+          showSection('profile');
         }
       } catch (err) { alert('خطا در ارتباط با سرور.'); }
     });
@@ -570,7 +665,8 @@
           headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
         });
         allProfiles = await res.json();
-        if (isAdmin) renderAdminList();
+        if (isAdmin) { renderAdminList(); calculateStats(); }
+        if (myPhone) loadUserDashboard();
       } catch (err) { console.error(err); }
     }
 
@@ -589,8 +685,6 @@
       const oppositeRole = myGender === 'man' ? 'woman' : 'man';
       
       let visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole);
-      
-      // مرتب‌سازی: نردبان‌دارها اول
       visibleProfiles.sort((a, b) => (b.ladder === true ? 1 : 0) - (a.ladder === true ? 1 : 0));
 
       if (visibleProfiles.length === 0) {
@@ -696,7 +790,7 @@
 
     async function updateStatus(id, newStatus) {
       const expiry = new Date();
-      expiry.setDate(expiry.getDate() + 30);
+      expiry.setDate(expiry.getDate() + 30); // ۳۰ روز اعتبار
       
       await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
         method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
@@ -724,7 +818,6 @@
     }
 
     async function openEditAdmin(id) {
-        // ویرایش سریع توسط مدیر (فقط تغییر نام و شماره)
         const p = allProfiles.find(x => x.id === id);
         const newName = prompt('نام جدید:', p.first_name);
         const newPhone = prompt('شماره جدید:', p.phone);
@@ -748,3 +841,4 @@
   </script>
 </body>
 </html>
+   
