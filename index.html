@@ -7,59 +7,81 @@
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
   <style>
     @font-face { font-family: 'IRANSans'; src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'); }
+    :root { --primary: #d1584c; --secondary: #f39c12; --success: #2ecc71; --info: #3498db; --admin: #8e44ad; }
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'IRANSans', sans-serif; }
-    body { background: #fdfaf6; color: #333; min-height: 100vh; padding: 16px; }
+    body { background: linear-gradient(135deg, #fff5f0 0%, #fdfaf6 100%); color: #333; min-height: 100vh; padding: 16px; }
     .app-container { max-width: 800px; margin: 0 auto; }
     
-    header { background: #fff; border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #ffe4d6; }
-    .logo-icon { font-size: 40px; }
-    h1 { color: #d1584c; margin-top: 10px; font-size: 1.5rem; }
+    /* گرافیک هدر */
+    header { background: #fff; border-radius: 24px; padding: 25px 20px; text-align: center; box-shadow: 0 10px 30px rgba(209, 88, 76, 0.08); margin-bottom: 20px; border: 1px solid #ffe4d6; position: relative; overflow: hidden; }
+    header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,228,214,0.4) 0%, transparent 60%); z-index: 0; }
+    header > * { position: relative; z-index: 1; }
+    .logo-icon { font-size: 50px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    h1 { color: var(--primary); margin-top: 10px; font-size: 1.6rem; font-weight: 800; }
     
-    .glow-btn { display: block; width: 100%; padding: 15px; background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); color: #d1584c; text-align: center; border-radius: 15px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 0 15px rgba(255, 154, 158, 0.6); animation: glow 2s infinite alternate; }
+    .glow-btn { display: block; width: 100%; padding: 15px; background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%); color: #d1584c; text-align: center; border-radius: 15px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 0 15px rgba(255, 154, 158, 0.6); animation: glow 2s infinite alternate; border: none; cursor: pointer; font-family: inherit; font-size: 1rem;}
     @keyframes glow { from { box-shadow: 0 0 10px #ff9a9e; } to { box-shadow: 0 0 25px #ff9a9e; } }
     
     .contact-admin { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-    .contact-btn { padding: 10px 20px; border-radius: 10px; text-decoration: none; color: white; font-size: 0.9rem; }
+    .contact-btn { padding: 10px 20px; border-radius: 12px; text-decoration: none; color: white; font-size: 0.9rem; font-weight: bold; transition: 0.3s; }
+    .contact-btn:hover { transform: translateY(-2px); }
     .eitaa { background: #f39c12; }
     .telegram { background: #0088cc; }
 
-    .card { background: #fff; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #ffe4d6; }
+    /* کارت‌ها */
+    .card { background: #fff; border-radius: 24px; padding: 24px; box-shadow: 0 8px 25px rgba(0,0,0,0.04); margin-bottom: 20px; border: 1px solid #f0e6e1; }
+    .section-title { color: var(--primary); font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; border-bottom: 2px dashed #f0e6e1; padding-bottom: 10px; }
+    
+    /* دکمه‌های ناوبری */
+    .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .nav-btn { padding: 15px; border: none; border-radius: 15px; color: white; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; font-family: inherit;}
+    .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .nav-btn i { font-size: 1.5rem; }
+
+    /* فرم‌ها */
     .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 5px; color: #555; font-size: 0.9rem; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; outline: none; transition: 0.3s; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #d1584c; }
+    .form-group label { display: block; margin-bottom: 6px; color: #555; font-size: 0.9rem; font-weight: bold; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; background: #fafafa; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(209,88,76,0.1); }
     
     .form-group input.error, .form-group select.error, .form-group textarea.error { border-color: #e74c3c; background-color: #fadbd8; }
     .error-text { color: #e74c3c; font-size: 0.75rem; display: none; margin-top: 5px; }
 
-    .btn-submit { width: 100%; padding: 15px; background: #d1584c; color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .btn-submit { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 1.05rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; font-family: inherit;}
+    .btn-submit:hover { background: #b5463b; }
     
-    .admin-panel { display: none; }
-    .admin-panel.active { display: block; }
-    .admin-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
-    .admin-tab { flex: 1; padding: 10px; background: #eee; border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.8rem; }
-    .admin-tab.active { background: #d1584c; color: white; }
-
+    /* استایل‌های بخش پروفایل */
     .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-    .profile-card { background: #fff; border-radius: 15px; padding: 15px; border: 1px solid #eee; position: relative; }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; color: white; margin-bottom: 10px; }
-    .badge.silver { background: #bdc3c7; }
-    .badge.gold { background: #f1c40f; color: #333; }
-    .badge.pending { background: #e74c3c; }
+    .profile-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: 0.3s; }
+    .profile-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
     
-    .profile-field { font-size: 0.85rem; color: #555; margin-bottom: 5px; }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; color: white; margin-bottom: 12px; }
+    .badge.silver { background: linear-gradient(135deg, #bdc3c7, #95a5a6); }
+    .badge.gold { background: linear-gradient(135deg, #f1c40f, #f39c12); color: #333; }
+    .badge.pending { background: #e74c3c; }
+    .badge.rejected { background: #7f8c8d; }
+    
+    .profile-field { font-size: 0.9rem; color: #555; margin-bottom: 6px; line-height: 1.6; }
     .profile-field strong { color: #333; }
-    .contact-info-admin { background: #fff3cd; padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.8rem; border: 1px solid #ffeeba; }
+    
+    .profile-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; background: #eee; }
+    
+    .contact-info-admin { background: #fff3cd; padding: 12px; border-radius: 12px; margin-top: 12px; font-size: 0.85rem; border: 1px solid #ffeeba; color: #856404; }
     
     .hidden { display: none !important; }
 
-    /* استایل بخش شرایط */
-    .plan-card { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 10px; }
-    .plan-price { color: #d1584c; font-weight: bold; }
-    .card-number { background: #eee; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; letter-spacing: 1px; cursor: pointer; margin: 10px 0; font-family: monospace; }
+    /* استایل شرایط */
+    .plan-card { background: #f9f9f9; border: 1px solid #eee; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .plan-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+    .card-number { background: #e8f4f8; padding: 15px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; cursor: pointer; margin: 15px 0; font-family: monospace; color: #2980b9; border: 1px dashed #3498db; }
     
     /* تعهدنامه */
-    .terms-box { background: #f0f8ff; border: 1px solid #bce8f1; padding: 15px; border-radius: 10px; font-size: 0.85rem; color: #31708f; margin-bottom: 15px; }
+    .terms-box { background: #fff8e1; border: 1px solid #ffe082; padding: 15px; border-radius: 12px; font-size: 0.85rem; color: #6d4c41; margin-bottom: 15px; line-height: 1.6; }
+
+    .admin-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+    .admin-tab { padding: 10px 15px; background: #f0f0f0; border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.85rem; white-space: nowrap; font-weight: bold; }
+    .admin-tab.active { background: var(--admin); color: white; }
   </style>
 </head>
 <body>
@@ -68,33 +90,40 @@
     <header>
       <div class="logo-icon">💍</div>
       <h1>پلتفرم ازدواج و همسریابی</h1>
-      <a href="http://eitaa.com/joinchat/878706709C93902231a1" class="glow-btn" target="_blank">✨ لمس کن برای رشد ✨</a>
+      
+      <button onclick="showSection('plans')" class="glow-btn">✨ لمس کن برای رشد ✨</button>
+      
       <div class="contact-admin">
         <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارتباط در ایتا</a>
         <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">ارتباط در تلگرام</a>
       </div>
     </header>
 
-    <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-      <button onclick="showSection('register')" class="btn-submit" style="background: #3498db; flex:1; min-width:120px;">ثبت‌نام</button>
-      <button onclick="showSection('view')" class="btn-submit" style="background: #2ecc71; flex:1; min-width:120px;">مشاهده پروفایل‌ها</button>
-      <button onclick="showSection('plans')" class="btn-submit" style="background: #f39c12; flex:1; min-width:120px;">شرایط ارتقاء</button>
-      <button onclick="showSection('admin')" class="btn-submit" style="background: #8e44ad; flex:1; min-width:120px;">مدیر</button>
+    <div class="nav-grid">
+      <button onclick="showSection('register')" class="nav-btn" style="background: var(--info);">📝 ثبت‌نام / ویرایش</button>
+      <button onclick="showSection('view')" class="nav-btn" style="background: var(--success);">👀 مشاهده پروفایل‌ها</button>
+      <button onclick="showSection('plans')" class="nav-btn" style="background: var(--secondary);">💎 شرایط ارتقاء</button>
+      <button onclick="showSection('admin')" class="nav-btn" style="background: var(--admin);">⚙️ پنل مدیریت</button>
     </div>
 
-    <!-- فرم ثبت‌نام -->
+    <!-- فرم ثبت‌نام و ویرایش -->
     <div id="section-register" class="card">
-      <h2 style="margin-bottom: 15px; color: #d1584c;">تکمیل فرم اطلاعات</h2>
+      <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       
-      <div class="terms-box">
-        <strong>تعهدنامه:</strong> با ثبت‌نام در این پلتفرم، تایید می‌کنم که این مجموعه فقط نقش معرف را دارد و هیچ مسئولیتی در قبال صحت اطلاعات و فرم افراد ندارد. تحقیق و بررسی بیشتر بر عهده بنده است.
+      <div class="terms-box" id="termsBox">
+        <strong>تعهدنامه:</strong> با ثبت‌نام در این پلتفرم، تایید می‌کنم که این مجموعه فقط نقش معرف را دارد و هیچ مسئولیتی در قبال صحت اطلاعات افراد ندارد. مسئولیت تحقیق و بررسی بر عهده بنده است. همچنین این ثبت‌نام فقط برای من در همین گوشی معتبر است.
+      </div>
+
+      <div id="editWarning" class="hidden" style="background:#ffeb3b; padding:10px; border-radius:10px; margin-bottom:15px; font-size:0.85rem; text-align:center;">
+        شما در حال ویرایش پروفایل خود هستید. پس از ثبت، فرم شما مجدداً در صف انتظار مدیر قرار می‌گیرد.
       </div>
 
       <form id="profileForm">
+        <input type="hidden" id="edit_id">
+        
         <div class="form-group">
           <label>نام کاربری (انگلیسی)</label>
           <input type="text" id="username" required>
-          <div class="error-text">الزامی است (فقط انگلیسی).</div>
         </div>
 
         <div class="form-group">
@@ -104,48 +133,55 @@
             <option value="man">داماد (آقا)</option>
             <option value="woman">عروس (خانم)</option>
           </select>
-          <div class="error-text">الزامی است.</div>
         </div>
 
         <div class="form-group">
           <label>نام (فارسی)</label>
           <input type="text" id="first_name" required>
-          <div class="error-text">الزامی است (فقط فارسی).</div>
         </div>
 
         <div class="form-group">
-          <label>نام خانوادگی (فارسی - فقط مدیر می‌بیند)</label>
+          <label>نام خانوادگی (فقط مدیر می‌بیند)</label>
           <input type="text" id="last_name" required>
-          <div class="error-text">الزامی است.</div>
         </div>
 
-        <!-- ... سایر فیلدهای قبلی (ملیت، استان و...) اینجا هستند، برای کوتاه شدن کد فقط فیلدهای تغییر یافته یا جدید را آوردیم ... -->
         <div class="form-group">
-          <label>سال تولد (مثلاً 1370)</label>
-          <select id="birth_year" required>
-            <option value="">انتخاب کنید...</option>
-            <!-- با جاوااسکریپت پر می‌شود -->
-          </select>
+          <label>سال تولد</label>
+          <select id="birth_year" required><option value="">انتخاب کنید...</option></select>
         </div>
 
         <div class="form-group">
           <label>قد (سانتی‌متر)</label>
-          <select id="height" required>
-            <option value="">انتخاب کنید...</option>
-            <!-- با جاوااسکریپت پر می‌شود -->
-          </select>
+          <select id="height" required><option value="">انتخاب کنید...</option></select>
         </div>
 
         <div class="form-group">
           <label>وزن (کیلوگرم)</label>
-          <select id="weight" required>
-            <option value="">انتخاب کنید...</option>
-            <!-- با جاوااسکریپت پر می‌شود -->
-          </select>
+          <select id="weight" required><option value="">انتخاب کنید...</option></select>
         </div>
-        
+
         <div class="form-group">
-          <label>نوع پیام‌رسان (برای ارتباط با مدیر)</label>
+          <label>آدرس دقیق (فقط مدیر)</label>
+          <textarea id="address" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>در صورت ازدواج سابق، تعداد، جنسیت و سن فرزندان</label>
+          <textarea id="previous_marriage_children" rows="2" placeholder="مثلاً: یک پسر ۵ ساله"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>ملاک انتخاب همسر</label>
+          <textarea id="criteria" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>توضیحات بیشتر (از درج شماره و آدرس خودداری کنید)</label>
+          <textarea id="extra_details" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>نوع پیام‌رسان</label>
           <select id="messenger_type" required>
             <option value="">انتخاب کنید...</option>
             <option value="ایتا">ایتا</option>
@@ -156,91 +192,66 @@
         <div class="form-group">
           <label>آیدی پیام‌رسان</label>
           <input type="text" id="contact_id" required>
-          <div class="error-text">الزامی است.</div>
         </div>
 
         <div class="form-group">
-          <label>شماره موبایل (۱۱ رقم انگلیسی)</label>
+          <label>شماره موبایل (۱۱ رقم)</label>
           <input type="tel" id="phone" required>
-          <div class="error-text">شماره باید ۱۱ رقم و انگلیسی باشد.</div>
+        </div>
+
+        <!-- بخش آپلود عکس (فقط در صورت ویرایش یا خرید طلایی) -->
+        <div class="form-group" id="photoUploadGroup" style="display: none;">
+          <label>آپلود عکس (فقط برای کاربران طلایی)</label>
+          <input type="file" id="photo_file" accept="image/*">
+          <div id="uploadStatus" style="font-size:0.8rem; color:var(--primary); margin-top:5px;"></div>
         </div>
 
         <div class="form-group">
           <label>
             <input type="checkbox" id="agree_terms" style="width:auto; margin-left:5px;" required>
-            <span style="font-size: 0.9rem;">تعهدنامه فوق را می‌پذیرم.</span>
+            <span>تعهدنامه را می‌پذیرم.</span>
           </label>
         </div>
 
-        <button type="submit" class="btn-submit">ارسال برای تایید مدیر</button>
+        <button type="submit" class="btn-submit">ثبت و ارسال برای مدیر</button>
+        <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#95a5a6; margin-top:5px;">انصراف از ویرایش</button>
       </form>
     </div>
 
-    <!-- بخش مشاهده پروفایل‌ها -->
+    <!-- مشاهده پروفایل‌ها -->
     <div id="section-view" class="card" style="display: none;">
-      <h2 style="margin-bottom: 15px; color: #2ecc71;">مشاهده پروفایل‌ها</h2>
-      <div class="form-group">
-        <label>جنسیت خود را انتخاب کنید تا پروفایل جنس مخالف را ببینید:</label>
-        <select id="viewerRole" onchange="fetchProfiles()">
-          <option value="">انتخاب کنید...</option>
-          <option value="man">من آقا هستم (مشاهده بانوان)</option>
-          <option value="woman">من خانم هستم (مشاهده آقایان)</option>
-        </select>
-      </div>
+      <h2 class="section-title">👀 مشاهده پروفایل‌ها</h2>
+      <p id="viewerMessage" style="font-size:0.9rem; color:#666; margin-bottom:15px;"></p>
       <div id="profilesGrid" class="grid"></div>
     </div>
 
-    <!-- بخش شرایط ارتقاء -->
+    <!-- شرایط ارتقاء -->
     <div id="section-plans" class="card" style="display: none;">
-      <h2 style="margin-bottom: 15px; color: #f39c12;">شرایط ثبت‌نام و ارتقاء</h2>
+      <h2 class="section-title">💎 شرایط ثبت‌نام و ارتقاء</h2>
+      <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">این ثبت‌نام فقط برای شما در یک گوشی معتبر است.</p>
       
-      <div class="plan-card">
-        <h4>نقره‌ای (۳۰ روزه)</h4>
-        <p class="plan-price">۱۵۵,۰۰۰ تومان</p>
-        <p style="font-size:0.8rem; color:#666;">نمایش فرم برای جنس مخالف (بدون عکس)</p>
-      </div>
-      
-      <div class="plan-card">
-        <h4>طلایی (۳۰ روزه)</h4>
-        <p class="plan-price">۲۳۰,۰۰۰ تومان</p>
-        <p style="font-size:0.8rem; color:#666;">نمایش فرم + مشاهده عکس‌ها</p>
-      </div>
+      <div class="plan-card"><div><strong>نقره‌ای (۱ ماهه)</strong></div><div class="plan-price">۱۵۵,۰۰۰ تومان</div></div>
+      <div class="plan-card"><div><strong>طلایی (۱ ماهه)</strong></div><div class="plan-price">۲۳۰,۰۰۰ تومان</div></div>
+      <div class="plan-card"><div><strong>نقره‌ای (۶ ماهه)</strong></div><div class="plan-price">۵۰۰,۰۰۰ تومان</div></div>
+      <div class="plan-card"><div><strong>طلایی (۶ ماهه)</strong></div><div class="plan-price">۱,۰۰۰,۰۰۰ تومان</div></div>
+      <div class="plan-card"><div><strong>نقره‌ای (۱ ساله)</strong></div><div class="plan-price">۹۰۰,۰۰۰ تومان</div></div>
+      <div class="plan-card"><div><strong>طلایی (۱ ساله)</strong></div><div class="plan-price">۱,۸۰۰,۰۰۰ تومان</div></div>
 
-      <div class="plan-card">
-        <h4>نقره‌ای (۶ ماهه)</h4>
-        <p class="plan-price">۵۰۰,۰۰۰ تومان</p>
-      </div>
-
-      <div class="plan-card">
-        <h4>طلایی (۶ ماهه)</h4>
-        <p class="plan-price">۱,۰۰۰,۰۰۰ تومان</p>
-      </div>
-
-      <div class="plan-card">
-        <h4>نقره‌ای (یک ساله)</h4>
-        <p class="plan-price">۹۰۰,۰۰۰ تومان</p>
-      </div>
-
-      <div class="plan-card">
-        <h4>طلایی (یک ساله)</h4>
-        <p class="plan-price">۱,۸۰۰,۰۰۰ تومان</p>
-      </div>
-
-      <p style="margin-top: 20px; font-weight: bold;">شماره کارت برای واریز (برای کپی لمس کنید):</p>
+      <p style="margin-top: 20px; font-weight: bold;">شماره کارت (برای کپی لمس کنید):</p>
       <div class="card-number" onclick="copyCard()">6037997123943616</div>
       <p style="font-size: 0.85rem; text-align: center;">بنام خانم جودکی - بانک ملی</p>
-      <p style="font-size: 0.85rem; text-align: center; margin-top: 10px; color: #d1584c;">لطفاً رسید را به آیدی زیر بفرستید:</p>
+      <p style="font-size: 0.85rem; text-align: center; margin-top: 10px; color: var(--primary);">لطفاً رسید را به آیدی زیر بفرستید:</p>
       
       <div class="contact-admin" style="margin-top: 10px;">
-        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ارسال رسید در ایتا</a>
-        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">ارسال رسید در تلگرام</a>
+        <a href="https://eitaa.com/Moarrefezdvaj" class="contact-btn eitaa" target="_blank">ایتا</a>
+        <a href="https://t.me/Moarrefezdvaj" class="contact-btn telegram" target="_blank">تلگرام</a>
       </div>
-      <p style="text-align: center; margin-top: 20px; font-size: 0.9rem;">با آرزوی خوشبختی و صحت و سلامت 🌹</p>
+      <p style="text-align: center; margin-top: 20px; font-size: 0.9rem;">با آرزوی خوشبختی 🌹</p>
     </div>
 
-    <!-- بخش مدیر -->
-    <div id="section-admin" class="card admin-panel">
-      <h2 style="margin-bottom: 15px; color: #8e44ad;">پنل مدیریت</h2>
+    <!-- پنل مدیریت -->
+    <div id="section-admin" class="card" style="display: none;">
+      <h2 class="section-title">⚙️ پنل مدیریت</h2>
       <div id="adminLogin">
         <div class="form-group"><label>رمز عبور</label><input type="password" id="adminPass"></div>
         <button onclick="loginAdmin()" class="btn-submit">ورود</button>
@@ -266,31 +277,39 @@
     let allProfiles = [];
     let isAdmin = false;
     let currentAdminFilter = 'pending';
+    let myGender = localStorage.getItem('my_gender') || ''; // تشخیص خودکار جنسیت
 
     // پر کردن سلکت‌ها
     window.onload = function() {
       const yearSel = document.getElementById('birth_year');
-      const currentYear = 1403;
-      for (let i = currentYear - 15; i >= 1320; i--) yearSel.innerHTML += `<option value="${i}">${i}</option>`;
+      for (let i = 1403 - 15; i >= 1320; i--) yearSel.innerHTML += `<option value="${i}">${i}</option>`;
 
       const heightSel = document.getElementById('height');
-      for (let i = 140; i <= 210; i++) heightSel.innerHTML += `<option value="${i}">${i} cm</option>`;
+      for (let i = 140; i <= 210; i++) heightSel.innerHTML += `<option value="${i}">${i}</option>`;
 
       const weightSel = document.getElementById('weight');
-      for (let i = 40; i <= 150; i++) weightSel.innerHTML += `<option value="${i}">${i} kg</option>`;
+      for (let i = 40; i <= 150; i++) weightSel.innerHTML += `<option value="${i}">${i}</option>`;
       
       fetchProfiles();
     };
 
     function showSection(section) {
-      document.getElementById('section-register').style.display = 'none';
-      document.getElementById('section-view').style.display = 'none';
-      document.getElementById('section-plans').style.display = 'none';
-      document.getElementById('section-admin').style.display = 'none';
-      if (section === 'register') document.getElementById('section-register').style.display = 'block';
-      if (section === 'view') document.getElementById('section-view').style.display = 'block';
-      if (section === 'plans') document.getElementById('section-plans').style.display = 'block';
-      if (section === 'admin') document.getElementById('section-admin').style.display = 'block';
+      ['register', 'view', 'plans', 'admin'].forEach(s => document.getElementById('section-' + s).style.display = 'none');
+      document.getElementById('section-' + section).style.display = 'block';
+      
+      if (section === 'view') {
+        if (!myGender) {
+          const g = prompt('لطفاً جنسیت خود را وارد کنید (man یا woman):');
+          if (g === 'man' || g === 'woman') {
+            myGender = g;
+            localStorage.setItem('my_gender', g);
+          } else {
+            alert('ورودی نامعتبر است.');
+            return;
+          }
+        }
+        renderPublicProfiles();
+      }
     }
 
     function copyCard() {
@@ -298,44 +317,52 @@
       alert('شماره کارت کپی شد!');
     }
 
-    // اعتبارسنجی فرم
+    // فرم ثبت‌نام / ویرایش
     document.getElementById('profileForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      const editId = document.getElementById('edit_id').value;
+      const isEdit = editId !== '';
+      
+      // اعتبارسنجی
       let isValid = true;
-      
-      const inputs = document.querySelectorAll('#profileForm input[required], #profileForm select[required]');
-      
-      inputs.forEach(input => {
-        const errorText = input.nextElementSibling;
-        if (!input.value.trim()) {
-          input.classList.add('error');
-          if (errorText && errorText.classList.contains('error-text')) errorText.style.display = 'block';
-          isValid = false;
-        } else {
-          input.classList.remove('error');
-          if (errorText && errorText.classList.contains('error-text')) errorText.style.display = 'none';
-        }
+      document.querySelectorAll('#profileForm input[required], #profileForm select[required]').forEach(input => {
+        if (!input.value.trim()) { input.classList.add('error'); isValid = false; }
+        else { input.classList.remove('error'); }
       });
 
-      // اعتبارسنجی نام (فقط فارسی)
-      const nameInput = document.getElementById('first_name');
-      if (!/^[\u0600-\u06FF\s]+$/.test(nameInput.value)) {
-        nameInput.classList.add('error');
-        isValid = false;
-        alert('نام باید فقط شامل حروف فارسی باشد.');
+      if (!/^[\u0600-\u06FF\s]+$/.test(document.getElementById('first_name').value)) {
+        alert('نام باید فارسی باشد.'); isValid = false;
+      }
+      if (!/^\d{11}$/.test(document.getElementById('phone').value)) {
+        alert('شماره موبایل باید ۱۱ رقم انگلیسی باشد.'); isValid = false;
       }
 
-      // اعتبارسنجی موبایل (۱۱ رقم انگلیسی)
-      const phoneInput = document.getElementById('phone');
-      if (!/^\d{11}$/.test(phoneInput.value)) {
-        phoneInput.classList.add('error');
-        isValid = false;
-        alert('شماره موبایل باید ۱۱ رقم و به انگلیسی باشد.');
+      if (!isValid) return alert('لطفاً فیلدهای الزامی را پر کنید.');
+
+      // آپلود عکس
+      let photoUrl = null;
+      const fileInput = document.getElementById('photo_file');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileName = Date.now() + '_' + file.name;
+        document.getElementById('uploadStatus').innerText = 'در حال آپلود عکس...';
+        
+        const uploadRes = await fetch(`${supabaseUrl}/storage/v1/object/photos/${fileName}`, {
+          method: 'POST',
+          headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey },
+          body: file
+        });
+        
+        if (uploadRes.ok) {
+          photoUrl = `${supabaseUrl}/storage/v1/object/public/photos/${fileName}`;
+          document.getElementById('uploadStatus').innerText = 'عکس با موفقیت آپلود شد.';
+        } else {
+          document.getElementById('uploadStatus').innerText = 'خطا در آپلود عکس.';
+        }
       }
 
-      if (!isValid) return;
-
-      const newProfile = {
+      const profileData = {
         username: document.getElementById('username').value,
         role: document.getElementById('role').value,
         first_name: document.getElementById('first_name').value,
@@ -343,51 +370,76 @@
         birth_year: document.getElementById('birth_year').value,
         height: document.getElementById('height').value,
         weight: document.getElementById('weight').value,
+        address: document.getElementById('address').value,
+        previous_marriage_children: document.getElementById('previous_marriage_children').value,
+        criteria: document.getElementById('criteria').value,
+        extra_details: document.getElementById('extra_details').value,
         messenger_type: document.getElementById('messenger_type').value,
         contact_id: document.getElementById('contact_id').value,
         phone: document.getElementById('phone').value,
-        status: 'pending',
+        status: 'pending', // با هر ویرایش، به صف انتظار برمی‌گردد
         agreed_terms: true
       };
+      
+      if (photoUrl) profileData.photo_url = photoUrl;
+
+      // ذخیره جنسیت در سیستم برای تشخیص خودکار
+      localStorage.setItem('my_gender', profileData.role);
+      myGender = profileData.role;
 
       try {
-        const res = await fetch(supabaseUrl + '/rest/v1/profiles', {
-          method: 'POST',
+        const url = isEdit ? `${supabaseUrl}/rest/v1/profiles?id=eq.${editId}` : `${supabaseUrl}/rest/v1/profiles`;
+        const method = isEdit ? 'PATCH' : 'POST';
+        
+        const res = await fetch(url, {
+          method: method,
           headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
-          body: JSON.stringify(newProfile)
+          body: JSON.stringify(profileData)
         });
+        
         if (res.ok) {
-          alert('اطلاعات ثبت شد. در انتظار تایید مدیر.');
-          document.getElementById('profileForm').reset();
+          alert(isEdit ? 'ویرایش شد. در صف انتظار مدیر قرار گرفت.' : 'ثبت شد. در صف انتظار مدیر.');
+          resetForm();
           showSection('view');
         }
-      } catch (err) { alert('خطا در ثبت.'); }
+      } catch (err) { alert('خطا در ارتباط با سرور.'); }
     });
 
+    function resetForm() {
+      document.getElementById('profileForm').reset();
+      document.getElementById('edit_id').value = '';
+      document.getElementById('editWarning').classList.add('hidden');
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+      document.getElementById('photoUploadGroup').style.display = 'none';
+      document.getElementById('termsBox').classList.remove('hidden');
+    }
+
+    function cancelEdit() {
+      resetForm();
+    }
+
+    // بارگذاری پروفایل‌ها
     async function fetchProfiles() {
       try {
         const res = await fetch(supabaseUrl + '/rest/v1/profiles?select=*&order=id.desc', {
           headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
         });
         allProfiles = await res.json();
-        renderPublicProfiles();
         if (isAdmin) renderAdminList();
       } catch (err) { console.error(err); }
     }
 
-    // نمایش به کاربر (فقط جنس مخالف)
+    // نمایش عمومی (فقط جنس مخالف)
     function renderPublicProfiles() {
       const grid = document.getElementById('profilesGrid');
-      const viewerRole = document.getElementById('viewerRole').value;
+      const msg = document.getElementById('viewerMessage');
       
-      if (!viewerRole) {
-        grid.innerHTML = '<p style="text-align:center; color:#888;">لطفاً ابتدا جنسیت خود را انتخاب کنید.</p>';
-        return;
-      }
-
+      if (!myGender) return;
+      
+      msg.innerText = `شما به عنوان ${myGender === 'man' ? 'آقا' : 'خانم'} وارد شده‌اید. فقط پروفایل جنس مخالف نمایش داده می‌شود.`;
+      
       grid.innerHTML = '';
-      // فیلتر: فقط تایید شده‌ها و فقط جنس مخالف
-      const oppositeRole = viewerRole === 'man' ? 'woman' : 'man';
+      const oppositeRole = myGender === 'man' ? 'woman' : 'man';
       const visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole);
 
       if (visibleProfiles.length === 0) {
@@ -396,20 +448,26 @@
       }
 
       visibleProfiles.forEach(p => {
-        const photoHtml = p.status === 'gold' ? '<div style="height:100px; background:#eee; border-radius:10px; margin-bottom:10px; display:flex; align-items:center; justify-content:center;">عکس (فقط طلایی)</div>' : '<div style="height:100px; background:#f9f9f9; border-radius:10px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی</div>';
+        let photoHtml = '<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی</div>';
+        if (p.status === 'gold' && p.photo_url) {
+          photoHtml = `<img src="${p.photo_url}" class="profile-img" alt="عکس">`;
+        }
 
         grid.innerHTML += `
           <div class="profile-card">
             <span class="badge ${p.status === 'gold' ? 'gold' : 'silver'}">${p.status === 'gold' ? '🌟 طلایی' : '🥈 نقره‌ای'}</span>
             ${photoHtml}
-            <h3 style="color:#d1584c;">${p.first_name} (${p.birth_year})</h3>
+            <h3 style="color:var(--primary); margin-bottom:10px;">${p.first_name} (${p.birth_year})</h3>
             <div class="profile-field"><strong>قد/وزن:</strong> ${p.height} cm / ${p.weight} kg</div>
+            <div class="profile-field"><strong>ملاک:</strong> ${p.criteria || 'ذکر نشده'}</div>
+            <div class="profile-field"><strong>توضیحات:</strong> ${p.extra_details || 'ندارد'}</div>
+            ${p.previous_marriage_children ? `<div class="profile-field"><strong>فرزندان سابق:</strong> ${p.previous_marriage_children}</div>` : ''}
           </div>
         `;
       });
     }
 
-    // --- مدیریت ---
+    // --- بخش مدیریت ---
     function loginAdmin() {
       if (document.getElementById('adminPass').value === 'Reza6625') {
         isAdmin = true;
@@ -431,26 +489,30 @@
       list.innerHTML = '';
       const filtered = allProfiles.filter(p => p.status === currentAdminFilter);
       
-      if (filtered.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">خالی است.</p>'; return; }
+      if (filtered.length === 0) { list.innerHTML = '<p style="text-align:center; color:#888;">لیست خالی است.</p>'; return; }
 
       filtered.forEach(p => {
         list.innerHTML += `
-          <div class="profile-card" style="border: 2px solid #8e44ad;">
+          <div class="profile-card" id="admin-card-${p.id}">
+            <span class="badge ${p.status}">${p.status === 'pending' ? 'در انتظار' : p.status === 'silver' ? 'نقره‌ای' : p.status === 'gold' ? 'طلایی' : 'رد شده'}</span>
             <h3>${p.first_name} ${p.last_name || ''} (${p.role === 'man' ? 'آقا' : 'خانم'})</h3>
-            <div class="profile-field">کاربری: ${p.username} | متولد: ${p.birth_year}</div>
+            <div class="profile-field">متولد: ${p.birth_year} | قد: ${p.height} | وزن: ${p.weight}</div>
+            <div class="profile-field">ملاک: ${p.criteria}</div>
+            
             <div class="contact-info-admin">
               <strong>محرمانه:</strong><br>
+              آدرس: ${p.address || 'ندارد'}<br>
               موبایل: ${p.phone}<br>
               پیام‌رسان: ${p.messenger_type} - ${p.contact_id}
             </div>
+
             ${p.status === 'rejected' ? `<div class="profile-field" style="color:red; margin-top:5px;">دلیل رد: ${p.reject_reason}</div>` : ''}
             
             <div style="margin-top:15px; display:flex; gap:5px; flex-wrap:wrap;">
-              ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" style="background:#bdc3c7; border:none; padding:5px 10px; border-radius:5px;">نقره‌ای</button>` : ''}
-              ${p.status === 'pending' || p.status === 'silver' ? `<button onclick="updateStatus(${p.id}, 'gold')" style="background:#f1c40f; border:none; padding:5px 10px; border-radius:5px;">طلایی</button>` : ''}
-              <button onclick="editProfile(${p.id})" style="background:#3498db; color:white; border:none; padding:5px 10px; border-radius:5px;">ویرایش</button>
-              <button onclick="rejectProfile(${p.id})" style="background:#e67e22; color:white; border:none; padding:5px 10px; border-radius:5px;">رد کردن</button>
-              <button onclick="deleteProfile(${p.id})" style="background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:5px;">حذف</button>
+              ${p.status === 'pending' ? `<button onclick="updateStatus(${p.id}, 'silver')" style="background:#bdc3c7; border:none; padding:8px 12px; border-radius:5px; font-family:inherit;">نقره‌ای</button>` : ''}
+              ${p.status === 'pending' || p.status === 'silver' ? `<button onclick="updateStatus(${p.id}, 'gold')" style="background:#f1c40f; border:none; padding:8px 12px; border-radius:5px; font-family:inherit;">طلایی</button>` : ''}
+              <button onclick="rejectProfile(${p.id})" style="background:#e67e22; color:white; border:none; padding:8px 12px; border-radius:5px; font-family:inherit;">رد کردن</button>
+              <button onclick="deleteProfile(${p.id})" style="background:#e74c3c; color:white; border:none; padding:8px 12px; border-radius:5px; font-family:inherit;">حذف</button>
             </div>
           </div>
         `;
@@ -477,20 +539,6 @@
         body: JSON.stringify({ status: 'rejected', reject_reason: reason })
       });
       fetchProfiles();
-    }
-
-    async function editProfile(id) {
-      const p = allProfiles.find(x => x.id === id);
-      const newName = prompt('نام جدید را وارد کنید:', p.first_name);
-      const newPhone = prompt('شماره جدید را وارد کنید:', p.phone);
-      
-      if (newName || newPhone) {
-        await fetch(supabaseUrl + '/rest/v1/profiles?id=eq.' + id, {
-          method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ first_name: newName || p.first_name, phone: newPhone || p.phone })
-        });
-        fetchProfiles();
-      }
     }
 
     async function deleteProfile(id) {
