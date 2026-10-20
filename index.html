@@ -43,7 +43,6 @@
     .btn-plans { background: var(--accent); color: #333; }
     .btn-notif { background: #00897b; }
     
-    /* نشان اعلان */
     .notif-badge { position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; padding: 3px 7px; font-size: 0.7rem; display: none; }
 
     .card { background: var(--card-bg); border-radius: 24px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 25px; border: 1px solid var(--border-color); }
@@ -74,16 +73,16 @@
     
     .profile-img { width: 100%; height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 15px; background: #eee; }
     
-    /* دکمه‌های لایک و دیسلایک */
     .action-buttons { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-    .action-btn { flex: 1; padding: 10px; border-radius: 10px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px; transition: 0.2s; min-width: 100px;}
+    .action-btn { flex: 1; padding: 10px; border-radius: 10px; border: none; font-family: inherit; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px; transition: 0.2s; min-width: 100px; font-size:0.85rem;}
     .btn-like { background: #e8f5e9; color: var(--success); border: 1px solid #c8e6c9; }
     .btn-like:hover { background: #c8e6c9; }
     .btn-dislike { background: #ffebee; color: var(--danger); border: 1px solid #ffcdd2; }
     .btn-dislike:hover { background: #ffcdd2; }
-    .btn-gold-req { background: #fff8e1; color: #f57f17; border: 1px solid #ffecb3; width: 100%; margin-top: 5px;}
+    .btn-gold-req { background: #fff8e1; color: #f57f17; border: 1px solid #ffecb3; width: 100%; margin-top: 5px; font-size:0.85rem; padding:10px;}
     .btn-gold-req:hover { background: #ffecb3; }
     .btn-accept { background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; }
+    .btn-view-profile { background: #f3e5f5; color: #8e24aa; border: 1px solid #e1bee7; width: 100%; margin-top: 10px; font-size:0.9rem; padding:10px;}
 
     .contact-info-admin { background: #fff3e0; padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem; border: 1px solid #ffe0b2; color: #e65100; }
     .hidden { display: none !important; }
@@ -100,8 +99,8 @@
     .btn-edit { background: #1976d2; }
     .btn-reject { background: #e53935; }
     .btn-delete { background: #616161; }
+    .btn-create-fake { background: #00897b; width: 100%; margin-bottom: 15px;}
 
-    /* تست سریع مدیر */
     .test-panel { background: #eceff1; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px dashed #90a4ae; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;}
     .test-panel select { padding: 8px; border-radius: 8px; border: 1px solid #ccc; font-family: inherit;}
 
@@ -119,8 +118,12 @@
     .plan-card { background: #fff; border: 1px solid var(--border-color); padding: 20px; border-radius: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
     .card-number { background: #f5f5f5; padding: 18px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.3rem; letter-spacing: 2px; cursor: pointer; margin: 20px 0; font-family: monospace; border: 2px dashed #bdbdbd; color: var(--text-main); }
 
-    .notif-item { background: #fff; border: 1px solid #b2dfdb; padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .notif-item { background: #fff; border: 1px solid #b2dfdb; padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap:10px;}
     .notif-green { border-color: #4caf50; background: #e8f5e9; }
+    
+    /* مودال نمایش کامل پروفایل */
+    #fullProfileModal .modal-content { max-width: 600px; }
+    .full-profile-img { width: 100%; max-height: 350px; object-fit: contain; border-radius: 16px; margin-bottom: 20px; background:#f5f5f5;}
   </style>
 </head>
 <body>
@@ -147,7 +150,7 @@
       <button onclick="showSection('plans')" class="nav-btn btn-plans">💎 شرایط</button>
     </div>
 
-    <!-- فرم ثبت‌نام -->
+    <!-- 1. فرم ثبت‌نام -->
     <div id="section-register" class="card" style="display: none;">
       <h2 class="section-title">📝 تکمیل / ویرایش فرم</h2>
       <div id="editWarning" class="hidden" style="background:#fff8e1; padding:15px; border-radius:12px; margin-bottom:20px; font-size:0.9rem; text-align:center; border:1px solid #ffecb3;">در حال ویرایش هستید. پس از ثبت به صف انتظار می‌روید.</div>
@@ -159,7 +162,7 @@
         <div class="form-group"><label>نام خانوادگی</label><input type="text" id="last_name" required></div>
         <div class="form-group"><label>ملیت</label><select id="nationality" required onchange="toggleCountry()"><option value="">انتخاب کنید...</option><option value="ایرانی">ایرانی</option><option value="خارجی">خارجی</option></select></div>
         <div class="form-group hidden" id="countryGroup"><label>نام کشور</label><input type="text" id="country_name"></div>
-        <div class="form-group"><label>استان</label><select id="province" required><option value="">انتخاب کنید...</option><option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option><option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><!-- ... --></select></div>
+        <div class="form-group"><label>استان</label><select id="province" required><option value="">انتخاب کنید...</option><option value="تهران">تهران</option><option value="البرز">البرز</option><option value="اصفهان">اصفهان</option><option value="خراسان رضوی">خراسان رضوی</option><option value="فارس">فارس</option><!--... بقیه استان‌ها ...--></select></div>
         <div class="form-group"><label>شهر</label><input type="text" id="city" required></div>
         <div class="form-group"><label>سال تولد</label><select id="birth_year" required><option value="">انتخاب کنید...</option></select></div>
         <div class="form-group"><label>وضعیت سلامت</label><select id="health_status" required onchange="toggleDisease()"><option value="">انتخاب کنید...</option><option value="سالم">سالم</option><option value="بیمار">بیمار</option></select></div>
@@ -184,7 +187,7 @@
       </form>
     </div>
 
-    <!-- پروفایل من -->
+    <!-- 2. پروفایل من -->
     <div id="section-profile" class="card" style="display: none;">
       <div id="userLoginView">
         <h2 class="section-title">🔐 ورود به حساب</h2>
@@ -208,20 +211,20 @@
       </div>
     </div>
 
-    <!-- مشاهده پروفایل‌ها -->
+    <!-- 3. مشاهده پروفایل‌ها -->
     <div id="section-view" class="card" style="display: none;">
       <h2 class="section-title">👀 مشاهده پروفایل‌ها</h2>
       <p id="viewerMessage" style="font-size:1rem; color:var(--text-muted); margin-bottom:25px;"></p>
       <div id="profilesGrid" class="grid"></div>
     </div>
 
-    <!-- اعلانات -->
+    <!-- 4. اعلانات -->
     <div id="section-notifications" class="card" style="display: none;">
       <h2 class="section-title">🔔 اعلانات و درخواست‌ها</h2>
       <div id="notificationsList" class="grid"></div>
     </div>
 
-    <!-- شرایط -->
+    <!-- 5. شرایط -->
     <div id="section-plans" class="card" style="display: none;">
       <h2 class="section-title">💎 شرایط ثبت‌نام و ارتقاء</h2>
       <button onclick="openModal()" class="btn-submit" style="background:#5d4037; margin-bottom:20px;">توضیحات کامل مزایا</button>
@@ -237,13 +240,12 @@
       </div>
     </div>
 
-    <!-- پنل مدیریت -->
+    <!-- 6. پنل مدیریت -->
     <div id="section-admin" class="card" style="display: none;">
       <h2 class="section-title">⚙️ پنل مدیریت</h2>
       
-      <!-- تست سریع مدیر -->
       <div class="test-panel">
-        <strong>🛠️ تست سریع (شبیه‌سازی):</strong>
+        <strong>🛠️ تست سریع:</strong>
         <select id="testRole" onchange="applyTestMode()">
             <option value="admin">مدیر اصلی</option>
             <option value="gold">شبیه‌سازی: کاربر طلایی</option>
@@ -255,6 +257,9 @@
             <option value="woman">خانم</option>
         </select>
       </div>
+
+      <!-- ساخت پروفایل تستی -->
+      <button onclick="createFakeProfile()" class="btn-submit btn-create-fake">➕ ساخت پروفایل تستی (فیک)</button>
 
       <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 30px;">
         <div class="stat-box"><div class="stat-value" id="statTotal">0</div><div class="stat-label">کل</div></div>
@@ -274,7 +279,6 @@
         <button onclick="saveBanner()" class="btn-submit" style="background:#ffa000; padding:10px;">ذخیره بنر</button>
       </div>
 
-      <!-- تب‌های مدیریت -->
       <div class="admin-tabs" id="adminTabs">
         <div class="admin-tab active" onclick="filterAdmin('pending')">صف انتظار</div>
         <div class="admin-tab" onclick="filterAdmin('silver')">نقره‌ای</div>
@@ -297,13 +301,12 @@
   <!-- مودال‌ها -->
   <div id="infoModal" class="modal">
     <div class="modal-content">
-      <h3>مزایای نقره‌ای:</h3><ul><li>نمایش فرم شما (اطلاعات کلی، بدون عکس)</li></ul>
-      <h3>مزایای طلایی:</h3><ul><li>نمایش کامل فرم و عکس شما</li><li>امکان مشاهده عکس دیگران</li><li>امکان ارسال درخواست طلایی (خوشم آمد)</li></ul>
+      <h3>مزایای نقره‌ای:</h3><ul><li>نمایش اطلاعات کلی پروفایل شما به دیگران</li></ul>
+      <h3>مزایای طلایی:</h3><ul><li>نمایش کامل فرم و عکس شما</li><li>امکان مشاهده عکس و اطلاعات کامل دیگران</li><li>امکان ارسال درخواست طلایی</li></ul>
       <button onclick="closeModal()" class="close-modal">متوجه شدم</button>
     </div>
   </div>
 
-  <!-- مودال ویرایش کامل توسط مدیر -->
   <div id="adminEditModal" class="modal">
     <div class="modal-content">
       <h3 style="color:var(--primary); margin-bottom:15px;">✏️ ویرایش کامل پروفایل</h3>
@@ -318,12 +321,21 @@
     </div>
   </div>
 
+  <!-- مودال مشاهده کامل پروفایل -->
+  <div id="fullProfileModal" class="modal">
+    <div class="modal-content" style="max-width:600px;">
+      <h3 style="color:var(--primary); margin-bottom:15px;">👤 پروفایل کامل</h3>
+      <div id="fullProfileContent"></div>
+      <button onclick="closeFullProfile()" class="btn-submit" style="background:#90a4ae;">بستن</button>
+    </div>
+  </div>
+
     <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
     
     let allProfiles = [];
-    let allLikes = []; // ذخیره لایک‌ها
+    let allLikes = [];
     let isAdmin = false;
     let currentAdminFilter = 'pending';
     let currentGenderFilter = 'all';
@@ -333,7 +345,6 @@
     let currentBannerUrl = '';
     let currentBannerLink = '';
     
-    // برای تست مدیر
     let isTestMode = false;
     let testRole = 'admin';
     let testGender = 'man';
@@ -374,24 +385,18 @@
           document.getElementById('userDashboardView').classList.add('hidden');
         }
       }
-      if (section === 'register' && myProfileId) {
-        loadMyProfile();
-      }
-      if (section === 'notifications') {
-        renderNotifications();
-      }
+      if (section === 'register' && myProfileId) { loadMyProfile(); }
+      if (section === 'notifications') { renderNotifications(); }
     }
 
     function promptAdmin() {
       const pass = prompt('رمز عبور مدیر را وارد کنید:');
       if (pass === 'Reza6625') {
-        isAdmin = true;
-        showSection('admin');
-        calculateStats();
+        isAdmin = true; showSection('admin'); calculateStats();
       } else if (pass !== null) { alert('رمز اشتباه است!'); }
     }
 
-    // --- تست مدیر ---
+    // --- تست و فیک ---
     function applyTestMode() {
         testRole = document.getElementById('testRole').value;
         testGender = document.getElementById('testGender').value;
@@ -403,13 +408,53 @@
             isTestMode = true;
             alert(`حالت تست فعال شد. شما اکنون یک ${testRole === 'gold' ? 'کاربر طلایی' : testRole === 'silver' ? 'کاربر نقره‌ای' : 'مهمان'} ${testGender === 'man' ? 'آقا' : 'خانم'} هستید.`);
             myGender = testGender;
-            // برای اینکه شبیه‌سازی واقعی باشد، یک آیدی فرضی به عنوان خودمان می‌دهیم
-            myProfileId = allProfiles[0] ? allProfiles[0].id : '999'; 
+            myProfileId = '999'; 
         }
         renderPublicProfiles();
     }
+    
+    async function createFakeProfile() {
+        const names = ['علی', 'رضا', 'محمد', 'حسین', 'سارا', 'مریم', 'زهرا', 'فاطمه', 'امیر', 'مهدی'];
+        const cities = ['تهران', 'اصفهان', 'مشهد', 'شیراز', 'تبریز', 'کرج', 'قم'];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomCity = cities[Math.floor(Math.random() * cities.length)];
+        const randomGender = Math.random() > 0.5 ? 'man' : 'woman';
+        const randomStatus = Math.random() > 0.5 ? 'gold' : 'silver';
+        
+        const fakeData = {
+            username: 'test_' + Date.now(),
+            role: randomGender,
+            first_name: randomName,
+            last_name: 'تستی',
+            nationality: 'ایرانی',
+            province: randomCity,
+            city: randomCity,
+            birth_year: '1370',
+            health_status: 'سالم',
+            height: '170',
+            weight: '70',
+            education: 'کارشناسی',
+            marital_status: 'مجرد',
+            criteria: 'اخلاق خوب و صداقت',
+            extra_details: 'این یک پروفایل تستی است.',
+            address: 'آدرس تستی',
+            messenger_type: 'تلگرام',
+            contact_id: '@test',
+            phone: '0912' + Math.floor(1000000 + Math.random() * 9000000),
+            status: randomStatus,
+            agreed_terms: true,
+            photo_url: 'https://via.placeholder.com/250?text=' + randomName
+        };
+        
+        await fetch(supabaseUrl + '/rest/v1/profiles', {
+            method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify(fakeData)
+        });
+        alert('پروفایل تستی ساخته شد.');
+        fetchProfiles();
+    }
 
-    // --- سیستم لایک و دیسلایک ---
+    // --- لایک و درخواست‌ها ---
     async function fetchLikes() {
         const res = await fetch(supabaseUrl + '/rest/v1/likes?select=*', { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
         allLikes = await res.json();
@@ -417,33 +462,37 @@
     }
 
     async function sendAction(receiverId, type) {
-        if (!myProfileId) { alert('ابتدا وارد حساب خود شوید.'); return; }
+        if (!myProfileId || myProfileId === '999') { alert('در حالت تست نمی‌توانید بازخورد بدهید.'); return; }
         
-        // بررسی اینکه آیا قبلا لایک کرده یا نه
         const existing = allLikes.find(l => l.sender_id == myProfileId && l.receiver_id == receiverId);
         if (existing) { alert('شما قبلاً به این کاربر بازخورد داده‌اید.'); return; }
 
-        await fetch(supabaseUrl + '/rest/v1/likes', {
+        const res = await fetch(supabaseUrl + '/rest/v1/likes', {
             method: 'POST', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
             body: JSON.stringify({ sender_id: myProfileId, receiver_id: receiverId, type: type, status: 'pending' })
         });
-        alert('بازخورد شما ثبت شد.');
-        fetchLikes();
+        if(res.ok) {
+            alert('بازخورد شما ثبت شد.');
+            fetchLikes();
+        }
     }
 
     async function acceptGoldRequest(likeId) {
-        await fetch(supabaseUrl + '/rest/v1/likes?id=eq.' + likeId, {
+        const res = await fetch(supabaseUrl + '/rest/v1/likes?id=eq.' + likeId, {
             method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: 'accepted' })
         });
-        alert('درخواست پذیرفته شد. اعلانات خود را بررسی کنید.');
-        fetchLikes();
+        if(res.ok) {
+            alert('درخواست پذیرفته شد. اعلانات خود را بررسی کنید.');
+            fetchLikes();
+        }
     }
 
     function checkNotifications() {
         if (!myProfileId) return;
         const incoming = allLikes.filter(l => l.receiver_id == myProfileId && l.status === 'pending' && l.type === 'gold_request');
         const accepted = allLikes.filter(l => l.status === 'accepted' && (l.sender_id == myProfileId || l.receiver_id == myProfileId));
+        const sentRequests = allLikes.filter(l => l.sender_id == myProfileId && l.status === 'pending');
         
         let count = incoming.length + accepted.length;
         document.getElementById('notifBadge').innerText = count;
@@ -453,48 +502,67 @@
     function renderNotifications() {
         const list = document.getElementById('notificationsList');
         list.innerHTML = '';
-        
         if (!myProfileId) { list.innerHTML = '<p>ابتدا وارد شوید.</p>'; return; }
 
-        // درخواست‌های دریافتی (طلایی)
+        // 1. درخواست‌های دریافتی
         const incoming = allLikes.filter(l => l.receiver_id == myProfileId && l.status === 'pending' && l.type === 'gold_request');
-        incoming.forEach(l => {
-            const sender = allProfiles.find(p => p.id == l.sender_id);
-            if(sender) {
-                list.innerHTML += `
-                    <div class="notif-item">
-                        <div>
-                            <strong>${sender.first_name}</strong> به شما درخواست طلایی داده است.
+        if(incoming.length > 0) {
+            list.innerHTML += `<h3 style="width:100%; color:var(--primary); margin-bottom:10px;">درخواست‌های دریافتی</h3>`;
+            incoming.forEach(l => {
+                const sender = allProfiles.find(p => p.id == l.sender_id);
+                if(sender) {
+                    list.innerHTML += `
+                        <div class="notif-item">
+                            <div><strong>${sender.first_name}</strong> به شما درخواست داده است.</div>
+                            <button onclick="acceptGoldRequest(${l.id})" class="action-btn btn-accept" style="flex:0;">قبول می‌کنم</button>
                         </div>
-                        <button onclick="acceptGoldRequest(${l.id})" class="action-btn btn-accept" style="flex:0;">قبول می‌کنم</button>
-                    </div>
-                `;
-            }
-        });
+                    `;
+                }
+            });
+        }
 
-        // تاییدهای دو طرفه
-        const accepted = allLikes.filter(l => l.status === 'accepted' && (l.sender_id == myProfileId || l.receiver_id == myProfileId));
-        accepted.forEach(l => {
-            const otherId = l.sender_id == myProfileId ? l.receiver_id : l.sender_id;
-            const other = allProfiles.find(p => p.id == otherId);
-            if(other) {
-                list.innerHTML += `
-                    <div class="notif-item notif-green">
-                        <div>
-                            <span style="color:green; font-size:1.2rem;">✔️</span> 
-                            تایید دو طرفه با <strong>${other.first_name}</strong> انجام شد.
-                            <br><small>جهت هماهنگی به ادمین پیام دهید.</small>
+        // 2. درخواست‌های ارسالی (گزارش من)
+        const sent = allLikes.filter(l => l.sender_id == myProfileId);
+        if(sent.length > 0) {
+            list.innerHTML += `<h3 style="width:100%; color:var(--text-main); margin-top:20px; margin-bottom:10px;">گزارش درخواست‌های من</h3>`;
+            sent.forEach(l => {
+                const receiver = allProfiles.find(p => p.id == l.receiver_id);
+                if(receiver) {
+                    let statusText = l.status === 'accepted' ? '<span style="color:green;">✔️ تایید شد</span>' : '<span style="color:orange;">⏳ در انتظار</span>';
+                    list.innerHTML += `
+                        <div class="notif-item">
+                            <div>به <strong>${receiver.first_name}</strong> درخواست داده‌اید. وضعیت: ${statusText}</div>
                         </div>
-                        <a href="https://t.me/Moarrefezdvaj" target="_blank" class="action-btn btn-like" style="flex:0;">پیام به ادمین</a>
-                    </div>
-                `;
-            }
-        });
+                    `;
+                }
+            });
+        }
+
+        // 3. تاییدهای دو طرفه
+        const accepted = allLikes.filter(l => l.status === 'accepted' && (l.sender_id == myProfileId || l.receiver_id == myProfileId));
+        if(accepted.length > 0) {
+            list.innerHTML += `<h3 style="width:100%; color:green; margin-top:20px; margin-bottom:10px;">تاییدهای دو طرفه</h3>`;
+            accepted.forEach(l => {
+                const otherId = l.sender_id == myProfileId ? l.receiver_id : l.sender_id;
+                const other = allProfiles.find(p => p.id == otherId);
+                if(other) {
+                    list.innerHTML += `
+                        <div class="notif-item notif-green">
+                            <div>
+                                <span style="color:green; font-size:1.2rem;">✔️</span> 
+                                تایید دو طرفه با <strong>${other.first_name}</strong> انجام شد.
+                                <br><small>جهت هماهنگی به ادمین پیام دهید.</small>
+                            </div>
+                            <a href="https://t.me/Moarrefezdvaj" target="_blank" class="action-btn btn-like" style="flex:0;">پیام به ادمین</a>
+                        </div>
+                    `;
+                }
+            });
+        }
 
         if(list.innerHTML === '') list.innerHTML = '<p>اعلان جدیدی ندارید.</p>';
     }
 
-    // --- ادامه کدهای قبلی (فرم‌ها، پروفایل، مدیر و...) ---
     function loginUser() {
       const phone = document.getElementById('loginPhoneInput').value;
       const user = allProfiles.find(p => p.phone === phone);
@@ -590,7 +658,6 @@
       alert('بنر ذخیره شد!'); fetchBanner();
     }
 
-    // --- توابع فرم ---
     function toggleGenderFields() { document.getElementById('virginityGroup').style.display = (document.getElementById('role').value === 'woman') ? 'block' : 'none'; }
     function toggleCountry() { document.getElementById('countryGroup').style.display = (document.getElementById('nationality').value === 'خارجی') ? 'block' : 'none'; }
     function toggleDisease() { document.getElementById('diseaseGroup').style.display = (document.getElementById('health_status').value === 'بیمار') ? 'block' : 'none'; }
@@ -747,35 +814,23 @@
       grid.innerHTML = '';
       const oppositeRole = myGender === 'man' ? 'woman' : 'man';
       
-      let visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole);
+      // فقط کسانی که عکس دارند و تایید شده‌اند
+      let visibleProfiles = allProfiles.filter(p => (p.status === 'silver' || p.status === 'gold') && p.role === oppositeRole && p.photo_url);
       visibleProfiles.sort((a, b) => (b.ladder === true ? 1 : 0) - (a.ladder === true ? 1 : 0));
 
-      if (visibleProfiles.length === 0) { grid.innerHTML = '<p style="text-align:center; color:#888;">پروفایلی وجود ندارد.</p>'; return; }
+      if (visibleProfiles.length === 0) { grid.innerHTML = '<p style="text-align:center; color:#888;">پروفایلی با عکس وجود ندارد.</p>'; return; }
 
       visibleProfiles.forEach(p => {
-        let photoHtml = (isGoldViewer && p.photo_url) ? `<img src="${p.photo_url}" class="profile-img" alt="عکس">` : `<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی (نیاز به اشتراک طلایی)</div>`;
+        let photoHtml = (isGoldViewer && p.photo_url) ? `<img src="${p.photo_url}" class="profile-img" alt="عکس">` : `<div class="profile-img" style="display:flex; align-items:center; justify-content:center; color:#aaa;">🔒 عکس مخفی</div>`;
         let ladderBadge = p.ladder ? `<span class="badge ladder">🚀 نردبان</span>` : '';
         let cardClass = p.ladder ? 'profile-card ladder-active' : 'profile-card';
 
-        let detailsHtml = '';
-        // ۱. اگر کاربر طلایی است، اطلاعات کامل (بدون محرمانه) را ببیند
-        if (isGoldViewer) {
-            detailsHtml = `
-                <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>شهر:</strong> ${safeVal(p.city)} (${safeVal(p.province)})</div>
-                <div class="profile-field"><strong>قد/وزن:</strong> ${safeVal(p.height)} cm / ${safeVal(p.weight)} kg</div>
-                <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)} | <strong>وضعیت:</strong> ${safeVal(p.marital_status)}</div>
-                <div class="profile-field"><strong>ملاک:</strong> ${safeVal(p.criteria)}</div>
-                <div class="profile-field"><strong>بیوگرافی:</strong> ${safeVal(p.extra_details)}</div>
-                ${p.previous_marriage_children ? `<div class="profile-field"><strong>فرزندان:</strong> ${p.previous_marriage_children}</div>` : ''}
-            `;
-        } else {
-            // ۲. اگر نقره ای است، فقط اطلاعات کلی
-            detailsHtml = `
-                <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>شهر:</strong> ${safeVal(p.city)}</div>
-                <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)}</div>
-                <div class="profile-field"><em style="color:#aaa;">برای مشاهده جزئیات کامل، اشتراک طلایی تهیه کنید.</em></div>
-            `;
-        }
+        // اطلاعات کلی که همه می‌بینند
+        let detailsHtml = `
+            <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>شهر:</strong> ${safeVal(p.city)}</div>
+            <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)} | <strong>وضعیت:</strong> ${safeVal(p.marital_status)}</div>
+            <div class="profile-field"><strong>ملاک:</strong> ${safeVal(p.criteria)}</div>
+        `;
 
         // دکمه‌های بازخورد
         let actionButtons = '';
@@ -791,14 +846,49 @@
                     </div>
                 `;
                 if (isGoldViewer) {
-                    actionButtons += `<button onclick="sendAction(${p.id}, 'gold_request')" class="action-btn btn-gold-req">✨ درخواست طلایی (اگر شما هم...)</button>`;
+                    actionButtons += `<button onclick="sendAction(${p.id}, 'gold_request')" class="action-btn btn-gold-req">✨ من پسند کردم، شما هم اگه پسند کردین تایید کنید.</button>`;
                 }
             }
         }
+        
+        // دکمه مشاهده کامل پروفایل
+        let fullViewBtn = `<button onclick="showFullProfile(${p.id}, ${isGoldViewer})" class="action-btn btn-view-profile">👁️ مشاهده کامل پروفایل</button>`;
 
-        grid.innerHTML += `<div class="${cardClass}">${ladderBadge}<span class="badge ${p.status === 'gold' ? 'gold' : 'silver'}">${p.status === 'gold' ? '🌟 طلایی' : '🥈 نقره‌ای'}</span>${photoHtml}<h3 style="color:var(--primary); margin-bottom:15px;">${p.first_name} (${p.birth_year})</h3>${detailsHtml}${actionButtons}</div>`;
+        grid.innerHTML += `<div class="${cardClass}">${ladderBadge}<span class="badge ${p.status === 'gold' ? 'gold' : 'silver'}">${p.status === 'gold' ? '🌟 طلایی' : '🥈 نقره‌ای'}</span>${photoHtml}<h3 style="color:var(--primary); margin-bottom:15px;">${p.first_name} (${p.birth_year})</h3>${detailsHtml}${fullViewBtn}${actionButtons}</div>`;
       });
     }
+
+    // نمایش مودال پروفایل کامل
+    function showFullProfile(id, isGold) {
+        if (!isGold) {
+            if(confirm('شما کاربر نقره‌ای هستید. برای مشاهده کامل پروفایل و عکس، باید حساب خود را به طلایی ارتقا دهید. آیا به صفحه شرایط ارتقا می‌روید؟')) {
+                showSection('plans');
+            }
+            return;
+        }
+        
+        const p = allProfiles.find(x => x.id === id);
+        if(!p) return;
+        
+        let content = `
+            <img src="${p.photo_url}" class="full-profile-img" alt="عکس">
+            <h4 style="color:var(--primary); font-size:1.2rem; margin-bottom:10px;">${p.first_name} ${p.last_name}</h4>
+            <div class="profile-field"><strong>ملیت:</strong> ${safeVal(p.nationality)} | <strong>استان/شهر:</strong> ${safeVal(p.province)} / ${safeVal(p.city)}</div>
+            <div class="profile-field"><strong>سال تولد:</strong> ${safeVal(p.birth_year)}</div>
+            <div class="profile-field"><strong>قد/وزن:</strong> ${safeVal(p.height)} cm / ${safeVal(p.weight)} kg</div>
+            <div class="profile-field"><strong>تحصیلات:</strong> ${safeVal(p.education)}</div>
+            <div class="profile-field"><strong>وضعیت ازدواج:</strong> ${safeVal(p.marital_status)}</div>
+            ${p.virginity ? `<div class="profile-field"><strong>وضعیت دوشیزگی:</strong> ${p.virginity}</div>` : ''}
+            ${p.previous_marriage_children ? `<div class="profile-field"><strong>فرزندان:</strong> ${p.previous_marriage_children}</div>` : ''}
+            <div class="profile-field"><strong>وضعیت سلامت:</strong> ${safeVal(p.health_status)} ${p.disease_type ? '('+p.disease_type+')' : ''}</div>
+            <div class="profile-field"><strong>ملاک:</strong> ${safeVal(p.criteria)}</div>
+            <div class="profile-field"><strong>بیوگرافی:</strong> ${safeVal(p.extra_details)}</div>
+        `;
+        
+        document.getElementById('fullProfileContent').innerHTML = content;
+        document.getElementById('fullProfileModal').style.display = 'flex';
+    }
+    function closeFullProfile() { document.getElementById('fullProfileModal').style.display = 'none'; }
 
     function filterAdmin(status) {
       currentAdminFilter = status;
@@ -814,7 +904,6 @@
       list.innerHTML = '';
       
       if (currentAdminFilter === 'matches') {
-          // نمایش تاییدهای دو طرفه
           const accepted = allLikes.filter(l => l.status === 'accepted');
           if(accepted.length === 0) { list.innerHTML = '<p style="text-align:center;">هنوز تایید دو طرفه‌ای نداشته‌اید.</p>'; return; }
           
@@ -863,7 +952,6 @@
       });
     }
 
-    // ویرایش کامل توسط مدیر
     function openAdminEdit(id) {
         const p = allProfiles.find(x => x.id === id);
         if(!p) return;
