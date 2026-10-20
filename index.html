@@ -82,12 +82,9 @@
     </footer>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
-    
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     const contentGrid = document.getElementById('contentGrid');
     const userSelect = document.getElementById('userSelect');
@@ -119,27 +116,27 @@
       return map[access] || '';
     }
 
+    // تابع دریافت داده‌ها با استفاده از روش fetch (بدون کتابخانه)
     async function fetchContentsFromDB() {
-      const { data, error } = await supabase.from('contents').select('*').order('id', { ascending: true });
-      
-      if (error) {
-        console.error('خطا در خواندن:', error);
-        contentGrid.innerHTML = `<div class="empty-state"><p>خطا در اتصال به سرور: ${error.message}</p></div>`;
-        return;
-      }
-      
-      if (!data || data.length === 0) {
-        contentGrid.innerHTML = `
-          <div class="empty-state">
-            <div class="big-icon">📭</div>
-            <p>هنوز هیچ محتوایی در دیتابیس اضافه نشده است.</p>
-          </div>
-        `;
-        return;
-      }
+      try {
+        const res = await fetch(supabaseUrl + '/rest/v1/contents?select=*&order=id.asc', {
+          headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey }
+        });
+        
+        if (!res.ok) throw new Error('HTTP error ' + res.status);
+        const data = await res.json();
+        
+        if (data.length === 0) {
+          contentGrid.innerHTML = `<div class="empty-state"><div class="big-icon">📭</div><p>هنوز هیچ محتوایی در دیتابیس اضافه نشده است.</p></div>`;
+          return;
+        }
 
-      allContents = data;
-      renderContents();
+        allContents = data;
+        renderContents();
+      } catch (err) {
+        console.error('خطا در خواندن:', err);
+        contentGrid.innerHTML = `<div class="empty-state"><p>خطا در اتصال به سرور: ${err.message}</p></div>`;
+      }
     }
 
     function renderContents() {
@@ -192,11 +189,11 @@
     addSampleBtn.addEventListener('click', async () => {
       if (currentUser !== 'admin') return;
       
-      const sampleTitles = ['راهنمای انتخاب حلقه ازدواج', 'مدیریت استرس مراسم عروسی', 'برنامه‌ریزی ماه عسل اقتصادی', 'آشنایی با حقوق قانونی زوجین'];
-      const sampleDescriptions = ['راهنمای کامل انتخاب حلقه مناسب با بودجه‌های مختلف و نکات خرید.', 'تکنیک‌های کاهش اضطراب و مدیریت استرس در روزهای منتهی به عروسی.', 'ایده‌های سفر ارزان و خاطره‌انگیز برای ماه عسل بدون هزینه زیاد.', 'بررسی حقوق و تکالیف قانونی زن و شوهر پس از عقد و ثبت ازدواج.'];
-      const icons = ['💍', '🧘', '✈️', '⚖️'];
+      const sampleTitles = ['راهنمای انتخاب حلقه ازدواج', 'مدیریت استرس مراسم عروسی', 'برنامه‌ریزی ماه عسل اقتصادی'];
+      const sampleDescriptions = ['راهنمای کامل انتخاب حلقه مناسب با بودجه‌های مختلف و نکات خرید.', 'تکنیک‌های کاهش اضطراب و مدیریت استرس در روزهای منتهی به عروسی.', 'ایده‌های سفر ارزان و خاطره‌انگیز برای ماه عسل بدون هزینه زیاد.'];
+      const icons = ['💍', '🧘', '✈️'];
       const accessOptions = ['public', 'couple', 'family', 'admin'];
-      const categories = ['آموزشی', 'سلامت', 'تفریحی', 'حقوقی'];
+      const categories = ['آموزشی', 'سلامت', 'تفریحی'];
 
       const randomIndex = Math.floor(Math.random() * sampleTitles.length);
       
@@ -209,17 +206,30 @@
         date: new Intl.DateTimeFormat('fa-IR').format(new Date())
       };
 
-      const { error } = await supabase.from('contents').insert([newContent]);
-      
-      if (error) {
-        alert('خطا در ذخیره محتوا: ' + error.message);
-        console.error(error);
-      } else {
-        alert('محتوا با موفقیت ذخیره شد!');
-        fetchContentsFromDB(); 
+      try {
+        const res = await fetch(supabaseUrl + '/rest/v1/contents', {
+          method: 'POST',
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': 'Bearer ' + supabaseKey,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(newContent)
+        });
+
+        if (res.ok) {
+          alert('محتوا با موفقیت ذخیره شد!');
+          fetchContentsFromDB(); 
+        } else {
+          alert('خطا در ذخیره محتوا');
+        }
+      } catch (err) {
+        alert('خطای شبکه: ' + err.message);
       }
     });
 
+    // شروع برنامه
     fetchContentsFromDB();
   </script>
 </body>
