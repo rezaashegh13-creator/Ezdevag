@@ -4,7 +4,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <h1>تست دیتابیس</h1>
+  <h1>تست دیتابیس (با واسط)</h1>
   <div id="result">در حال لود...</div>
   <script>
     const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
@@ -12,11 +12,15 @@
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     async function test() {
-      const { data, error } = await supabase.from('contents').select('*');
-      if (error) {
-        document.getElementById('result').innerText = 'خطا: ' + error.message;
-      } else {
-        document.getElementById('result').innerText = 'موفق! تعداد محتوا: ' + data.length;
+      try {
+        const { data, error } = await supabase.from('contents').select('*');
+        if (error) {
+          document.getElementById('result').innerText = 'خطا: ' + error.message;
+        } else {
+          document.getElementById('result').innerText = 'موفق! تعداد محتوا: ' + data.length;
+        }
+      } catch (err) {
+        document.getElementById('result').innerText = 'خطای شبکه: ' + err.message;
       }
     }
     test();
