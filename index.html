@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اپلیکیشن ازدواج | محتوای دسترسی‌محور</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif; }
+    body { background: #f5f0eb; min-height: 100vh; display: flex; flex-direction: column; padding: 16px; }
+    .app-container { max-width: 1200px; margin: 0 auto; width: 100%; }
+    header { background: #fff4f0; border-radius: 32px; padding: 20px 28px; margin-bottom: 24px; box-shadow: 0 8px 20px rgba(190, 120, 100, 0.12); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border: 1px solid #fadcd0; }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon { font-size: 36px; }
+    .logo h1 { font-size: 1.7rem; font-weight: 800; color: #b45f4a; letter-spacing: -0.5px; }
+    .logo span { font-size: 0.9rem; color: #c98b7a; font-weight: 400; display: block; margin-top: 2px; }
+    .user-selector { display: flex; align-items: center; gap: 12px; background: #ffffff; padding: 8px 16px 8px 8px; border-radius: 50px; border: 1px solid #f2c9bb; }
+    .user-selector label { font-size: 0.95rem; font-weight: 600; color: #8b5e4f; }
+    .user-selector select { padding: 10px 20px 10px 16px; border-radius: 40px; border: 1px solid #e7c3b6; background: #fef9f7; font-family: inherit; font-size: 0.95rem; font-weight: 500; color: #4d2e24; outline: none; cursor: pointer; transition: 0.2s; }
+    .user-selector select:focus { border-color: #d68c78; box-shadow: 0 0 0 3px rgba(214, 140, 120, 0.15); }
+    .access-badge { background: #fae6df; padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; color: #a5523c; display: inline-flex; align-items: center; gap: 6px; margin-right: 8px; }
+    .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; margin-top: 8px; }
+    .card { background: #ffffff; border-radius: 28px; padding: 24px 22px; box-shadow: 0 10px 25px rgba(180, 120, 100, 0.08); border: 1px solid #f5dfd6; transition: all 0.25s ease; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 30px rgba(180, 100, 80, 0.12); border-color: #eccbbf; }
+    .card-access-tag { position: absolute; top: 16px; left: 16px; font-size: 0.7rem; font-weight: 700; padding: 5px 12px; border-radius: 30px; background: #f0e0d8; color: #865a4a; letter-spacing: 0.3px; }
+    .card-access-tag.public { background: #e0f0e5; color: #2b6e4b; }
+    .card-access-tag.couple { background: #fde8e0; color: #b54e2e; }
+    .card-access-tag.family { background: #e0eaf8; color: #2f5a8a; }
+    .card-access-tag.admin { background: #f8e0e8; color: #9e3c5e; }
+    .card-icon { font-size: 38px; margin-bottom: 16px; margin-top: 12px; }
+    .card h3 { font-size: 1.3rem; font-weight: 700; color: #3d2a23; margin-bottom: 10px; line-height: 1.4; }
+    .card p { color: #6e5b53; font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px; flex-grow: 1; }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #edd9d0; padding-top: 16px; margin-top: 6px; font-size: 0.8rem; color: #a08174; }
+    .lock-icon { font-size: 1.1rem; }
+    .card.locked { opacity: 0.75; filter: grayscale(0.4); background: #faf7f5; border-style: dashed; border-color: #e4cfc6; }
+    .card.locked .card-icon { opacity: 0.5; }
+    .card.locked h3, .card.locked p { color: #9e8b82; }
+    .card.locked .card-meta { border-top-color: #e2d4cd; }
+    .locked-message { font-size: 0.8rem; background: #f2e6e0; padding: 6px 12px; border-radius: 20px; color: #a56651; font-weight: 500; display: inline-block; margin-top: 10px; }
+    footer { text-align: center; padding: 32px 16px 16px; color: #b38e7f; font-size: 0.85rem; border-top: 1px solid #f0ded5; margin-top: 30px; }
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fffcf9; border-radius: 40px; border: 2px dashed #e5cdc2; color: #b38b7c; }
+    .empty-state .big-icon { font-size: 60px; margin-bottom: 16px; opacity: 0.6; }
+    .empty-state p { font-size: 1.1rem; margin-bottom: 8px; }
+    .admin-hint { background: #fff2ec; border-radius: 40px; padding: 12px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border: 1px solid #f2d5c8; }
+    .admin-hint p { color: #9f6a55; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+    .admin-hint button { background: #d98b73; border: none; padding: 10px 24px; border-radius: 30px; color: white; font-family: inherit; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(200, 120, 90, 0.3); border: 1px solid #e8a58f; }
+    .admin-hint button:hover { background: #c97b60; transform: scale(1.02); }
+    @media (max-width: 600px) { header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 18px; } .user-selector { width: 100%; justify-content: space-between; } .user-selector select { flex: 1; } .logo h1 { font-size: 1.4rem; } .content-grid { grid-template-columns: 1fr; } .access-badge { margin-right: 0; } }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">💍</div>
+        <div>
+          <h1>ازدواجِ ما</h1>
+          <span>محتوای اختصاصی برای هر مرحله</span>
+        </div>
+      </div>
+      <div class="user-selector">
+        <label for="userSelect">👤 ورود به عنوان:</label>
+        <select id="userSelect">
+          <option value="public">مهمان (عمومی)</option>
+          <option value="couple">عروس و داماد</option>
+          <option value="family">خانواده‌ها</option>
+          <option value="admin">مدیر سیستم</option>
+        </select>
+        <span id="currentAccessBadge" class="access-badge">🌐 عمومی</span>
+      </div>
+    </header>
+
+    <div id="adminHint" class="admin-hint" style="display: none;">
+      <p>✨ شما به عنوان مدیر می‌توانید محتوای جدید اضافه کنید.</p>
+      <button id="addSampleContentBtn">+ افزودن محتوای نمونه</button>
+    </div>
+
+    <div id="contentGrid" class="content-grid"></div>
+
+    <footer>
+      ساخته شده با ❤️ برای مسیر ازدواج | تمام محتوا بر اساس سطح دسترسی نمایش داده می‌شود
+    </footer>
+  </div>
+
+  <!-- اسکریپت Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // اطلاعات پروژه شما
+    const supabaseUrl = 'https://tfvzyzhfzkyjohuapfzm.supabase.co'; 
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmdnp5emhmemt5am9odWFwZnptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzY4MjAsImV4cCI6MjEwODA1MjgyMH0.IR_6UQUlmtGgxS2tRPH_vcdIMLpyO8xUsFUTKWXWuLY'; 
+    
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    const contentGrid = document.getElementById('contentGrid');
+    const userSelect = document.getElementById('userSelect');
+    const currentAccessBadge = document.getElementById('currentAccessBadge');
+    const adminHint = document.getElementById('adminHint');
+    const addSampleBtn = document.getElementById('addSampleContentBtn');
+
+    let currentUser = 'public';
+    let allContents = [];
+
+    const accessLevels = {
+      public: { label: '🌐 عمومی', allowed: ['public'] },
+      couple: { label: '💑 عروس و داماد', allowed: ['public', 'couple'] },
+      family: { label: '👪 خانواده‌ها', allowed: ['public', 'family'] },
+      admin: { label: '⚙️ مدیر', allowed: ['public', 'couple', 'family', 'admin'] }
+    };
+
+    function hasAccess(userRole, contentAccess) {
+      return accessLevels[userRole].allowed.includes(contentAccess);
+    }
+
+    function getAccessLabel(access) {
+      const map = { public: '🌐 عمومی', couple: '💑 عروس و داماد', family: '👪 خانواده', admin: '⚙️ مدیریت' };
+      return map[access] || access;
+    }
+
+    function getAccessClass(access) {
+      const map = { public: 'public', couple: 'couple', family: 'family', admin: 'admin' };
+      return map[access] || '';
+    }
+
+    async function fetchContentsFromDB() {
+      const { data, error } = await supabase.from('contents').select('*').order('id', { ascending: true });
+      
+      if (error) {
+        console.error('خطا در خواندن:', error);
+        contentGrid.innerHTML = `<div class="empty-state"><p>خطا در اتصال به سرور: ${error.message}</p></div>`;
+        return;
+      }
+      
+      if (!data || data.length === 0) {
+        contentGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="big-icon">📭</div>
+            <p>هنوز هیچ محتوایی در دیتابیس اضافه نشده است.</p>
+          </div>
+        `;
+        return;
+      }
+
+      allContents = data;
+      renderContents();
+    }
+
+    function renderContents() {
+      currentAccessBadge.textContent = accessLevels[currentUser].label;
+      adminHint.style.display = (currentUser === 'admin') ? 'flex' : 'none';
+
+      let visibleContents = allContents.filter(item => hasAccess(currentUser, item.access));
+      let lockedContents = allContents.filter(item => !hasAccess(currentUser, item.access));
+
+      let html = '';
+      
+      visibleContents.forEach(item => {
+        html += `
+          <div class="card" data-id="${item.id}">
+            <span class="card-access-tag ${getAccessClass(item.access)}">${getAccessLabel(item.access)}</span>
+            <div class="card-icon">${item.icon}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <div class="card-meta">
+              <span>📅 ${item.date}</span>
+              <span>${item.category}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      lockedContents.forEach(item => {
+        html += `
+          <div class="card locked" data-id="${item.id}">
+            <span class="card-access-tag ${getAccessClass(item.access)}">${getAccessLabel(item.access)}</span>
+            <div class="card-icon">${item.icon}</div>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <div class="card-meta">
+              <span class="lock-icon">🔒</span>
+              <span>دسترسی محدود</span>
+            </div>
+            <div class="locked-message">⛔ نیاز به سطح دسترسی بالاتر</div>
+          </div>
+        `;
+      });
+      contentGrid.innerHTML = html;
+    }
+
+    userSelect.addEventListener('change', (e) => {
+      currentUser = e.target.value;
+      renderContents();
+    });
+
+    addSampleBtn.addEventListener('click', async () => {
+      if (currentUser !== 'admin') return;
+      
+      const sampleTitles = ['راهنمای انتخاب حلقه ازدواج', 'مدیریت استرس مراسم عروسی', 'برنامه‌ریزی ماه عسل اقتصادی', 'آشنایی با حقوق قانونی زوجین'];
+      const sampleDescriptions = ['راهنمای کامل انتخاب حلقه مناسب با بودجه‌های مختلف و نکات خرید.', 'تکنیک‌های کاهش اضطراب و مدیریت استرس در روزهای منتهی به عروسی.', 'ایده‌های سفر ارزان و خاطره‌انگیز برای ماه عسل بدون هزینه زیاد.', 'بررسی حقوق و تکالیف قانونی زن و شوهر پس از عقد و ثبت ازدواج.'];
+      const icons = ['💍', '🧘', '✈️', '⚖️'];
+      const accessOptions = ['public', 'couple', 'family', 'admin'];
+      const categories = ['آموزشی', 'سلامت', 'تفریحی', 'حقوقی'];
+
+      const randomIndex = Math.floor(Math.random() * sampleTitles.length);
+      
+      const newContent = {
+        title: sampleTitles[randomIndex],
+        description: sampleDescriptions[randomIndex],
+        icon: icons[randomIndex],
+        access: accessOptions[Math.floor(Math.random() * accessOptions.length)],
+        category: categories[Math.floor(Math.random() * categories.length)],
+        date: new Intl.DateTimeFormat('fa-IR').format(new Date())
+      };
+
+      const { error } = await supabase.from('contents').insert([newContent]);
+      
+      if (error) {
+        alert('خطا در ذخیره محتوا: ' + error.message);
+        console.error(error);
+      } else {
+        alert('محتوا با موفقیت ذخیره شد!');
+        fetchContentsFromDB(); 
+      }
+    });
+
+    fetchContentsFromDB();
+  </script>
+</body>
+</html>
