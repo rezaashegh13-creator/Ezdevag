@@ -106,6 +106,7 @@
     .admin-btn { border: none; padding: 10px 15px; border-radius: 10px; font-family: inherit; cursor: pointer; color: white; font-size: 0.85rem; font-weight: bold; transition: 0.3s;}
     .btn-delete { background: var(--danger); }
     .btn-edit { background: #8e24aa; }
+    .btn-login-as { background: #00897b; }
     
     .admin-settings-box { background: #f8f9fa; padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px solid #ddd; }
     .admin-setting-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
@@ -249,7 +250,19 @@
         <div class="form-group"><label>شماره موبایل (۱۱ رقم)</label><input type="tel" id="phone" required pattern="\d{11}"></div>
         <div class="form-group"><label>آپلود عکس اصلی (اجباری)</label><input type="file" id="photo_file" accept="image/*" onchange="checkFileSize(this)"></div>
         <div class="form-group"><label>آپلود مدارک (اختیاری)</label><input type="file" id="doc_file" accept="image/*,application/pdf"></div>
-        <div class="form-group"><label><input type="checkbox" id="agree_terms" style="width:auto; margin-left:8px;" required><span>تعهدنامه را می‌پذیرم.</span></label></div>
+        
+        <!-- کادر تعهدنامه اضافه شد -->
+        <div class="terms-box" style="background:#f8f9fa; padding:15px; border-radius:12px; border:1px solid #ddd; margin-bottom:15px; font-size:0.9rem; line-height:1.8; color:#555;">
+            <strong style="color:var(--primary);">تعهدنامه:</strong> با ثبت‌نام در این پلتفرم، تایید می‌کنم که این مجموعه فقط نقش معرف را دارد و هیچ مسئولیتی در قبال صحت اطلاعات افراد ندارد. مسئولیت تحقیق و بررسی بیشتر بر عهده بنده است. همچنین این ثبت‌نام فقط برای من در همین گوشی معتبر است.
+        </div>
+        
+        <div class="form-group">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                <input type="checkbox" id="agree_terms" style="width:20px; height:20px;" required>
+                <span style="font-weight:bold;">تعهدنامه فوق را می‌پذیرم.</span>
+            </label>
+        </div>
+        
         <button type="submit" class="btn-submit">ثبت اطلاعات</button>
         <button type="button" onclick="cancelEdit()" id="cancelEditBtn" class="btn-submit hidden" style="background:#95a5a6;">انصراف</button>
       </form>
@@ -534,13 +547,12 @@
         fetchLikes();
         fetchTimeSettings();
         fetchBanner();
-        fetchFeeBanners(); // فراخوانی تابع دریافت بنرهای هزینه
+        fetchFeeBanners(); 
         
         if(localStorage.getItem('hide_rules') !== 'true') {
             document.getElementById('rulesModal').style.display = 'flex';
         }
 
-        // افزایش زمان به 15 ثانیه برای جلوگیری از کندی
         setInterval(() => {
             fetchProfiles();
             fetchLikes();
@@ -561,6 +573,7 @@
         document.getElementById('loginForm').classList.remove('hidden');
     }
 
+    let scrollCount = 0;
     function checkScroll() {
         if (myProfileId) return; 
         if (document.getElementById('section-view').style.display !== 'block') return;
@@ -966,15 +979,46 @@
         }
         const p = allProfiles.find(x => x.id === id);
         if(!p) return;
+
+        // ساخت متن کامل با استفاده از تمام فیلدهای فرم (به جز محرمانه‌ها)
         let content = `
             <img src="${p.photo_url}" class="full-profile-img" alt="عکس">
-            <h4 style="color:var(--primary); font-size:1.3rem; margin-bottom:15px;">${p.first_name} ${p.last_name}</h4>
+            <h4 style="color:var(--primary); font-size:1.3rem; margin-bottom:15px;">${p.first_name} (${p.birth_year})</h4>
+            
+            <h5 style="color:var(--text-main); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px; margin-top:15px;">اطلاعات پایه</h5>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>ملیت:</strong> ${safeVal(p.nationality)} ${p.country_name ? '('+p.country_name+')' : ''}</div>
             <div class="profile-field" style="margin-bottom:10px;"><strong>استان/شهر:</strong> ${safeVal(p.province)} / ${safeVal(p.city)}</div>
+            
+            <h5 style="color:var(--text-main); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px; margin-top:15px;">اطلاعات جسمانی و تحصیلی</h5>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>وضعیت سلامت:</strong> ${safeVal(p.health_status)} ${p.disease_type ? '('+p.disease_type+')' : ''}</div>
             <div class="profile-field" style="margin-bottom:10px;"><strong>قد/وزن:</strong> ${safeVal(p.height)} cm / ${safeVal(p.weight)} kg</div>
             <div class="profile-field" style="margin-bottom:10px;"><strong>تحصیلات:</strong> ${safeVal(p.education)}</div>
-            <div class="profile-field" style="margin-bottom:10px;"><strong>وضعیت:</strong> ${safeVal(p.marital_status)}</div>
-            ${p.previous_marriage_children ? `<div class="profile-field" style="margin-bottom:10px;"><strong>فرزندان:</strong> ${p.previous_marriage_children}</div>` : ''}
+            <div class="profile-field" style="margin-bottom:10px;"><strong>شغل:</strong> ${safeVal(p.job)}</div>
+            
+            <h5 style="color:var(--text-main); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px; margin-top:15px;">اطلاعات خانوادگی و ازدواج</h5>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>تعداد اعضای خانواده:</strong> ${safeVal(p.family_members_count)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>نحوه زندگی:</strong> ${safeVal(p.living_status)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>وضعیت ازدواج:</strong> ${safeVal(p.marital_status)}</div>
+            ${p.virginity ? `<div class="profile-field" style="margin-bottom:10px;"><strong>وضعیت دوشیزگی:</strong> ${p.virginity}</div>` : ''}
+            ${p.previous_marriage_children ? `<div class="profile-field" style="margin-bottom:10px;"><strong>فرزندان (از ازدواج سابق):</strong> ${p.previous_marriage_children}</div>` : ''}
+            ${p.children_details ? `<div class="profile-field" style="margin-bottom:10px;"><strong>جزئیات فرزندان:</strong> ${p.children_details}</div>` : ''}
+            
+            <h5 style="color:var(--text-main); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px; margin-top:15px;">اعتقادات و شخصیت‌شناسی</h5>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>اعتقادات دینی:</strong> ${safeVal(p.religious_beliefs)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>اعتقادات سیاسی:</strong> ${safeVal(p.political_beliefs)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>تیپ شخصیتی:</strong> ${safeVal(p.psychology_mbti)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>سبک دلبستگی:</strong> ${safeVal(p.psychology_attachment)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>زبان عشق:</strong> ${safeVal(p.psychology_love_language)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>سبک حل تعارض:</strong> ${safeVal(p.psychology_conflict)}</div>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>سحرخیز/شب‌زنده‌دار:</strong> ${safeVal(p.psychology_morning_night)}</div>
+            
+            <h5 style="color:var(--text-main); border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px; margin-top:15px;">توضیحات</h5>
+            <div class="profile-field" style="margin-bottom:10px;"><strong>ملاک انتخاب همسر:</strong> ${safeVal(p.criteria)}</div>
             <div class="profile-field" style="margin-bottom:10px;"><strong>بیوگرافی:</strong> ${safeVal(p.extra_details)}</div>
+            
+            <div style="margin-top:20px; padding:10px; background:#fff3e0; border-radius:10px; text-align:center; font-size:0.85rem; color:#e65100; border:1px solid #ffe0b2;">
+                ⚠️ جهت دریافت اطلاعات تماس، آیدی و هماهنگی ملاقات، از طریق چت با ادمین یا پس از تایید دوطرفه اقدام کنید.
+            </div>
         `;
         document.getElementById('fullProfileContent').innerHTML = content;
         document.getElementById('fullProfileModal').style.display = 'flex';
