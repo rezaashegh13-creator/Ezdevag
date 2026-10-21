@@ -146,6 +146,22 @@
     .chat-tabs-admin { display: flex; gap: 10px; margin-bottom: 15px; }
     .chat-tab-admin { padding: 10px 20px; background: #f1f2f6; border-radius: 25px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.3s;}
     .chat-tab-admin.active { background: var(--primary); color: white; }
+
+    /* استایل بنرهای هزینه */
+    .fee-banner-container {
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 15px;
+        background: #f9f9f9;
+        display: none;
+        border: 1px solid var(--border-color);
+    }
+    .fee-banner-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
   </style>
 </head>
 <body onscroll="checkScroll()">
@@ -316,22 +332,21 @@
     <!-- قوانین و شرایط -->
     <div id="section-plans" class="card" style="display: none;">
       <h2 class="section-title">💎 قوانین و هزینه‌ها</h2>
-      <div class="rule-item">
+      
+      <!-- بخش اول: هزینه فرم‌گذاری -->
+      <div class="rule-item" style="margin-bottom: 20px;">
           <h3 style="color:var(--primary); margin-bottom:10px;">۱. هزینه فرم‌گذاری (اشتراک):</h3>
-          <p style="font-size:0.95rem; line-height:1.8;">
-              <br>🔹 <strong>مبتدی:</strong> رایگان (فقط چت با ادمین).
-              <br>🔸 <strong>نقره‌ای:</strong> ۱۵۵,۰۰۰ تومان (لایک، بدون عکس).
-              <br>🌟 <strong>طلایی:</strong> ۲۳۰,۰۰۰ تومان (مشاهده عکس و پروفایل کامل).
-          </p>
+          <div id="feeBannerContainer1" class="fee-banner-container" style="margin-top:10px; border-radius:12px; overflow:hidden; border:1px solid #eee;">
+              <img id="feeBannerImg1" src="" alt="هزینه فرم‌گذاری" style="width:100%; display:block;">
+          </div>
       </div>
       
-      <div class="rule-item" style="border-right-color:var(--danger); margin-top:15px;">
+      <!-- بخش دوم: هزینه معرفی -->
+      <div class="rule-item" style="border-right-color:var(--danger); margin-bottom: 20px;">
           <h3 style="color:var(--danger); margin-bottom:10px;">۲. هزینه معرفی (تایید دو طرفه):</h3>
-          <p style="font-size:0.95rem; line-height:1.8;">
-              <br>👤 <strong>مبتدی:</strong> ۲۴۹,۰۰۰ تومان
-              <br>🥈 <strong>نقره‌ای:</strong> ۱۹۹,۰۰۰ تومان
-              <br>🌟 <strong>طلایی:</strong> ۱۴۹,۰۰۰ تومان
-          </p>
+          <div id="feeBannerContainer2" class="fee-banner-container" style="margin-top:10px; border-radius:12px; overflow:hidden; border:1px solid #eee;">
+              <img id="feeBannerImg2" src="" alt="هزینه معرفی" style="width:100%; display:block;">
+          </div>
       </div>
 
       <p style="margin-top: 20px; font-weight: bold;">شماره کارت جهت پرداخت:</p>
@@ -368,7 +383,7 @@
           </div>
       </div>
 
-      <!-- تنظیمات بنر -->
+      <!-- تنظیمات بنر اصلی -->
       <div class="admin-settings-box" style="background:#fff3e0; border-color:#ffe0b2;">
           <h3 style="color:#e65100; margin-bottom:15px;">🖼️ تنظیمات بنر بالای صفحه</h3>
           <div class="admin-setting-row" style="flex-direction:column; align-items:stretch;">
@@ -380,6 +395,20 @@
               <input type="text" id="bannerLinkInput" placeholder="https://...">
           </div>
           <button onclick="saveBanner()" class="admin-btn btn-edit" style="width:100%; background:#ffa000; margin-top:10px;">ذخیره بنر</button>
+      </div>
+
+      <!-- تنظیمات بنرهای هزینه -->
+      <div class="admin-settings-box" style="background:#fff3e0; border-color:#ffe0b2;">
+          <h3 style="color:#e65100; margin-bottom:15px;">🖼️ تنظیمات بنر هزینه‌ها</h3>
+          <div class="admin-setting-row" style="flex-direction:column; align-items:stretch;">
+              <label style="font-size:0.85rem; font-weight:bold; margin-bottom:5px;">لینک عکس هزینه فرم‌گذاری (بنر ۱):</label>
+              <input type="text" id="feeBanner1Input" placeholder="https://...">
+          </div>
+          <div class="admin-setting-row" style="flex-direction:column; align-items:stretch;">
+              <label style="font-size:0.85rem; font-weight:bold; margin-bottom:5px;">لینک عکس هزینه معرفی (بنر ۲):</label>
+              <input type="text" id="feeBanner2Input" placeholder="https://...">
+          </div>
+          <button onclick="saveFeeBanners()" class="admin-btn btn-edit" style="width:100%; background:#ffa000; margin-top:10px;">ذخیره بنرهای هزینه</button>
       </div>
 
       <!-- چت ادمین -->
@@ -481,6 +510,9 @@
     let currentBannerUrl = '';
     let currentBannerLink = '';
     
+    let currentFeeBanner1 = '';
+    let currentFeeBanner2 = '';
+    
     let timeSettings = { beginner: 30, silver: 30, gold: 30 };
 
     window.onload = function() {
@@ -502,6 +534,7 @@
         fetchLikes();
         fetchTimeSettings();
         fetchBanner();
+        fetchFeeBanners(); // فراخوانی تابع دریافت بنرهای هزینه
         
         if(localStorage.getItem('hide_rules') !== 'true') {
             document.getElementById('rulesModal').style.display = 'flex';
@@ -1060,6 +1093,38 @@
             body: JSON.stringify({ banner_url: url, banner_link: link })
         });
         alert('بنر ذخیره شد!'); fetchBanner();
+    }
+
+    // --- توابع بنرهای هزینه ---
+    async function fetchFeeBanners() {
+        try {
+            const res = await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', { headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey } });
+            const data = await res.json();
+            if (data && data[0]) {
+                if (data[0].fee_banner_1) {
+                    currentFeeBanner1 = data[0].fee_banner_1;
+                    document.getElementById('feeBannerImg1').src = currentFeeBanner1;
+                    document.getElementById('feeBannerContainer1').style.display = 'block';
+                }
+                if (data[0].fee_banner_2) {
+                    currentFeeBanner2 = data[0].fee_banner_2;
+                    document.getElementById('feeBannerImg2').src = currentFeeBanner2;
+                    document.getElementById('feeBannerContainer2').style.display = 'block';
+                }
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    async function saveFeeBanners() {
+        const url1 = document.getElementById('feeBanner1Input').value;
+        const url2 = document.getElementById('feeBanner2Input').value;
+        
+        await fetch(supabaseUrl + '/rest/v1/settings?id=eq.1', {
+            method: 'PATCH', headers: { 'apikey': supabaseKey, 'Authorization': 'Bearer ' + supabaseKey, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fee_banner_1: url1, fee_banner_2: url2 })
+        });
+        alert('بنرهای هزینه ذخیره شدند!'); 
+        fetchFeeBanners();
     }
 
     function loginAsUser(userId) {
